@@ -8,5 +8,273 @@
              xmlns:vm="clr-namespace:WinClean.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance vm:CleanupViewModel}">
-    <controls:EmptyState Title="{x:Static r:Strings.Page_NothingYet}" />
+
+    <UserControl.Resources>
+        <Style x:Key="RowStyle" TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8,4" />
+        </Style>
+        <Style x:Key="NumericHeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource HeaderStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+
+        <DataTemplate x:Key="CategoryTemplate" DataType="{x:Type vm:CleanupCategoryItem}">
+            <Grid Margin="0,6" IsEnabled="{Binding CanSelect}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Top" Margin="0,2,0,0" AutomationProperties.Name="{Binding Name}" />
+                <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" />
+                        <TextBlock Style="{StaticResource GlyphText}" Text="{x:Static vm:Glyphs.Admin}" FontSize="12" Margin="6,0,0,0"
+                                   ToolTip="{x:Static r:Strings.Cleanup_NeedsAdministrator}"
+                                   Visibility="{Binding RequiresElevation, Converter={StaticResource BoolToVisibility}}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Description}" TextWrapping="Wrap" Margin="0,2,0,0" />
+                    <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Note}" TextWrapping="Wrap" Margin="0,2,0,0"
+                               Visibility="{Binding Note, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,3,0,0">
+                    <Ellipse Width="8" Height="8" Margin="0,0,6,0" VerticalAlignment="Center">
+                        <Ellipse.Style>
+                            <Style TargetType="Ellipse">
+                                <Setter Property="Fill" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Risk}" Value="Caution">
+                                        <Setter Property="Fill" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Risk}" Value="Advanced">
+                                        <Setter Property="Fill" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Ellipse.Style>
+                    </Ellipse>
+                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding RiskText}" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Column="3" VerticalAlignment="Top">
+                    <TextBlock Style="{StaticResource NumericText}" Text="{Binding SizeText}" />
+                    <TextBlock Style="{StaticResource NumericCaptionText}" Text="{Binding CountText}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <DockPanel Margin="24,0,24,24">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+            <ToggleButton DockPanel.Dock="Right"
+                          Content="{Binding PreviewLabel}"
+                          IsChecked="{Binding IsPreviewOpen}"
+                          IsEnabled="{Binding IsAnalyzed}"
+                          Margin="12,0,0,0" />
+            <Button DockPanel.Dock="Left"
+                    Content="{x:Static r:Strings.Cleanup_Analyze}"
+                    Command="{Binding AnalyzeCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Status}" VerticalAlignment="Center" Margin="12,0" TextTrimming="CharacterEllipsis" />
+        </DockPanel>
+
+        <Border DockPanel.Dock="Top"
+                Style="{StaticResource Card}"
+                Padding="12,8"
+                Margin="0,0,0,12"
+                Visibility="{Binding NeedsAdministrator, Converter={StaticResource BoolToVisibility}}">
+            <DockPanel>
+                <Button DockPanel.Dock="Right"
+                        Content="{x:Static r:Strings.Settings_RestartAsAdministrator}"
+                        Command="{Binding RestartAsAdministratorCommand}"
+                        VerticalAlignment="Center"
+                        Margin="12,0,0,0" />
+                <TextBlock DockPanel.Dock="Left" Style="{StaticResource GlyphText}" Text="{x:Static vm:Glyphs.Admin}" Margin="0,0,10,0" />
+                <TextBlock Style="{StaticResource BodyText}" Text="{x:Static r:Strings.Cleanup_NeedsAdministratorBanner}" TextWrapping="Wrap" VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Bottom"
+                Style="{StaticResource Card}"
+                Padding="16,10"
+                Margin="0,12,0,0"
+                Visibility="{Binding IsAnalyzed, Converter={StaticResource BoolToVisibility}}">
+            <DockPanel>
+                <Button DockPanel.Dock="Right"
+                        Style="{DynamicResource AccentButtonStyle}"
+                        Content="{x:Static r:Strings.Cleanup_CleanSelected}"
+                        Command="{Binding CleanCommand}"
+                        IsEnabled="{Binding CanClean}"
+                        MinWidth="140" />
+                <TextBlock Style="{StaticResource BodyText}" Text="{Binding Summary}" VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+
+        <Grid>
+            <controls:EmptyState Title="{x:Static r:Strings.Cleanup_NotAnalyzed}"
+                                 Description="{x:Static r:Strings.Cleanup_NotAnalyzedDescription}">
+                <controls:EmptyState.Style>
+                    <Style TargetType="controls:EmptyState">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsAnalyzed}" Value="False" />
+                                    <Condition Binding="{Binding IsFinished}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </controls:EmptyState.Style>
+            </controls:EmptyState>
+
+            <Grid Visibility="{Binding IsAnalyzed, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource Card}" Padding="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16,8">
+                        <ItemsControl ItemsSource="{Binding Groups}" Focusable="False">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:CleanupGroupItem}">
+                                    <StackPanel Margin="0,4,0,12">
+                                        <TextBlock Style="{StaticResource BodyStrongText}" Text="{Binding Name}" Margin="0,0,0,4" />
+                                        <ItemsControl ItemsSource="{Binding Categories}" ItemTemplate="{StaticResource CategoryTemplate}" Focusable="False" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+
+                <Border Grid.Column="1"
+                        Style="{StaticResource Card}"
+                        Width="480"
+                        Margin="12,0,0,0"
+                        Padding="0"
+                        Visibility="{Binding IsPreviewOpen, Converter={StaticResource BoolToVisibility}}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Margin="12,10,12,6">
+                            <controls:SearchBox Text="{Binding PreviewFilter, Mode=TwoWay}" Placeholder="{x:Static r:Strings.Cleanup_PreviewFilter}" />
+                            <TextBlock Style="{StaticResource CaptionText}" Text="{x:Static r:Strings.Cleanup_AllOrNothing}" TextWrapping="Wrap" Margin="0,6,0,0" />
+                        </StackPanel>
+                        <TextBlock DockPanel.Dock="Bottom" Style="{StaticResource SecondaryText}" Text="{Binding PreviewTotal}" Margin="12,6,12,10" />
+                        <ListView ItemsSource="{Binding PreviewRows}"
+                                  ItemContainerStyle="{StaticResource RowStyle}"
+                                  BorderThickness="0"
+                                  VirtualizingPanel.IsVirtualizing="True"
+                                  VirtualizingPanel.VirtualizationMode="Recycling"
+                                  VirtualizingPanel.ScrollUnit="Pixel"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="36">
+                                        <GridViewColumnHeader Content="" Style="{StaticResource HeaderStyle}" />
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate DataType="{x:Type vm:CleanupPreviewRow}">
+                                                <CheckBox IsChecked="{Binding IsIncluded}" IsEnabled="{Binding CanExclude}" Margin="4,0,0,0" AutomationProperties.Name="{Binding Name}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="190">
+                                        <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnName}" Style="{StaticResource HeaderStyle}" />
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate DataType="{x:Type vm:CleanupPreviewRow}">
+                                                <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Detail}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="80">
+                                        <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnSize}" Style="{StaticResource NumericHeaderStyle}" />
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate DataType="{x:Type vm:CleanupPreviewRow}">
+                                                <TextBlock Style="{StaticResource NumericText}" Text="{Binding SizeText}" Margin="0,0,8,0" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150">
+                                        <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnCategory}" Style="{StaticResource HeaderStyle}" />
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate DataType="{x:Type vm:CleanupPreviewRow}">
+                                                <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Category}" TextTrimming="CharacterEllipsis" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource Card}" Padding="0" Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibility}}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Margin="16,12,16,8">
+                        <TextBlock Style="{StaticResource SubtitleText}" Text="{x:Static r:Strings.Cleanup_Finished}" />
+                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding FinishedSummary}" TextWrapping="Wrap" Margin="0,4,0,0" />
+                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                            <Button Content="{x:Static r:Strings.Cleanup_Done}" Command="{Binding DoneCommand}" MinWidth="90" />
+                            <Button Content="{x:Static r:Strings.Cleanup_OpenLog}" Command="{Binding OpenLogCommand}" Margin="8,0,0,0"
+                                    Visibility="{Binding LogPath, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Cleanup_NotRemoved}" Margin="0,16,0,0"
+                                   Visibility="{Binding NotRemoved.Count, Converter={StaticResource CountToVisibility}}" />
+                    </StackPanel>
+                    <ListView ItemsSource="{Binding NotRemoved}"
+                              ItemContainerStyle="{StaticResource RowStyle}"
+                              BorderThickness="0"
+                              VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              VirtualizingPanel.ScrollUnit="Pixel"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              Visibility="{Binding NotRemoved.Count, Converter={StaticResource CountToVisibility}}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="220">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnName}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:CleanupResultRow}">
+                                            <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="90">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnSize}" Style="{StaticResource NumericHeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:CleanupResultRow}">
+                                            <TextBlock Style="{StaticResource NumericText}" Text="{Binding SizeText}" Margin="0,0,8,0" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="220">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnReason}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:CleanupResultRow}">
+                                            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Reason}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Reason}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="320">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Cleanup_ColumnPath}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:CleanupResultRow}">
+                                            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Path}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </DockPanel>
 </UserControl>

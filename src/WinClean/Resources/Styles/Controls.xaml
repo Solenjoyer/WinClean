@@ -5,6 +5,8 @@
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
     <converters:EmptyToVisibleConverter x:Key="EmptyToVisible" />
+    <converters:InverseBoolConverter x:Key="InverseBool" />
+    <converters:CountToVisibilityConverter x:Key="CountToVisibility" />
 
     <!-- A glyph-only button without a visible surface until it is hovered: clear, dismiss, chevrons. -->
     <Style x:Key="SubtleGlyphButton" TargetType="Button">
