@@ -5,8 +5,6 @@ namespace WinClean.Services.Monitoring;
 
 internal sealed class BatterySampler
 {
-    public bool Present { get; private set; } = true;
-
     public string? Reason { get; private set; }
 
     public BatterySample? Sample()
@@ -21,11 +19,8 @@ internal sealed class BatterySampler
 
         if ((status.BatteryFlag & Kernel32.BATTERY_FLAG_NO_BATTERY) != 0)
         {
-            Present = false;
             return null;
         }
-
-        Present = true;
 
         return new BatterySample(
             OnAcPower: status.ACLineStatus == 1,

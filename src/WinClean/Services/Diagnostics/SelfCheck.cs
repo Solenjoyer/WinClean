@@ -3,7 +3,10 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.Extensions.Logging.Abstractions;
+using WinClean.Core.Formatting;
 using WinClean.Core.Settings;
+using WinClean.Services.Monitoring;
 
 namespace WinClean.Services.Diagnostics;
 
@@ -77,6 +80,38 @@ internal static class SelfCheck
     private static IEnumerable<SelfCheckItem> Checks()
     {
         yield return new SelfCheckItem("Settings round trip", CheckSettingsRoundTrip);
+        yield return new SelfCheckItem("System metrics", CheckSystemMetrics);
+    }
+
+    private static CheckResult CheckSystemMetrics()
+    {
+        using var scheduler = new MonitoringScheduler(NullLogger<MonitoringScheduler>.Instance);
+        var sample = scheduler.SampleOnce();
+        var summary = new StringBuilder();
+
+        summary.Append(CultureInfo.InvariantCulture, $"cpu {Percent.Format(sample.CpuPercent ?? double.NaN, 0)}");
+
+        if (sample.Memory is { } memory)
+        {
+            summary.Append(CultureInfo.InvariantCulture, $", memory {ByteSize.Format(memory.Used)} of {ByteSize.Format(memory.Total)}");
+        }
+
+        summary.Append(CultureInfo.InvariantCulture, $", {sample.Volumes.Count} volumes, uptime {Durations.Format(sample.Uptime)}");
+        summary.Append(sample.Battery is null ? ", no battery" : ", battery present");
+
+        var unavailable = scheduler.Statuses
+            .Where(status => !status.Available && status.Reason is not null)
+            .Select(status => $"{status.Name}: {status.Reason}")
+            .ToList();
+
+        if (unavailable.Count == 0 || sample.CpuPercent is null || sample.Memory is null)
+        {
+            return sample.CpuPercent is null || sample.Memory is null
+                ? CheckResult.Failed(string.Join("; ", unavailable))
+                : CheckResult.Ok(summary.ToString());
+        }
+
+        return CheckResult.Degraded($"{summary}; not available: {string.Join("; ", unavailable)}");
     }
 
     private static CheckResult CheckSettingsRoundTrip()

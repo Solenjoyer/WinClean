@@ -4,6 +4,7 @@ using System.Windows.Interop;
 using WinClean.Core.Settings;
 using WinClean.Native;
 using WinClean.Services;
+using WinClean.Services.Monitoring;
 using WinClean.Services.Shell;
 using WinClean.ViewModels;
 
@@ -15,15 +16,20 @@ public partial class MainWindow : Window
 
     private readonly SettingsStore _settings;
 
-    public MainWindow(ShellViewModel shell, SettingsStore settings)
+    private readonly MonitoringCoordinator _monitoring;
+
+    public MainWindow(ShellViewModel shell, SettingsStore settings, MonitoringCoordinator monitoring)
     {
         InitializeComponent();
 
         _shell = shell;
         _settings = settings;
+        _monitoring = monitoring;
         DataContext = shell;
 
         RestorePlacement(settings.Current.Window);
+        IsVisibleChanged += (_, _) => UpdateVisibility();
+        StateChanged += (_, _) => UpdateVisibility();
     }
 
     /// <summary>Restores, shows and activates the window, for the tray and for a second launch.</summary>
@@ -70,6 +76,8 @@ public partial class MainWindow : Window
             CompactNavigation = _shell.IsCompact,
         });
     }
+
+    private void UpdateVisibility() => _monitoring.WindowVisible = IsVisible && WindowState != WindowState.Minimized;
 
     private nint HandleWindowMessage(nint hwnd, int message, nint wParam, nint lParam, ref bool handled)
     {

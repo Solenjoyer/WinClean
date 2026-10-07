@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
 using WinClean.Core.Monitoring;
 using WinClean.Native;
@@ -67,7 +68,7 @@ public sealed class MonitoringScheduler : IDisposable
     public MonitoringScheduler(ILogger<MonitoringScheduler> logger)
     {
         _logger = logger;
-        _ui = SynchronizationContext.Current;
+        _ui = SynchronizationContext.Current ?? new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher);
     }
 
     /// <summary>Raised on the UI thread (when created there) with the newest sample.</summary>
@@ -103,7 +104,7 @@ public sealed class MonitoringScheduler : IDisposable
         new("Volumes", _volumes.Reason is null, _volumes.Reason),
         new("Disk activity", _disk.Reason is null, _disk.Reason),
         new("Network", _network.Reason is null, _network.Reason),
-        new("Battery", _battery.Present, _battery.Reason ?? (_battery.Present ? null : "No battery in this machine.")),
+        new("Battery", _battery.Reason is null, _battery.Reason),
         new("GPU", _gpu.Reason is null, _gpu.Reason),
     ];
 

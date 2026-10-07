@@ -141,4 +141,104 @@
     <value>Report on GitHub</value>
     <comment>Opens the browser; the only network action here.</comment>
   </data>
+  <data name="Overview_Cpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Overview_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Overview_Disk" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="Overview_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Overview_Gpu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Overview_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Overview_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Overview_Processors" xml:space="preserve">
+    <value>{0} processors</value>
+  </data>
+  <data name="Overview_FrequencyAndProcessors" xml:space="preserve">
+    <value>{0} GHz, {1} processors</value>
+  </data>
+  <data name="Overview_OfTotalAvailable" xml:space="preserve">
+    <value>of {0}, {1} available</value>
+    <comment>Memory caption: of 32 GB, 13.8 GB available</comment>
+  </data>
+  <data name="Overview_FreeOfTotal" xml:space="preserve">
+    <value>{0} free of {1}</value>
+  </data>
+  <data name="Overview_ReadWrite" xml:space="preserve">
+    <value>{0} read, {1} write</value>
+  </data>
+  <data name="Overview_DownUp" xml:space="preserve">
+    <value>{0} down, {1} up</value>
+  </data>
+  <data name="Overview_DedicatedMemoryInUse" xml:space="preserve">
+    <value>{0} dedicated memory in use</value>
+  </data>
+  <data name="Overview_GpuUnavailable" xml:space="preserve">
+    <value>GPU counters are not available on this system.</value>
+  </data>
+  <data name="Overview_Uptime" xml:space="preserve">
+    <value>Uptime</value>
+  </data>
+  <data name="Overview_Processes" xml:space="preserve">
+    <value>Processes</value>
+  </data>
+  <data name="Overview_ProcessesThreadsHandles" xml:space="preserve">
+    <value>{0} processes, {1} threads, {2} handles</value>
+  </data>
+  <data name="Overview_Commit" xml:space="preserve">
+    <value>Committed memory</value>
+  </data>
+  <data name="Overview_CommitOfLimit" xml:space="preserve">
+    <value>{0} of {1}</value>
+  </data>
+  <data name="Overview_Battery" xml:space="preserve">
+    <value>Battery</value>
+  </data>
+  <data name="Overview_BatteryCharging" xml:space="preserve">
+    <value>{0}, charging</value>
+  </data>
+  <data name="Overview_BatteryPluggedIn" xml:space="preserve">
+    <value>{0}, plugged in</value>
+  </data>
+  <data name="Overview_BatteryRemaining" xml:space="preserve">
+    <value>{0}, about {1} left</value>
+  </data>
+  <data name="Overview_SystemVolume" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Overview_CpuHistory" xml:space="preserve">
+    <value>CPU usage history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_MemoryHistory" xml:space="preserve">
+    <value>Memory usage history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_DiskHistory" xml:space="preserve">
+    <value>Disk activity history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_NetworkHistory" xml:space="preserve">
+    <value>Network activity history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_GpuHistory" xml:space="preserve">
+    <value>GPU usage history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_VolumeLabel" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>Volume title: Windows (C:)</comment>
+  </data>
 </root>

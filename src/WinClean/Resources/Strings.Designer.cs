@@ -96,6 +96,99 @@ public static class Strings
     /// <summary>"Not available" (Shown wherever a value cannot be read on this machine.)</summary>
     public static string NotAvailable => ResourceManager.GetString("NotAvailable", Culture)!;
 
+    /// <summary>"Battery"</summary>
+    public static string Overview_Battery => ResourceManager.GetString("Overview_Battery", Culture)!;
+
+    /// <summary>"{0}, charging"</summary>
+    public static string Overview_BatteryCharging => ResourceManager.GetString("Overview_BatteryCharging", Culture)!;
+
+    /// <summary>"{0}, plugged in"</summary>
+    public static string Overview_BatteryPluggedIn => ResourceManager.GetString("Overview_BatteryPluggedIn", Culture)!;
+
+    /// <summary>"{0}, about {1} left"</summary>
+    public static string Overview_BatteryRemaining => ResourceManager.GetString("Overview_BatteryRemaining", Culture)!;
+
+    /// <summary>"Committed memory"</summary>
+    public static string Overview_Commit => ResourceManager.GetString("Overview_Commit", Culture)!;
+
+    /// <summary>"{0} of {1}"</summary>
+    public static string Overview_CommitOfLimit => ResourceManager.GetString("Overview_CommitOfLimit", Culture)!;
+
+    /// <summary>"CPU"</summary>
+    public static string Overview_Cpu => ResourceManager.GetString("Overview_Cpu", Culture)!;
+
+    /// <summary>"CPU usage history" (Accessibility name)</summary>
+    public static string Overview_CpuHistory => ResourceManager.GetString("Overview_CpuHistory", Culture)!;
+
+    /// <summary>"{0} dedicated memory in use"</summary>
+    public static string Overview_DedicatedMemoryInUse => ResourceManager.GetString("Overview_DedicatedMemoryInUse", Culture)!;
+
+    /// <summary>"Disk"</summary>
+    public static string Overview_Disk => ResourceManager.GetString("Overview_Disk", Culture)!;
+
+    /// <summary>"Disk activity history" (Accessibility name)</summary>
+    public static string Overview_DiskHistory => ResourceManager.GetString("Overview_DiskHistory", Culture)!;
+
+    /// <summary>"{0} down, {1} up"</summary>
+    public static string Overview_DownUp => ResourceManager.GetString("Overview_DownUp", Culture)!;
+
+    /// <summary>"{0} free of {1}"</summary>
+    public static string Overview_FreeOfTotal => ResourceManager.GetString("Overview_FreeOfTotal", Culture)!;
+
+    /// <summary>"{0} GHz, {1} processors"</summary>
+    public static string Overview_FrequencyAndProcessors => ResourceManager.GetString("Overview_FrequencyAndProcessors", Culture)!;
+
+    /// <summary>"GPU"</summary>
+    public static string Overview_Gpu => ResourceManager.GetString("Overview_Gpu", Culture)!;
+
+    /// <summary>"GPU usage history" (Accessibility name)</summary>
+    public static string Overview_GpuHistory => ResourceManager.GetString("Overview_GpuHistory", Culture)!;
+
+    /// <summary>"GPU counters are not available on this system."</summary>
+    public static string Overview_GpuUnavailable => ResourceManager.GetString("Overview_GpuUnavailable", Culture)!;
+
+    /// <summary>"Memory"</summary>
+    public static string Overview_Memory => ResourceManager.GetString("Overview_Memory", Culture)!;
+
+    /// <summary>"Memory usage history" (Accessibility name)</summary>
+    public static string Overview_MemoryHistory => ResourceManager.GetString("Overview_MemoryHistory", Culture)!;
+
+    /// <summary>"Network"</summary>
+    public static string Overview_Network => ResourceManager.GetString("Overview_Network", Culture)!;
+
+    /// <summary>"Network activity history" (Accessibility name)</summary>
+    public static string Overview_NetworkHistory => ResourceManager.GetString("Overview_NetworkHistory", Culture)!;
+
+    /// <summary>"of {0}, {1} available" (Memory caption: of 32 GB, 13.8 GB available)</summary>
+    public static string Overview_OfTotalAvailable => ResourceManager.GetString("Overview_OfTotalAvailable", Culture)!;
+
+    /// <summary>"Processes"</summary>
+    public static string Overview_Processes => ResourceManager.GetString("Overview_Processes", Culture)!;
+
+    /// <summary>"{0} processes, {1} threads, {2} handles"</summary>
+    public static string Overview_ProcessesThreadsHandles => ResourceManager.GetString("Overview_ProcessesThreadsHandles", Culture)!;
+
+    /// <summary>"{0} processors"</summary>
+    public static string Overview_Processors => ResourceManager.GetString("Overview_Processors", Culture)!;
+
+    /// <summary>"{0} read, {1} write"</summary>
+    public static string Overview_ReadWrite => ResourceManager.GetString("Overview_ReadWrite", Culture)!;
+
+    /// <summary>"Storage"</summary>
+    public static string Overview_Storage => ResourceManager.GetString("Overview_Storage", Culture)!;
+
+    /// <summary>"System"</summary>
+    public static string Overview_System => ResourceManager.GetString("Overview_System", Culture)!;
+
+    /// <summary>"System drive"</summary>
+    public static string Overview_SystemVolume => ResourceManager.GetString("Overview_SystemVolume", Culture)!;
+
+    /// <summary>"Uptime"</summary>
+    public static string Overview_Uptime => ResourceManager.GetString("Overview_Uptime", Culture)!;
+
+    /// <summary>"{0} ({1})" (Volume title: Windows (C:))</summary>
+    public static string Overview_VolumeLabel => ResourceManager.GetString("Overview_VolumeLabel", Culture)!;
+
     /// <summary>"Nothing to show yet." (Placeholder while a page has no data.)</summary>
     public static string Page_NothingYet => ResourceManager.GetString("Page_NothingYet", Culture)!;
 }
