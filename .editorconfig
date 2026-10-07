@@ -61,13 +61,20 @@ dotnet_style_prefer_conditional_expression_over_return = false:none
 dotnet_diagnostic.IDE0005.severity = warning
 dotnet_diagnostic.IDE0055.severity = warning
 
-# Naming: constants are PascalCase, private fields are _camelCase, interfaces start with I,
-# async methods end with Async. Rules are matched top to bottom.
+# Naming: constants and static readonly fields are PascalCase, other private fields are _camelCase,
+# interfaces start with I, async methods end with Async. Rules are matched top to bottom.
 dotnet_naming_rule.constants_pascal.severity = warning
 dotnet_naming_rule.constants_pascal.symbols = constants
 dotnet_naming_rule.constants_pascal.style = pascal_case
 dotnet_naming_symbols.constants.applicable_kinds = field
 dotnet_naming_symbols.constants.required_modifiers = const
+
+dotnet_naming_rule.static_readonly_pascal.severity = warning
+dotnet_naming_rule.static_readonly_pascal.symbols = static_readonly_fields
+dotnet_naming_rule.static_readonly_pascal.style = pascal_case
+dotnet_naming_symbols.static_readonly_fields.applicable_kinds = field
+dotnet_naming_symbols.static_readonly_fields.applicable_accessibilities = private, internal, protected, private_protected
+dotnet_naming_symbols.static_readonly_fields.required_modifiers = static, readonly
 
 dotnet_naming_rule.private_fields_underscore.severity = warning
 dotnet_naming_rule.private_fields_underscore.symbols = private_fields
