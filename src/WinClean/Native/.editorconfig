@@ -1,0 +1,12 @@
+# Interop code keeps the names used by the Windows SDK (ATTACH_PARENT_PROCESS, dwLength, ...)
+# so that signatures can be checked against the documentation at a glance.
+[*.cs]
+dotnet_naming_rule.constants_pascal.severity = none
+dotnet_naming_rule.private_fields_underscore.severity = none
+dotnet_naming_rule.interfaces_prefixed.severity = none
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1711.severity = none
+dotnet_diagnostic.CA1712.severity = none
+dotnet_diagnostic.CA1815.severity = none
+dotnet_diagnostic.CA1051.severity = none
+dotnet_diagnostic.IDE1006.severity = none
