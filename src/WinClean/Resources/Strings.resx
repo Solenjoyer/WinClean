@@ -1115,4 +1115,193 @@
   <data name="Cleanup_ColumnCategory" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="Health_Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Health_Edition" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="Health_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Health_Build" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="Health_Installed" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Health_Servicing" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Health_SupportedUntil" xml:space="preserve">
+    <value>Supported until {0} for {1} editions, according to data bundled with {2} (updated {3}).</value>
+  </data>
+  <data name="Health_SupportEnded" xml:space="preserve">
+    <value>Reached end of support on {0} for {1} editions, according to data bundled with {2} (updated {3}).</value>
+  </data>
+  <data name="Health_SupportUnknown" xml:space="preserve">
+    <value>This build is not in the support table bundled with {0} (updated {1}): a preview, a server edition or a newer release.</value>
+  </data>
+  <data name="Health_ConsumerEditions" xml:space="preserve">
+    <value>Home and Pro</value>
+  </data>
+  <data name="Health_EnterpriseEditions" xml:space="preserve">
+    <value>Enterprise and Education</value>
+  </data>
+  <data name="Health_LongTermEditions" xml:space="preserve">
+    <value>long-term servicing</value>
+  </data>
+  <data name="Health_Updates" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Health_LastCheck" xml:space="preserve">
+    <value>Last check</value>
+  </data>
+  <data name="Health_LastInstall" xml:space="preserve">
+    <value>Last install</value>
+  </data>
+  <data name="Health_AsReported" xml:space="preserve">
+    <value>as reported by the Windows Update Agent</value>
+  </data>
+  <data name="Health_RecentUpdates" xml:space="preserve">
+    <value>Recent updates</value>
+  </data>
+  <data name="Health_NoHistory" xml:space="preserve">
+    <value>No update history is available.</value>
+  </data>
+  <data name="Health_UpdateFailed" xml:space="preserve">
+    <value>failed</value>
+  </data>
+  <data name="Health_RestartPending" xml:space="preserve">
+    <value>A restart is pending.</value>
+  </data>
+  <data name="Health_RestartNotPending" xml:space="preserve">
+    <value>No restart is pending.</value>
+  </data>
+  <data name="Health_SignalWindowsUpdate" xml:space="preserve">
+    <value>Windows Update is waiting for a restart</value>
+  </data>
+  <data name="Health_SignalServicing" xml:space="preserve">
+    <value>Component servicing is waiting for a restart</value>
+  </data>
+  <data name="Health_SignalRenames" xml:space="preserve">
+    <value>File operations are queued for the next restart (weak signal)</value>
+  </data>
+  <data name="Health_SignalRename" xml:space="preserve">
+    <value>The computer name changes at the next restart</value>
+  </data>
+  <data name="Health_SignalUpdateInProgress" xml:space="preserve">
+    <value>An update is in progress</value>
+  </data>
+  <data name="Health_OpenWindowsUpdate" xml:space="preserve">
+    <value>Open Windows Update</value>
+  </data>
+  <data name="Health_CheckNow" xml:space="preserve">
+    <value>Check now</value>
+  </data>
+  <data name="Health_CheckNowCaption" xml:space="preserve">
+    <value>Contacts Microsoft Update.</value>
+  </data>
+  <data name="Health_Checking" xml:space="preserve">
+    <value>Asking Microsoft Update</value>
+  </data>
+  <data name="Health_CheckResultNone" xml:space="preserve">
+    <value>No updates are waiting.</value>
+  </data>
+  <data name="Health_CheckResult" xml:space="preserve">
+    <value>{0} updates are available:</value>
+  </data>
+  <data name="Health_CheckFailed" xml:space="preserve">
+    <value>The check failed: {0}</value>
+  </data>
+  <data name="Health_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Health_SystemDrive" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Health_LastRestart" xml:space="preserve">
+    <value>Last restart</value>
+  </data>
+  <data name="Health_Firmware" xml:space="preserve">
+    <value>Firmware</value>
+  </data>
+  <data name="Health_FirmwareUefi" xml:space="preserve">
+    <value>UEFI</value>
+  </data>
+  <data name="Health_FirmwareBios" xml:space="preserve">
+    <value>Legacy BIOS</value>
+  </data>
+  <data name="Health_SecureBoot" xml:space="preserve">
+    <value>Secure Boot</value>
+  </data>
+  <data name="Health_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Health_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Health_Drivers" xml:space="preserve">
+    <value>Drivers</value>
+  </data>
+  <data name="Health_DriversDescription" xml:space="preserve">
+    <value>Versions and dates as the vendor writes them. WinClean does not compare them online; the links open the official download pages.</value>
+  </data>
+  <data name="Health_ShowAllDevices" xml:space="preserve">
+    <value>Show all devices</value>
+  </data>
+  <data name="Health_ColumnDevice" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="Health_ColumnProvider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="Health_ColumnVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Health_ColumnDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Health_ColumnSource" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Health_DriverLink" xml:space="preserve">
+    <value>Drivers at {0}</value>
+  </data>
+  <data name="Health_DriverLinkTooltip" xml:space="preserve">
+    <value>Opens {0} in your browser</value>
+  </data>
+  <data name="Health_NoDrivers" xml:space="preserve">
+    <value>No devices could be listed.</value>
+  </data>
+  <data name="Health_Reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="DeviceGroup_Display" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="DeviceGroup_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="DeviceGroup_Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="DeviceGroup_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="DeviceGroup_Chipset" xml:space="preserve">
+    <value>Chipset</value>
+  </data>
+  <data name="DeviceGroup_Bluetooth" xml:space="preserve">
+    <value>Bluetooth</value>
+  </data>
+  <data name="DeviceGroup_Usb" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="DeviceGroup_Firmware" xml:space="preserve">
+    <value>Firmware</value>
+  </data>
+  <data name="DeviceGroup_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
 </root>

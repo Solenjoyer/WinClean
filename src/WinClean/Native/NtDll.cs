@@ -39,4 +39,23 @@ internal static partial class NtDll
 
     [LibraryImport("ntdll.dll")]
     internal static partial uint RtlNtStatusToDosError(int Status);
+
+    [LibraryImport("ntdll.dll")]
+    internal static partial int RtlGetVersion(ref OSVERSIONINFOEXW lpVersionInformation);
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct OSVERSIONINFOEXW
+    {
+        public uint dwOSVersionInfoSize;
+        public uint dwMajorVersion;
+        public uint dwMinorVersion;
+        public uint dwBuildNumber;
+        public uint dwPlatformId;
+        public fixed char szCSDVersion[128];
+        public ushort wServicePackMajor;
+        public ushort wServicePackMinor;
+        public ushort wSuiteMask;
+        public byte wProductType;
+        public byte wReserved;
+    }
 }

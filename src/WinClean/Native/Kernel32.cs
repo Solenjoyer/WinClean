@@ -25,6 +25,9 @@ internal static partial class Kernel32
 
     internal const nint INVALID_HANDLE_VALUE = -1;
 
+    internal const uint FirmwareTypeBios = 1;
+    internal const uint FirmwareTypeUefi = 2;
+
     internal const uint INVALID_FILE_SIZE = 0xFFFFFFFF;
 
     internal const uint IO_REPARSE_TAG_MOUNT_POINT = 0xA0000003;
@@ -72,6 +75,10 @@ internal static partial class Kernel32
 
     [LibraryImport("kernel32.dll")]
     internal static partial ulong GetTickCount64();
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool GetFirmwareType(out uint FirmwareType);
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
     internal static partial uint GetLogicalDrives();

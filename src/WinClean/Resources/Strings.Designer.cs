@@ -357,6 +357,33 @@ public static class Strings
     /// <summary>"Yes"</summary>
     public static string Details_Yes => ResourceManager.GetString("Details_Yes", Culture)!;
 
+    /// <summary>"Audio"</summary>
+    public static string DeviceGroup_Audio => ResourceManager.GetString("DeviceGroup_Audio", Culture)!;
+
+    /// <summary>"Bluetooth"</summary>
+    public static string DeviceGroup_Bluetooth => ResourceManager.GetString("DeviceGroup_Bluetooth", Culture)!;
+
+    /// <summary>"Chipset"</summary>
+    public static string DeviceGroup_Chipset => ResourceManager.GetString("DeviceGroup_Chipset", Culture)!;
+
+    /// <summary>"Display"</summary>
+    public static string DeviceGroup_Display => ResourceManager.GetString("DeviceGroup_Display", Culture)!;
+
+    /// <summary>"Firmware"</summary>
+    public static string DeviceGroup_Firmware => ResourceManager.GetString("DeviceGroup_Firmware", Culture)!;
+
+    /// <summary>"Network"</summary>
+    public static string DeviceGroup_Network => ResourceManager.GetString("DeviceGroup_Network", Culture)!;
+
+    /// <summary>"Other"</summary>
+    public static string DeviceGroup_Other => ResourceManager.GetString("DeviceGroup_Other", Culture)!;
+
+    /// <summary>"Storage"</summary>
+    public static string DeviceGroup_Storage => ResourceManager.GetString("DeviceGroup_Storage", Culture)!;
+
+    /// <summary>"USB"</summary>
+    public static string DeviceGroup_Usb => ResourceManager.GetString("DeviceGroup_Usb", Culture)!;
+
     /// <summary>"Copy details"</summary>
     public static string Error_CopyDetails => ResourceManager.GetString("Error_CopyDetails", Culture)!;
 
@@ -377,6 +404,168 @@ public static class Strings
 
     /// <summary>"Unexpected error"</summary>
     public static string Error_Title => ResourceManager.GetString("Error_Title", Culture)!;
+
+    /// <summary>"as reported by the Windows Update Agent"</summary>
+    public static string Health_AsReported => ResourceManager.GetString("Health_AsReported", Culture)!;
+
+    /// <summary>"Build"</summary>
+    public static string Health_Build => ResourceManager.GetString("Health_Build", Culture)!;
+
+    /// <summary>"The check failed: {0}"</summary>
+    public static string Health_CheckFailed => ResourceManager.GetString("Health_CheckFailed", Culture)!;
+
+    /// <summary>"Check now"</summary>
+    public static string Health_CheckNow => ResourceManager.GetString("Health_CheckNow", Culture)!;
+
+    /// <summary>"Contacts Microsoft Update."</summary>
+    public static string Health_CheckNowCaption => ResourceManager.GetString("Health_CheckNowCaption", Culture)!;
+
+    /// <summary>"{0} updates are available:"</summary>
+    public static string Health_CheckResult => ResourceManager.GetString("Health_CheckResult", Culture)!;
+
+    /// <summary>"No updates are waiting."</summary>
+    public static string Health_CheckResultNone => ResourceManager.GetString("Health_CheckResultNone", Culture)!;
+
+    /// <summary>"Asking Microsoft Update"</summary>
+    public static string Health_Checking => ResourceManager.GetString("Health_Checking", Culture)!;
+
+    /// <summary>"Date"</summary>
+    public static string Health_ColumnDate => ResourceManager.GetString("Health_ColumnDate", Culture)!;
+
+    /// <summary>"Device"</summary>
+    public static string Health_ColumnDevice => ResourceManager.GetString("Health_ColumnDevice", Culture)!;
+
+    /// <summary>"Provider"</summary>
+    public static string Health_ColumnProvider => ResourceManager.GetString("Health_ColumnProvider", Culture)!;
+
+    /// <summary>"Source"</summary>
+    public static string Health_ColumnSource => ResourceManager.GetString("Health_ColumnSource", Culture)!;
+
+    /// <summary>"Version"</summary>
+    public static string Health_ColumnVersion => ResourceManager.GetString("Health_ColumnVersion", Culture)!;
+
+    /// <summary>"Home and Pro"</summary>
+    public static string Health_ConsumerEditions => ResourceManager.GetString("Health_ConsumerEditions", Culture)!;
+
+    /// <summary>"Drivers at {0}"</summary>
+    public static string Health_DriverLink => ResourceManager.GetString("Health_DriverLink", Culture)!;
+
+    /// <summary>"Opens {0} in your browser"</summary>
+    public static string Health_DriverLinkTooltip => ResourceManager.GetString("Health_DriverLinkTooltip", Culture)!;
+
+    /// <summary>"Drivers"</summary>
+    public static string Health_Drivers => ResourceManager.GetString("Health_Drivers", Culture)!;
+
+    /// <summary>"Versions and dates as the vendor writes them. WinClean does not compare them online; the links open the official download pages."</summary>
+    public static string Health_DriversDescription => ResourceManager.GetString("Health_DriversDescription", Culture)!;
+
+    /// <summary>"Edition"</summary>
+    public static string Health_Edition => ResourceManager.GetString("Health_Edition", Culture)!;
+
+    /// <summary>"Enterprise and Education"</summary>
+    public static string Health_EnterpriseEditions => ResourceManager.GetString("Health_EnterpriseEditions", Culture)!;
+
+    /// <summary>"Firmware"</summary>
+    public static string Health_Firmware => ResourceManager.GetString("Health_Firmware", Culture)!;
+
+    /// <summary>"Legacy BIOS"</summary>
+    public static string Health_FirmwareBios => ResourceManager.GetString("Health_FirmwareBios", Culture)!;
+
+    /// <summary>"UEFI"</summary>
+    public static string Health_FirmwareUefi => ResourceManager.GetString("Health_FirmwareUefi", Culture)!;
+
+    /// <summary>"Installed"</summary>
+    public static string Health_Installed => ResourceManager.GetString("Health_Installed", Culture)!;
+
+    /// <summary>"Last check"</summary>
+    public static string Health_LastCheck => ResourceManager.GetString("Health_LastCheck", Culture)!;
+
+    /// <summary>"Last install"</summary>
+    public static string Health_LastInstall => ResourceManager.GetString("Health_LastInstall", Culture)!;
+
+    /// <summary>"Last restart"</summary>
+    public static string Health_LastRestart => ResourceManager.GetString("Health_LastRestart", Culture)!;
+
+    /// <summary>"long-term servicing"</summary>
+    public static string Health_LongTermEditions => ResourceManager.GetString("Health_LongTermEditions", Culture)!;
+
+    /// <summary>"No devices could be listed."</summary>
+    public static string Health_NoDrivers => ResourceManager.GetString("Health_NoDrivers", Culture)!;
+
+    /// <summary>"No update history is available."</summary>
+    public static string Health_NoHistory => ResourceManager.GetString("Health_NoHistory", Culture)!;
+
+    /// <summary>"Off"</summary>
+    public static string Health_Off => ResourceManager.GetString("Health_Off", Culture)!;
+
+    /// <summary>"On"</summary>
+    public static string Health_On => ResourceManager.GetString("Health_On", Culture)!;
+
+    /// <summary>"Open Windows Update"</summary>
+    public static string Health_OpenWindowsUpdate => ResourceManager.GetString("Health_OpenWindowsUpdate", Culture)!;
+
+    /// <summary>"Reading"</summary>
+    public static string Health_Reading => ResourceManager.GetString("Health_Reading", Culture)!;
+
+    /// <summary>"Recent updates"</summary>
+    public static string Health_RecentUpdates => ResourceManager.GetString("Health_RecentUpdates", Culture)!;
+
+    /// <summary>"No restart is pending."</summary>
+    public static string Health_RestartNotPending => ResourceManager.GetString("Health_RestartNotPending", Culture)!;
+
+    /// <summary>"A restart is pending."</summary>
+    public static string Health_RestartPending => ResourceManager.GetString("Health_RestartPending", Culture)!;
+
+    /// <summary>"Secure Boot"</summary>
+    public static string Health_SecureBoot => ResourceManager.GetString("Health_SecureBoot", Culture)!;
+
+    /// <summary>"Support"</summary>
+    public static string Health_Servicing => ResourceManager.GetString("Health_Servicing", Culture)!;
+
+    /// <summary>"Show all devices"</summary>
+    public static string Health_ShowAllDevices => ResourceManager.GetString("Health_ShowAllDevices", Culture)!;
+
+    /// <summary>"The computer name changes at the next restart"</summary>
+    public static string Health_SignalRename => ResourceManager.GetString("Health_SignalRename", Culture)!;
+
+    /// <summary>"File operations are queued for the next restart (weak signal)"</summary>
+    public static string Health_SignalRenames => ResourceManager.GetString("Health_SignalRenames", Culture)!;
+
+    /// <summary>"Component servicing is waiting for a restart"</summary>
+    public static string Health_SignalServicing => ResourceManager.GetString("Health_SignalServicing", Culture)!;
+
+    /// <summary>"An update is in progress"</summary>
+    public static string Health_SignalUpdateInProgress => ResourceManager.GetString("Health_SignalUpdateInProgress", Culture)!;
+
+    /// <summary>"Windows Update is waiting for a restart"</summary>
+    public static string Health_SignalWindowsUpdate => ResourceManager.GetString("Health_SignalWindowsUpdate", Culture)!;
+
+    /// <summary>"Reached end of support on {0} for {1} editions, according to data bundled with {2} (updated {3})."</summary>
+    public static string Health_SupportEnded => ResourceManager.GetString("Health_SupportEnded", Culture)!;
+
+    /// <summary>"This build is not in the support table bundled with {0} (updated {1}): a preview, a server edition or a newer release."</summary>
+    public static string Health_SupportUnknown => ResourceManager.GetString("Health_SupportUnknown", Culture)!;
+
+    /// <summary>"Supported until {0} for {1} editions, according to data bundled with {2} (updated {3})."</summary>
+    public static string Health_SupportedUntil => ResourceManager.GetString("Health_SupportedUntil", Culture)!;
+
+    /// <summary>"System"</summary>
+    public static string Health_System => ResourceManager.GetString("Health_System", Culture)!;
+
+    /// <summary>"System drive"</summary>
+    public static string Health_SystemDrive => ResourceManager.GetString("Health_SystemDrive", Culture)!;
+
+    /// <summary>"failed"</summary>
+    public static string Health_UpdateFailed => ResourceManager.GetString("Health_UpdateFailed", Culture)!;
+
+    /// <summary>"Updates"</summary>
+    public static string Health_Updates => ResourceManager.GetString("Health_Updates", Culture)!;
+
+    /// <summary>"Version"</summary>
+    public static string Health_Version => ResourceManager.GetString("Health_Version", Culture)!;
+
+    /// <summary>"Windows"</summary>
+    public static string Health_Windows => ResourceManager.GetString("Health_Windows", Culture)!;
 
     /// <summary>"Coding agents"</summary>
     public static string LocationGroup_AiAgents => ResourceManager.GetString("LocationGroup_AiAgents", Culture)!;
