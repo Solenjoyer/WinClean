@@ -29,6 +29,8 @@
     <!-- Documentation output is what lets the compiler report unused usings (IDE0005); missing comments are not enforced. -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <!-- Symbols travel inside the assemblies, so crash logs carry line numbers and a publish has no stray files. -->
+    <DebugType>embedded</DebugType>
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>

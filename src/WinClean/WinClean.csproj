@@ -22,7 +22,6 @@
     <ServerGarbageCollection>false</ServerGarbageCollection>
     <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
     <TieredPGO>true</TieredPGO>
-    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <!--
@@ -41,6 +40,8 @@
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <PublishTrimmed>false</PublishTrimmed>
     <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+    <!-- The XML documentation files only exist for the analyzers; users get one executable. -->
+    <PublishDocumentationFiles>false</PublishDocumentationFiles>
   </PropertyGroup>
 
   <!-- App.xaml is compiled as a page so that Program.Main owns startup and can handle command-line modes first. -->
