@@ -1,0 +1,22 @@
+{
+  "name": "winclean-launch-video",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Launch video for WinClean, built with Remotion.",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render src/index.ts WinCleanLaunch out/winclean-launch.mp4",
+    "still": "remotion still src/index.ts WinCleanLaunch",
+    "audio": "python3 tools/make-audio.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}
