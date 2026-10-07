@@ -7,6 +7,412 @@
              xmlns:r="clr-namespace:WinClean.Resources"
              xmlns:vm="clr-namespace:WinClean.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:StorageViewModel}">
-    <controls:EmptyState Title="{x:Static r:Strings.Page_NothingYet}" />
+             d:DataContext="{d:DesignInstance vm:StorageViewModel}"
+             Loaded="OnLoaded">
+
+    <UserControl.Resources>
+        <Style x:Key="RowStyle" TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8,4" />
+        </Style>
+        <Style x:Key="NumericHeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource HeaderStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+        <ContextMenu x:Key="PathMenu">
+            <MenuItem Header="{x:Static r:Strings.Common_OpenLocation}"
+                      Command="{Binding PlacementTarget.Tag.OpenLocationCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                      CommandParameter="{Binding Path}" />
+            <MenuItem Header="{x:Static r:Strings.Common_CopyPath}"
+                      Command="{Binding PlacementTarget.Tag.CopyPathCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                      CommandParameter="{Binding Path}" />
+        </ContextMenu>
+        <DataTemplate x:Key="SizeCell">
+            <TextBlock Style="{StaticResource NumericText}" Text="{Binding SizeText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <DockPanel Margin="24,0,24,24">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+            <Button DockPanel.Dock="Right"
+                    Content="{x:Static r:Strings.Storage_ScanFolder}"
+                    Click="OnScanFolder"
+                    VerticalAlignment="Top"
+                    Margin="12,0,0,0" />
+            <ItemsControl ItemsSource="{Binding Drives}" Focusable="False">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Margin="-6,0" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:DriveItem}">
+                        <Border Style="{StaticResource Card}" Width="250" Margin="6,0,6,12" Padding="16,12">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Button DockPanel.Dock="Right"
+                                            Content="{x:Static r:Strings.Storage_Scan}"
+                                            Command="{Binding DataContext.ScanDriveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            IsEnabled="{Binding CanScan}"
+                                            VerticalAlignment="Top"
+                                            Padding="10,4" />
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource BodyStrongText}" Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Style="{StaticResource CaptionText}" Text="{Binding KindText}" />
+                                    </StackPanel>
+                                </DockPanel>
+                                <controls:ProportionBar Value="{Binding UsedPercent}" IsCritical="{Binding IsCritical}" Margin="0,10,0,6" />
+                                <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding FreeText}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+
+        <Border DockPanel.Dock="Top"
+                Style="{StaticResource Card}"
+                Margin="0,0,0,12"
+                Padding="16,12"
+                Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}">
+            <DockPanel>
+                <Button DockPanel.Dock="Right"
+                        Content="{x:Static r:Strings.Common_Cancel}"
+                        Command="{Binding CancelScanCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16,0,0,0" />
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BodyText}" Text="{Binding ScanStatus}" />
+                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding CurrentPath}" TextTrimming="CharacterEllipsis" Margin="0,2,0,0" />
+                    <ProgressBar IsIndeterminate="True" Height="4" Margin="0,8,0,0" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <controls:InfoBanner DockPanel.Dock="Top"
+                             Text="{Binding ResultNote}"
+                             Severity="Information"
+                             Margin="0,0,0,12"
+                             Visibility="{Binding ResultNote, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}" />
+
+        <Grid>
+            <controls:EmptyState Title="{x:Static r:Strings.Storage_PickTarget}"
+                                 Description="{x:Static r:Strings.Storage_PickTargetDescription}"
+                                 Visibility="{Binding HasResult, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+
+            <Grid Visibility="{Binding HasResult, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" MinWidth="320" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="6*" MinWidth="360" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource Card}" Padding="0">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top" Margin="12,10,12,4">
+                            <Button DockPanel.Dock="Right"
+                                    Style="{StaticResource TextButton}"
+                                    Content="{x:Static r:Strings.Storage_Up}"
+                                    Command="{Binding GoUpCommand}"
+                                    IsEnabled="{Binding CanGoUp}" />
+                            <ItemsControl ItemsSource="{Binding Breadcrumbs}" Focusable="False" VerticalAlignment="Center">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:BreadcrumbItem}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource TextButton}"
+                                                    Content="{Binding Name}"
+                                                    Command="{Binding DataContext.NavigateToCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}" />
+                                            <TextBlock Style="{StaticResource GlyphText}" Text="{x:Static vm:Glyphs.ChevronRight}" FontSize="10" Margin="2,0" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource CaptionText}" Text="{Binding FilesHere}" Margin="18,0,12,8" />
+                        <ListBox x:Name="FolderList"
+                                 ItemsSource="{Binding Folders}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 HorizontalContentAlignment="Stretch"
+                                 VirtualizingPanel.IsVirtualizing="True"
+                                 VirtualizingPanel.VirtualizationMode="Recycling"
+                                 VirtualizingPanel.ScrollUnit="Pixel"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 MouseDoubleClick="OnFolderDoubleClick"
+                                 KeyDown="OnFolderKeyDown"
+                                 AutomationProperties.Name="{x:Static r:Strings.Storage_TabFolders}">
+                            <ListBox.InputBindings>
+                                <KeyBinding Key="Back" Command="{Binding GoUpCommand}" />
+                                <KeyBinding Key="Left" Modifiers="Alt" Command="{Binding GoUpCommand}" />
+                            </ListBox.InputBindings>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:FolderItem}">
+                                    <Grid Margin="8,5" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}" ContextMenu="{StaticResource PathMenu}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource GlyphText}" Text="{x:Static vm:Glyphs.ChevronRight}" FontSize="10" Margin="0,0,6,0"
+                                                       Visibility="{Binding CanEnter, Converter={StaticResource BoolToVisibility}}" />
+                                            <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Caption}" Margin="8,0,0,0" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Style="{StaticResource NumericText}" Text="{Binding SizeText}" Margin="12,0,0,0" />
+                                        <controls:ProportionBar Grid.Row="1" Grid.ColumnSpan="2" Value="{Binding Percent}" Margin="0,5,0,0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource Card}" Padding="0">
+                    <TabControl Background="Transparent" BorderThickness="0" Padding="0">
+                        <TabItem Header="{x:Static r:Strings.Storage_TabFiles}">
+                            <ListView ItemsSource="{Binding LargestFiles}"
+                                      ItemContainerStyle="{StaticResource RowStyle}"
+                                      BorderThickness="0"
+                                      VirtualizingPanel.IsVirtualizing="True"
+                                      VirtualizingPanel.VirtualizationMode="Recycling"
+                                      VirtualizingPanel.ScrollUnit="Pixel"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      Tag="{Binding}"
+                                      ContextMenu="{StaticResource PathMenu}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="240">
+                                            <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnName}" Style="{StaticResource HeaderStyle}" />
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate DataType="{x:Type vm:FileItem}">
+                                                    <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="90" CellTemplate="{StaticResource SizeCell}">
+                                            <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnSize}" Style="{StaticResource NumericHeaderStyle}" />
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="110">
+                                            <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnModified}" Style="{StaticResource HeaderStyle}" />
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate DataType="{x:Type vm:FileItem}">
+                                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding ModifiedText}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="300">
+                                            <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnFolder}" Style="{StaticResource HeaderStyle}" />
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate DataType="{x:Type vm:FileItem}">
+                                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Directory}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Directory}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </TabItem>
+
+                        <TabItem Header="{x:Static r:Strings.Storage_TabTypes}">
+                            <ItemsControl ItemsSource="{Binding Categories}" Margin="12" Focusable="False">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:CategoryItem}">
+                                        <Grid Margin="0,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" />
+                                                <TextBlock Style="{StaticResource CaptionText}" Text="{Binding CountText}" Margin="8,0,0,0" VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Style="{StaticResource NumericText}" Text="{Binding SizeText}" />
+                                            <controls:ProportionBar Grid.Row="1" Grid.ColumnSpan="2" Value="{Binding Percent}" Margin="0,5,0,0" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </TabItem>
+
+                        <TabItem Header="{x:Static r:Strings.Storage_TabApplications}">
+                            <DockPanel>
+                                <DockPanel DockPanel.Dock="Top" Margin="12,8,12,4">
+                                    <Button DockPanel.Dock="Right" Style="{StaticResource TextButton}" Content="{x:Static r:Strings.Storage_OpenInstalledApps}" Command="{Binding OpenInstalledAppsCommand}" />
+                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Storage_NoApplications}" VerticalAlignment="Center"
+                                               Visibility="{Binding HasApplications, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+                                </DockPanel>
+                                <ListView ItemsSource="{Binding Applications}"
+                                          ItemContainerStyle="{StaticResource RowStyle}"
+                                          BorderThickness="0"
+                                          VirtualizingPanel.IsVirtualizing="True"
+                                          VirtualizingPanel.VirtualizationMode="Recycling"
+                                          VirtualizingPanel.ScrollUnit="Pixel"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="260">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnName}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:ApplicationItem}">
+                                                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Location}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="160">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnPublisher}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:ApplicationItem}">
+                                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Publisher}" TextTrimming="CharacterEllipsis" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="150" CellTemplate="{StaticResource SizeCell}">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnSize}" Style="{StaticResource NumericHeaderStyle}" />
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="100">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnInstalled}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:ApplicationItem}">
+                                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding InstalledText}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </DockPanel>
+                        </TabItem>
+
+                        <TabItem Header="{x:Static r:Strings.Storage_TabDeveloper}">
+                            <Grid>
+                                <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Storage_NoArtifacts}" Margin="12"
+                                           Visibility="{Binding HasArtifacts, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+                                <ListView ItemsSource="{Binding Artifacts}"
+                                          ItemContainerStyle="{StaticResource RowStyle}"
+                                          BorderThickness="0"
+                                          VirtualizingPanel.IsVirtualizing="True"
+                                          VirtualizingPanel.VirtualizationMode="Recycling"
+                                          VirtualizingPanel.ScrollUnit="Pixel"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                          Tag="{Binding}"
+                                          ContextMenu="{StaticResource PathMenu}"
+                                          Visibility="{Binding HasArtifacts, Converter={StaticResource BoolToVisibility}}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="300">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnFolder}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:ArtifactItem}">
+                                                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding Path}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="150">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnKind}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:ArtifactItem}">
+                                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Kind}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Description}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="90" CellTemplate="{StaticResource SizeCell}">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnSize}" Style="{StaticResource NumericHeaderStyle}" />
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="150">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnLastChanged}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:ArtifactItem}">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding ChangedText}" />
+                                                            <Border Style="{StaticResource Badge}" Margin="8,0,0,0" Visibility="{Binding IsStale, Converter={StaticResource BoolToVisibility}}">
+                                                                <TextBlock Style="{StaticResource CaptionText}" Text="{x:Static r:Strings.Storage_Stale}" />
+                                                            </Border>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="{x:Static r:Strings.Storage_TabLocations}">
+                            <DockPanel>
+                                <DockPanel DockPanel.Dock="Top" Margin="12,8,12,4">
+                                    <Button DockPanel.Dock="Right"
+                                            Content="{x:Static r:Strings.Storage_Measure}"
+                                            Command="{Binding MeasureLocationsCommand}"
+                                            VerticalAlignment="Top" />
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Storage_LocationsHint}" TextWrapping="Wrap" />
+                                        <TextBlock Style="{StaticResource CaptionText}" Text="{Binding MeasureStatus}" Margin="0,4,0,0"
+                                                   Visibility="{Binding IsMeasuring, Converter={StaticResource BoolToVisibility}}" />
+                                    </StackPanel>
+                                </DockPanel>
+                                <ListView ItemsSource="{Binding Locations}"
+                                          ItemContainerStyle="{StaticResource RowStyle}"
+                                          BorderThickness="0"
+                                          VirtualizingPanel.IsVirtualizing="True"
+                                          VirtualizingPanel.VirtualizationMode="Recycling"
+                                          VirtualizingPanel.ScrollUnit="Pixel"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="150">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnKind}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:LocationItem}">
+                                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Group}" TextTrimming="CharacterEllipsis" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="280">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnName}" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:LocationItem}">
+                                                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Description}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="100" CellTemplate="{StaticResource SizeCell}">
+                                                <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnSize}" Style="{StaticResource NumericHeaderStyle}" />
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="110">
+                                                <GridViewColumnHeader Content="" Style="{StaticResource HeaderStyle}" />
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type vm:LocationItem}">
+                                                        <TextBlock Style="{StaticResource CaptionText}" Text="{Binding CountText}" VerticalAlignment="Center" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </DockPanel>
+                        </TabItem>
+                    </TabControl>
+                </Border>
+            </Grid>
+        </Grid>
+    </DockPanel>
 </UserControl>

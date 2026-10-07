@@ -734,4 +734,217 @@
   <data name="Settings_OpenRepository" xml:space="preserve">
     <value>Source code</value>
   </data>
+  <data name="Storage_ScanFolder" xml:space="preserve">
+    <value>Scan folder</value>
+  </data>
+  <data name="Storage_Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="Storage_Scanning" xml:space="preserve">
+    <value>Scanning {0}</value>
+  </data>
+  <data name="Storage_ScanCounts" xml:space="preserve">
+    <value>{0} folders, {1} files, {2}</value>
+  </data>
+  <data name="Storage_ScanCancelled" xml:space="preserve">
+    <value>Scan cancelled. Results cover {0} files.</value>
+  </data>
+  <data name="Storage_ScanDenied" xml:space="preserve">
+    <value>{0} folders could not be read and are counted as empty.</value>
+  </data>
+  <data name="Storage_ScanFailed" xml:space="preserve">
+    <value>The scan failed: {0}</value>
+  </data>
+  <data name="Storage_PickTarget" xml:space="preserve">
+    <value>Pick a drive or folder to scan.</value>
+  </data>
+  <data name="Storage_PickTargetDescription" xml:space="preserve">
+    <value>The scan reads folder listings only. Nothing is opened, changed or sent anywhere.</value>
+  </data>
+  <data name="Storage_FreeOfTotal" xml:space="preserve">
+    <value>{0} free of {1}</value>
+  </data>
+  <data name="Storage_DriveKindFixed" xml:space="preserve">
+    <value>Fixed drive</value>
+  </data>
+  <data name="Storage_DriveKindRemovable" xml:space="preserve">
+    <value>Removable drive</value>
+  </data>
+  <data name="Storage_DriveKindNetwork" xml:space="preserve">
+    <value>Network drive</value>
+  </data>
+  <data name="Storage_DriveKindOptical" xml:space="preserve">
+    <value>Optical drive</value>
+  </data>
+  <data name="Storage_DriveKindRamDisk" xml:space="preserve">
+    <value>RAM disk</value>
+  </data>
+  <data name="Storage_Up" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="Storage_FilesHere" xml:space="preserve">
+    <value>{0} files directly in this folder, {1}</value>
+  </data>
+  <data name="Storage_FolderCounts" xml:space="preserve">
+    <value>{0} files</value>
+  </data>
+  <data name="Storage_FolderDenied" xml:space="preserve">
+    <value>not readable</value>
+  </data>
+  <data name="Storage_FolderLink" xml:space="preserve">
+    <value>link, not followed</value>
+  </data>
+  <data name="Storage_FolderCloud" xml:space="preserve">
+    <value>cloud folder</value>
+  </data>
+  <data name="Storage_FolderArtifact" xml:space="preserve">
+    <value>developer folder</value>
+  </data>
+  <data name="Storage_TabFolders" xml:space="preserve">
+    <value>Largest folders</value>
+  </data>
+  <data name="Storage_TabFiles" xml:space="preserve">
+    <value>Largest files</value>
+  </data>
+  <data name="Storage_TabTypes" xml:space="preserve">
+    <value>File types</value>
+  </data>
+  <data name="Storage_TabApplications" xml:space="preserve">
+    <value>Applications</value>
+  </data>
+  <data name="Storage_TabDeveloper" xml:space="preserve">
+    <value>Developer storage</value>
+  </data>
+  <data name="Storage_TabLocations" xml:space="preserve">
+    <value>Known locations</value>
+  </data>
+  <data name="Storage_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Storage_ColumnSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Storage_ColumnModified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="Storage_ColumnFolder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Storage_ColumnPublisher" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="Storage_ColumnVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Storage_ColumnInstalled" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Storage_ColumnKind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Storage_ColumnLastChanged" xml:space="preserve">
+    <value>Project changed</value>
+  </data>
+  <data name="Storage_OpenInstalledApps" xml:space="preserve">
+    <value>Open Installed apps</value>
+  </data>
+  <data name="Storage_SizeEstimated" xml:space="preserve">
+    <value>{0} (reported by the installer)</value>
+  </data>
+  <data name="Storage_NoApplications" xml:space="preserve">
+    <value>No installed applications were found in the registry.</value>
+  </data>
+  <data name="Storage_NoArtifacts" xml:space="preserve">
+    <value>No developer folders were found in the scanned location.</value>
+  </data>
+  <data name="Storage_Stale" xml:space="preserve">
+    <value>stale</value>
+  </data>
+  <data name="Storage_Measure" xml:space="preserve">
+    <value>Measure</value>
+  </data>
+  <data name="Storage_Measuring" xml:space="preserve">
+    <value>Measuring {0}</value>
+  </data>
+  <data name="Storage_LocationsHint" xml:space="preserve">
+    <value>Caches, temporary files, package stores and virtual disks, measured without a full scan. Cleaning happens on the Cleanup page.</value>
+  </data>
+  <data name="Storage_LocationMissing" xml:space="preserve">
+    <value>Not present</value>
+  </data>
+  <data name="Storage_FileCount" xml:space="preserve">
+    <value>{0} files</value>
+  </data>
+  <data name="Category_Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Category_Image" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Category_Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="Category_Document" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Category_Archive" xml:space="preserve">
+    <value>Archives</value>
+  </data>
+  <data name="Category_Installer" xml:space="preserve">
+    <value>Installers</value>
+  </data>
+  <data name="Category_Program" xml:space="preserve">
+    <value>Programs</value>
+  </data>
+  <data name="Category_Code" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="Category_BuildOutput" xml:space="preserve">
+    <value>Build output</value>
+  </data>
+  <data name="Category_DiskImage" xml:space="preserve">
+    <value>Disk images</value>
+  </data>
+  <data name="Category_Database" xml:space="preserve">
+    <value>Databases</value>
+  </data>
+  <data name="Category_OtherFiles" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="LocationGroup_Temporary" xml:space="preserve">
+    <value>Temporary files</value>
+  </data>
+  <data name="LocationGroup_Diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="LocationGroup_Caches" xml:space="preserve">
+    <value>System caches</value>
+  </data>
+  <data name="LocationGroup_Browsers" xml:space="preserve">
+    <value>Browsers</value>
+  </data>
+  <data name="LocationGroup_PackageManagers" xml:space="preserve">
+    <value>Package manager caches</value>
+  </data>
+  <data name="LocationGroup_PackageStores" xml:space="preserve">
+    <value>Package stores</value>
+  </data>
+  <data name="LocationGroup_Ides" xml:space="preserve">
+    <value>Editors and IDEs</value>
+  </data>
+  <data name="LocationGroup_AiAgents" xml:space="preserve">
+    <value>Coding agents</value>
+  </data>
+  <data name="LocationGroup_Docker" xml:space="preserve">
+    <value>Docker Desktop</value>
+  </data>
+  <data name="LocationGroup_Wsl" xml:space="preserve">
+    <value>WSL</value>
+  </data>
+  <data name="LocationGroup_WindowsUpdate" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="LocationGroup_Downloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using WinClean.Native;
 
 namespace WinClean.Services.Shell;
 
@@ -24,6 +25,38 @@ public sealed class ShellLinks
     {
         ArgumentException.ThrowIfNullOrEmpty(path);
         Start(path);
+    }
+
+    /// <summary>Opens the containing folder in Explorer with the item selected.</summary>
+    public void Reveal(string path)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(path);
+
+        var item = Shell32.ILCreateFromPathW(path);
+
+        if (item != 0)
+        {
+            try
+            {
+                if (Shell32.SHOpenFolderAndSelectItems(item, 0, 0, 0) >= 0)
+                {
+                    return;
+                }
+            }
+            finally
+            {
+                Shell32.ILFree(item);
+            }
+        }
+
+        try
+        {
+            using var process = Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{path}\"") { UseShellExecute = true });
+        }
+        catch (Win32Exception exception)
+        {
+            _logger.LogWarning(exception, "Explorer could not be started for {Path}.", path);
+        }
     }
 
     private void Start(string target)

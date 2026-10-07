@@ -12,6 +12,7 @@ using WinClean.Services.Logging;
 using WinClean.Services.Monitoring;
 using WinClean.Services.Processes;
 using WinClean.Services.Shell;
+using WinClean.Services.Storage;
 using WinClean.ViewModels;
 
 namespace WinClean;
@@ -147,6 +148,8 @@ public partial class App : Application
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<Elevation>();
         services.AddSingleton<TrayIcon>();
+        services.AddSingleton<StorageScanner>();
+        services.AddSingleton<KnownLocationSizer>();
         services.AddSingleton<ProcessIconCache>();
         services.AddSingleton<ProcessDetailsCache>();
         services.AddSingleton<ProcessActions>();

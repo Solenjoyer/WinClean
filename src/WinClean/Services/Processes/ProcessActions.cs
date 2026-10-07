@@ -1,10 +1,10 @@
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32.SafeHandles;
 using WinClean.Core.Monitoring;
 using WinClean.Native;
+using WinClean.Services.Shell;
 
 namespace WinClean.Services.Processes;
 
@@ -16,9 +16,12 @@ public sealed class ProcessActions
 {
     private readonly ILogger<ProcessActions> _logger;
 
-    public ProcessActions(ILogger<ProcessActions> logger)
+    private readonly ShellLinks _links;
+
+    public ProcessActions(ILogger<ProcessActions> logger, ShellLinks links)
     {
         _logger = logger;
+        _links = links;
     }
 
     public ActionResult Terminate(ProcessIdentity identity)
@@ -112,29 +115,7 @@ public sealed class ProcessActions
         return result;
     }
 
-    public void OpenLocation(string path)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(path);
-
-        var item = Shell32.ILCreateFromPathW(path);
-
-        if (item != 0)
-        {
-            try
-            {
-                if (Shell32.SHOpenFolderAndSelectItems(item, 0, 0, 0) >= 0)
-                {
-                    return;
-                }
-            }
-            finally
-            {
-                Shell32.ILFree(item);
-            }
-        }
-
-        StartShell("explorer.exe", $"/select,\"{path}\"");
-    }
+    public void OpenLocation(string path) => _links.Reveal(path);
 
     public void ShowProperties(string path)
     {
@@ -163,18 +144,6 @@ public sealed class ProcessActions
         {
             Marshal.FreeCoTaskMem(verb);
             Marshal.FreeCoTaskMem(file);
-        }
-    }
-
-    private void StartShell(string file, string arguments)
-    {
-        try
-        {
-            using var process = Process.Start(new ProcessStartInfo(file, arguments) { UseShellExecute = true });
-        }
-        catch (Win32Exception exception)
-        {
-            _logger.LogWarning(exception, "Explorer could not be started for {Arguments}.", arguments);
         }
     }
 

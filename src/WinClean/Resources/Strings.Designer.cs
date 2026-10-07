@@ -30,11 +30,32 @@ public static class Strings
     /// <summary>"Coding agent"</summary>
     public static string Category_AiAgent => ResourceManager.GetString("Category_AiAgent", Culture)!;
 
+    /// <summary>"Archives"</summary>
+    public static string Category_Archive => ResourceManager.GetString("Category_Archive", Culture)!;
+
+    /// <summary>"Audio"</summary>
+    public static string Category_Audio => ResourceManager.GetString("Category_Audio", Culture)!;
+
     /// <summary>"Browser"</summary>
     public static string Category_Browser => ResourceManager.GetString("Category_Browser", Culture)!;
 
+    /// <summary>"Build output"</summary>
+    public static string Category_BuildOutput => ResourceManager.GetString("Category_BuildOutput", Culture)!;
+
+    /// <summary>"Source code"</summary>
+    public static string Category_Code => ResourceManager.GetString("Category_Code", Culture)!;
+
     /// <summary>"Containers"</summary>
     public static string Category_Container => ResourceManager.GetString("Category_Container", Culture)!;
+
+    /// <summary>"Databases"</summary>
+    public static string Category_Database => ResourceManager.GetString("Category_Database", Culture)!;
+
+    /// <summary>"Disk images"</summary>
+    public static string Category_DiskImage => ResourceManager.GetString("Category_DiskImage", Culture)!;
+
+    /// <summary>"Documents"</summary>
+    public static string Category_Document => ResourceManager.GetString("Category_Document", Culture)!;
 
     /// <summary>"Editor"</summary>
     public static string Category_Editor => ResourceManager.GetString("Category_Editor", Culture)!;
@@ -42,8 +63,20 @@ public static class Strings
     /// <summary>"IDE"</summary>
     public static string Category_Ide => ResourceManager.GetString("Category_Ide", Culture)!;
 
+    /// <summary>"Images"</summary>
+    public static string Category_Image => ResourceManager.GetString("Category_Image", Culture)!;
+
+    /// <summary>"Installers"</summary>
+    public static string Category_Installer => ResourceManager.GetString("Category_Installer", Culture)!;
+
+    /// <summary>"Other"</summary>
+    public static string Category_OtherFiles => ResourceManager.GetString("Category_OtherFiles", Culture)!;
+
     /// <summary>"Package manager"</summary>
     public static string Category_PackageManager => ResourceManager.GetString("Category_PackageManager", Culture)!;
+
+    /// <summary>"Programs"</summary>
+    public static string Category_Program => ResourceManager.GetString("Category_Program", Culture)!;
 
     /// <summary>"Runtime"</summary>
     public static string Category_Runtime => ResourceManager.GetString("Category_Runtime", Culture)!;
@@ -56,6 +89,9 @@ public static class Strings
 
     /// <summary>"Version control"</summary>
     public static string Category_VersionControl => ResourceManager.GetString("Category_VersionControl", Culture)!;
+
+    /// <summary>"Video"</summary>
+    public static string Category_Video => ResourceManager.GetString("Category_Video", Culture)!;
 
     /// <summary>"Virtual machine"</summary>
     public static string Category_VirtualMachine => ResourceManager.GetString("Category_VirtualMachine", Culture)!;
@@ -173,6 +209,42 @@ public static class Strings
 
     /// <summary>"Unexpected error"</summary>
     public static string Error_Title => ResourceManager.GetString("Error_Title", Culture)!;
+
+    /// <summary>"Coding agents"</summary>
+    public static string LocationGroup_AiAgents => ResourceManager.GetString("LocationGroup_AiAgents", Culture)!;
+
+    /// <summary>"Browsers"</summary>
+    public static string LocationGroup_Browsers => ResourceManager.GetString("LocationGroup_Browsers", Culture)!;
+
+    /// <summary>"System caches"</summary>
+    public static string LocationGroup_Caches => ResourceManager.GetString("LocationGroup_Caches", Culture)!;
+
+    /// <summary>"Diagnostics"</summary>
+    public static string LocationGroup_Diagnostics => ResourceManager.GetString("LocationGroup_Diagnostics", Culture)!;
+
+    /// <summary>"Docker Desktop"</summary>
+    public static string LocationGroup_Docker => ResourceManager.GetString("LocationGroup_Docker", Culture)!;
+
+    /// <summary>"Downloads"</summary>
+    public static string LocationGroup_Downloads => ResourceManager.GetString("LocationGroup_Downloads", Culture)!;
+
+    /// <summary>"Editors and IDEs"</summary>
+    public static string LocationGroup_Ides => ResourceManager.GetString("LocationGroup_Ides", Culture)!;
+
+    /// <summary>"Package manager caches"</summary>
+    public static string LocationGroup_PackageManagers => ResourceManager.GetString("LocationGroup_PackageManagers", Culture)!;
+
+    /// <summary>"Package stores"</summary>
+    public static string LocationGroup_PackageStores => ResourceManager.GetString("LocationGroup_PackageStores", Culture)!;
+
+    /// <summary>"Temporary files"</summary>
+    public static string LocationGroup_Temporary => ResourceManager.GetString("LocationGroup_Temporary", Culture)!;
+
+    /// <summary>"Windows Update"</summary>
+    public static string LocationGroup_WindowsUpdate => ResourceManager.GetString("LocationGroup_WindowsUpdate", Culture)!;
+
+    /// <summary>"WSL"</summary>
+    public static string LocationGroup_Wsl => ResourceManager.GetString("LocationGroup_Wsl", Culture)!;
 
     /// <summary>"Cleanup"</summary>
     public static string Nav_Cleanup => ResourceManager.GetString("Nav_Cleanup", Culture)!;
@@ -665,6 +737,147 @@ public static class Strings
 
     /// <summary>"WinClean is using {0} of memory."</summary>
     public static string Settings_WorkingSet => ResourceManager.GetString("Settings_WorkingSet", Culture)!;
+
+    /// <summary>"Folder"</summary>
+    public static string Storage_ColumnFolder => ResourceManager.GetString("Storage_ColumnFolder", Culture)!;
+
+    /// <summary>"Installed"</summary>
+    public static string Storage_ColumnInstalled => ResourceManager.GetString("Storage_ColumnInstalled", Culture)!;
+
+    /// <summary>"Kind"</summary>
+    public static string Storage_ColumnKind => ResourceManager.GetString("Storage_ColumnKind", Culture)!;
+
+    /// <summary>"Project changed"</summary>
+    public static string Storage_ColumnLastChanged => ResourceManager.GetString("Storage_ColumnLastChanged", Culture)!;
+
+    /// <summary>"Modified"</summary>
+    public static string Storage_ColumnModified => ResourceManager.GetString("Storage_ColumnModified", Culture)!;
+
+    /// <summary>"Name"</summary>
+    public static string Storage_ColumnName => ResourceManager.GetString("Storage_ColumnName", Culture)!;
+
+    /// <summary>"Publisher"</summary>
+    public static string Storage_ColumnPublisher => ResourceManager.GetString("Storage_ColumnPublisher", Culture)!;
+
+    /// <summary>"Size"</summary>
+    public static string Storage_ColumnSize => ResourceManager.GetString("Storage_ColumnSize", Culture)!;
+
+    /// <summary>"Version"</summary>
+    public static string Storage_ColumnVersion => ResourceManager.GetString("Storage_ColumnVersion", Culture)!;
+
+    /// <summary>"Fixed drive"</summary>
+    public static string Storage_DriveKindFixed => ResourceManager.GetString("Storage_DriveKindFixed", Culture)!;
+
+    /// <summary>"Network drive"</summary>
+    public static string Storage_DriveKindNetwork => ResourceManager.GetString("Storage_DriveKindNetwork", Culture)!;
+
+    /// <summary>"Optical drive"</summary>
+    public static string Storage_DriveKindOptical => ResourceManager.GetString("Storage_DriveKindOptical", Culture)!;
+
+    /// <summary>"RAM disk"</summary>
+    public static string Storage_DriveKindRamDisk => ResourceManager.GetString("Storage_DriveKindRamDisk", Culture)!;
+
+    /// <summary>"Removable drive"</summary>
+    public static string Storage_DriveKindRemovable => ResourceManager.GetString("Storage_DriveKindRemovable", Culture)!;
+
+    /// <summary>"{0} files"</summary>
+    public static string Storage_FileCount => ResourceManager.GetString("Storage_FileCount", Culture)!;
+
+    /// <summary>"{0} files directly in this folder, {1}"</summary>
+    public static string Storage_FilesHere => ResourceManager.GetString("Storage_FilesHere", Culture)!;
+
+    /// <summary>"developer folder"</summary>
+    public static string Storage_FolderArtifact => ResourceManager.GetString("Storage_FolderArtifact", Culture)!;
+
+    /// <summary>"cloud folder"</summary>
+    public static string Storage_FolderCloud => ResourceManager.GetString("Storage_FolderCloud", Culture)!;
+
+    /// <summary>"{0} files"</summary>
+    public static string Storage_FolderCounts => ResourceManager.GetString("Storage_FolderCounts", Culture)!;
+
+    /// <summary>"not readable"</summary>
+    public static string Storage_FolderDenied => ResourceManager.GetString("Storage_FolderDenied", Culture)!;
+
+    /// <summary>"link, not followed"</summary>
+    public static string Storage_FolderLink => ResourceManager.GetString("Storage_FolderLink", Culture)!;
+
+    /// <summary>"{0} free of {1}"</summary>
+    public static string Storage_FreeOfTotal => ResourceManager.GetString("Storage_FreeOfTotal", Culture)!;
+
+    /// <summary>"Not present"</summary>
+    public static string Storage_LocationMissing => ResourceManager.GetString("Storage_LocationMissing", Culture)!;
+
+    /// <summary>"Caches, temporary files, package stores and virtual disks, measured without a full scan. Cleaning happens on the Cleanup page."</summary>
+    public static string Storage_LocationsHint => ResourceManager.GetString("Storage_LocationsHint", Culture)!;
+
+    /// <summary>"Measure"</summary>
+    public static string Storage_Measure => ResourceManager.GetString("Storage_Measure", Culture)!;
+
+    /// <summary>"Measuring {0}"</summary>
+    public static string Storage_Measuring => ResourceManager.GetString("Storage_Measuring", Culture)!;
+
+    /// <summary>"No installed applications were found in the registry."</summary>
+    public static string Storage_NoApplications => ResourceManager.GetString("Storage_NoApplications", Culture)!;
+
+    /// <summary>"No developer folders were found in the scanned location."</summary>
+    public static string Storage_NoArtifacts => ResourceManager.GetString("Storage_NoArtifacts", Culture)!;
+
+    /// <summary>"Open Installed apps"</summary>
+    public static string Storage_OpenInstalledApps => ResourceManager.GetString("Storage_OpenInstalledApps", Culture)!;
+
+    /// <summary>"Pick a drive or folder to scan."</summary>
+    public static string Storage_PickTarget => ResourceManager.GetString("Storage_PickTarget", Culture)!;
+
+    /// <summary>"The scan reads folder listings only. Nothing is opened, changed or sent anywhere."</summary>
+    public static string Storage_PickTargetDescription => ResourceManager.GetString("Storage_PickTargetDescription", Culture)!;
+
+    /// <summary>"Scan"</summary>
+    public static string Storage_Scan => ResourceManager.GetString("Storage_Scan", Culture)!;
+
+    /// <summary>"Scan cancelled. Results cover {0} files."</summary>
+    public static string Storage_ScanCancelled => ResourceManager.GetString("Storage_ScanCancelled", Culture)!;
+
+    /// <summary>"{0} folders, {1} files, {2}"</summary>
+    public static string Storage_ScanCounts => ResourceManager.GetString("Storage_ScanCounts", Culture)!;
+
+    /// <summary>"{0} folders could not be read and are counted as empty."</summary>
+    public static string Storage_ScanDenied => ResourceManager.GetString("Storage_ScanDenied", Culture)!;
+
+    /// <summary>"The scan failed: {0}"</summary>
+    public static string Storage_ScanFailed => ResourceManager.GetString("Storage_ScanFailed", Culture)!;
+
+    /// <summary>"Scan folder"</summary>
+    public static string Storage_ScanFolder => ResourceManager.GetString("Storage_ScanFolder", Culture)!;
+
+    /// <summary>"Scanning {0}"</summary>
+    public static string Storage_Scanning => ResourceManager.GetString("Storage_Scanning", Culture)!;
+
+    /// <summary>"{0} (reported by the installer)"</summary>
+    public static string Storage_SizeEstimated => ResourceManager.GetString("Storage_SizeEstimated", Culture)!;
+
+    /// <summary>"stale"</summary>
+    public static string Storage_Stale => ResourceManager.GetString("Storage_Stale", Culture)!;
+
+    /// <summary>"Applications"</summary>
+    public static string Storage_TabApplications => ResourceManager.GetString("Storage_TabApplications", Culture)!;
+
+    /// <summary>"Developer storage"</summary>
+    public static string Storage_TabDeveloper => ResourceManager.GetString("Storage_TabDeveloper", Culture)!;
+
+    /// <summary>"Largest files"</summary>
+    public static string Storage_TabFiles => ResourceManager.GetString("Storage_TabFiles", Culture)!;
+
+    /// <summary>"Largest folders"</summary>
+    public static string Storage_TabFolders => ResourceManager.GetString("Storage_TabFolders", Culture)!;
+
+    /// <summary>"Known locations"</summary>
+    public static string Storage_TabLocations => ResourceManager.GetString("Storage_TabLocations", Culture)!;
+
+    /// <summary>"File types"</summary>
+    public static string Storage_TabTypes => ResourceManager.GetString("Storage_TabTypes", Culture)!;
+
+    /// <summary>"Up"</summary>
+    public static string Storage_Up => ResourceManager.GetString("Storage_Up", Culture)!;
 
     /// <summary>"CPU {0}"</summary>
     public static string Tray_CpuTip => ResourceManager.GetString("Tray_CpuTip", Culture)!;
