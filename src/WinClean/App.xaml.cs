@@ -145,6 +145,7 @@ public partial class App : Application
         services.AddSingleton<ShellLinks>();
         services.AddSingleton<IClipboard, ClipboardService>();
         services.AddSingleton<IDialogService, DialogService>();
+        services.AddSingleton<Elevation>();
         services.AddSingleton<TrayIcon>();
         services.AddSingleton<ProcessIconCache>();
         services.AddSingleton<ProcessDetailsCache>();
