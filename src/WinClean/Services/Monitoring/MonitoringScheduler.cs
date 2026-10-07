@@ -116,7 +116,9 @@ public sealed class MonitoringScheduler : IDisposable
         new("Battery", _battery.Reason is null, _battery.Reason),
         new("GPU", _gpu.Reason is null, _gpu.Reason),
         new("Processes", _processes.Reason is null, _processes.Reason),
-        new("Sensors", _sensors is { Enabled: true, Reason: null }, _sensors is null or { Enabled: false } ? "Sensors are off; enable them in Settings." : _sensors.Reason),
+        _sensors is null or { Enabled: false }
+            ? new("Sensors", false, "Sensors are off; enable them in Settings.", Disabled: true)
+            : new("Sensors", _sensors.Reason is null, _sensors.Reason),
     ];
 
     public void Start()

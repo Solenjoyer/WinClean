@@ -249,7 +249,7 @@ internal static class SelfCheck
         summary.Append(sample.Battery is null ? ", no battery" : ", battery present");
 
         var unavailable = scheduler.Statuses
-            .Where(status => !status.Available && status.Reason is not null)
+            .Where(status => status is { Available: false, Disabled: false, Reason: not null })
             .Select(status => $"{status.Name}: {status.Reason}")
             .ToList();
 
