@@ -10,6 +10,7 @@ using WinClean.Services;
 using WinClean.Services.Diagnostics;
 using WinClean.Services.Logging;
 using WinClean.Services.Monitoring;
+using WinClean.Services.Processes;
 using WinClean.Services.Shell;
 using WinClean.ViewModels;
 
@@ -97,6 +98,9 @@ public partial class App : Application
         services.AddSingleton<SettingsStore>();
         services.AddSingleton<CrashReporter>();
         services.AddSingleton<ShellLinks>();
+        services.AddSingleton<ProcessIconCache>();
+        services.AddSingleton<ProcessDetailsCache>();
+        services.AddSingleton<ProcessActions>();
         services.AddSingleton<MonitoringScheduler>();
         services.AddSingleton<MonitoringCoordinator>();
 

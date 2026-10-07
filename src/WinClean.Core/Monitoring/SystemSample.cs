@@ -14,7 +14,8 @@ public sealed record SystemSample(
     NetworkSample? Network,
     BatterySample? Battery,
     IReadOnlyList<GpuSample> Gpus,
-    TimeSpan Uptime)
+    TimeSpan Uptime,
+    ProcessSnapshot? Processes = null)
 {
     /// <summary>The busiest adapter, which is what the Overview card shows.</summary>
     public GpuSample? PrimaryGpu => Gpus.Count == 0 ? null : Gpus.MaxBy(gpu => gpu.DedicatedTotal ?? gpu.DedicatedUsed);

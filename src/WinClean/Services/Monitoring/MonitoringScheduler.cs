@@ -3,6 +3,7 @@ using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
 using WinClean.Core.Monitoring;
 using WinClean.Native;
+using WinClean.Services.Processes;
 
 namespace WinClean.Services.Monitoring;
 
@@ -37,6 +38,10 @@ public sealed class MonitoringScheduler : IDisposable
 
     private readonly FrequencySampler _frequency = new();
 
+    private readonly ProcessSnapshotReader _processes;
+
+    private readonly WindowInventory _windows = new();
+
     private Thread? _thread;
 
     private volatile bool _stopping;
@@ -65,9 +70,10 @@ public sealed class MonitoringScheduler : IDisposable
 
     private long _detailedSampledAt = long.MinValue;
 
-    public MonitoringScheduler(ILogger<MonitoringScheduler> logger)
+    public MonitoringScheduler(ILogger<MonitoringScheduler> logger, ProcessDetailsCache details)
     {
         _logger = logger;
+        _processes = new ProcessSnapshotReader(details);
         _ui = SynchronizationContext.Current ?? new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher);
     }
 
@@ -106,6 +112,7 @@ public sealed class MonitoringScheduler : IDisposable
         new("Network", _network.Reason is null, _network.Reason),
         new("Battery", _battery.Reason is null, _battery.Reason),
         new("GPU", _gpu.Reason is null, _gpu.Reason),
+        new("Processes", _processes.Reason is null, _processes.Reason),
     ];
 
     public void Start()
@@ -124,12 +131,16 @@ public sealed class MonitoringScheduler : IDisposable
         _thread.Start();
     }
 
+    /// <summary>Runs the next tick now instead of at the end of the interval, for instance after an action.</summary>
+    public void Poke() => _wake.Set();
+
     /// <summary>One synchronous tick, for diagnostics and the self-check.</summary>
-    public SystemSample SampleOnce()
+    public SystemSample SampleOnce(bool processes = false)
     {
-        Tick(new MonitoringDemand(true, true, false, 1), MonotonicClock.Ticks);
+        var demand = new MonitoringDemand(true, true, processes, 1);
+        Tick(demand, MonotonicClock.Ticks);
         Thread.Sleep(1000);
-        return Tick(new MonitoringDemand(true, true, false, 1), MonotonicClock.Ticks);
+        return Tick(demand, MonotonicClock.Ticks);
     }
 
     public void Dispose()
@@ -217,6 +228,10 @@ public sealed class MonitoringScheduler : IDisposable
             _detailedSampledAt = now;
         }
 
+        var processes = demand.Processes
+            ? _processes.Read(now, _cpu.ProcessorCount, _gpu.EngineReadings, _gpu.ProcessMemoryReadings, _windows.Scan())
+            : null;
+
         var sample = new SystemSample(
             DateTimeOffset.Now,
             ++_sequence,
@@ -230,7 +245,8 @@ public sealed class MonitoringScheduler : IDisposable
             network,
             _cachedBattery,
             demand.Detailed ? _cachedGpus : [],
-            TimeSpan.FromMilliseconds(Kernel32.GetTickCount64()));
+            TimeSpan.FromMilliseconds(Kernel32.GetTickCount64()),
+            processes);
 
         Latest = sample;
         return sample;
@@ -241,6 +257,7 @@ public sealed class MonitoringScheduler : IDisposable
         _cpu.Reset();
         _disk.Reset();
         _network.Reset();
+        _processes.Reset();
         _lastTickTicks = 0;
     }
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using WinClean.Core.Formatting;
 using WinClean.Core.Settings;
 using WinClean.Services.Monitoring;
+using WinClean.Services.Processes;
 
 namespace WinClean.Services.Diagnostics;
 
@@ -81,11 +82,38 @@ internal static class SelfCheck
     {
         yield return new SelfCheckItem("Settings round trip", CheckSettingsRoundTrip);
         yield return new SelfCheckItem("System metrics", CheckSystemMetrics);
+        yield return new SelfCheckItem("Process list", CheckProcessList);
+    }
+
+    private static CheckResult CheckProcessList()
+    {
+        using var details = new ProcessDetailsCache(new ProcessIconCache(), NullLogger<ProcessDetailsCache>.Instance);
+        using var scheduler = new MonitoringScheduler(NullLogger<MonitoringScheduler>.Instance, details);
+        var snapshot = scheduler.SampleOnce(processes: true).Processes;
+
+        if (snapshot is null)
+        {
+            return CheckResult.Failed(scheduler.Statuses.First(status => status.Name == "Processes").Reason ?? "no snapshot");
+        }
+
+        var self = snapshot.Processes.FirstOrDefault(process => process.Pid == Environment.ProcessId);
+
+        if (self is null)
+        {
+            return CheckResult.Failed($"{snapshot.Processes.Count} processes listed, but not this one");
+        }
+
+        var withPath = snapshot.Processes.Count(process => process.Facts.Path is not null);
+        var withWindow = snapshot.Processes.Count(process => process.HasWindow);
+        var summary = $"{snapshot.Processes.Count} processes in {snapshot.Grouping.Groups.Count} groups, {withPath} with a path, {withWindow} with windows; this one is {self.Name} at {self.Facts.Path ?? "an unknown path"}";
+
+        return self.Facts.Path is null ? CheckResult.Degraded(summary) : CheckResult.Ok(summary);
     }
 
     private static CheckResult CheckSystemMetrics()
     {
-        using var scheduler = new MonitoringScheduler(NullLogger<MonitoringScheduler>.Instance);
+        using var details = new ProcessDetailsCache(new ProcessIconCache(), NullLogger<ProcessDetailsCache>.Instance);
+        using var scheduler = new MonitoringScheduler(NullLogger<MonitoringScheduler>.Instance, details);
         var sample = scheduler.SampleOnce();
         var summary = new StringBuilder();
 

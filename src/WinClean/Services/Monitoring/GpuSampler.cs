@@ -19,6 +19,8 @@ internal sealed class GpuSampler : IDisposable
 
     private nint? _sharedCounter;
 
+    private nint? _processMemoryCounter;
+
     private bool _initialized;
 
     public string? Reason { get; private set; }
@@ -44,6 +46,7 @@ internal sealed class GpuSampler : IDisposable
 
         var engines = Parse(_query.ReadArray(_engineCounter.Value));
         EngineReadings = engines;
+        ProcessMemoryReadings = _processMemoryCounter is null ? [] : Parse(_query.ReadArray(_processMemoryCounter.Value));
 
         var perAdapter = new Dictionary<long, Dictionary<string, double>>();
 
@@ -99,6 +102,7 @@ internal sealed class GpuSampler : IDisposable
 
         _dedicatedCounter = _query.AddCounter(@"\GPU Adapter Memory(*)\Dedicated Usage", out _);
         _sharedCounter = _query.AddCounter(@"\GPU Adapter Memory(*)\Shared Usage", out _);
+        _processMemoryCounter = _query.AddCounter(@"\GPU Process Memory(*)\Dedicated Usage", out _);
         Reason = null;
     }
 

@@ -23,6 +23,20 @@ internal static partial class Kernel32
 
     internal const uint IOCTL_DISK_PERFORMANCE = 0x00070020;
 
+    internal const uint PROCESS_TERMINATE = 0x0001;
+    internal const uint PROCESS_SUSPEND_RESUME = 0x0800;
+    internal const uint PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
+
+    internal const int ERROR_ACCESS_DENIED = 5;
+    internal const int ERROR_INVALID_PARAMETER = 87;
+    internal const int ERROR_INSUFFICIENT_BUFFER = 122;
+
+    internal const ushort IMAGE_FILE_MACHINE_UNKNOWN = 0;
+    internal const ushort IMAGE_FILE_MACHINE_I386 = 0x014c;
+    internal const ushort IMAGE_FILE_MACHINE_ARMNT = 0x01c4;
+    internal const ushort IMAGE_FILE_MACHINE_AMD64 = 0x8664;
+    internal const ushort IMAGE_FILE_MACHINE_ARM64 = 0xAA64;
+
     internal const byte BATTERY_FLAG_NO_BATTERY = 128;
     internal const byte BATTERY_PERCENTAGE_UNKNOWN = 255;
     internal const uint BATTERY_LIFE_UNKNOWN = 0xFFFFFFFF;
@@ -101,6 +115,29 @@ internal static partial class Kernel32
         uint nOutBufferSize,
         out uint lpBytesReturned,
         nint lpOverlapped);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    internal static partial SafeProcessHandle OpenProcess(uint dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, uint dwProcessId);
+
+    [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool QueryFullProcessImageNameW(SafeProcessHandle hProcess, uint dwFlags, Span<char> lpExeName, ref uint lpdwSize);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool GetProcessTimes(SafeProcessHandle hProcess, out long lpCreationTime, out long lpExitTime, out long lpKernelTime, out long lpUserTime);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool TerminateProcess(SafeProcessHandle hProcess, uint uExitCode);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool IsProcessCritical(SafeProcessHandle hProcess, [MarshalAs(UnmanagedType.Bool)] out bool Critical);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool IsWow64Process2(SafeProcessHandle hProcess, out ushort pProcessMachine, out ushort pNativeMachine);
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct MEMORYSTATUSEX
