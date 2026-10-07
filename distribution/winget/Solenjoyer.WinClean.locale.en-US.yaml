@@ -1,0 +1,24 @@
+# Locale manifest template. Replace VERSION before submitting.
+PackageIdentifier: Solenjoyer.WinClean
+PackageVersion: VERSION
+PackageLocale: en-US
+Publisher: Solenjoyer
+PublisherUrl: https://github.com/Solenjoyer
+PublisherSupportUrl: https://github.com/Solenjoyer/WinClean/issues
+PackageName: WinClean
+PackageUrl: https://github.com/Solenjoyer/WinClean
+License: MIT
+LicenseUrl: https://github.com/Solenjoyer/WinClean/blob/main/LICENSE
+ShortDescription: System monitor and cleanup utility for developers and power users.
+Description: |-
+  WinClean shows what is using CPU, memory, disk and GPU with processes grouped by application, scans drives for the largest folders, files and developer caches, cleans only what you have previewed and confirmed, and reports whether Windows and its drivers are up to date. Local-first: no account, no telemetry, no network access unless you click a link.
+Tags:
+  - cleanup
+  - developer
+  - disk-space
+  - monitor
+  - processes
+  - storage
+ReleaseNotesUrl: https://github.com/Solenjoyer/WinClean/releases/tag/vVERSION
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0
