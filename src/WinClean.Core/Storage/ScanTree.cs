@@ -132,6 +132,60 @@ public sealed class ScanTree
         return children;
     }
 
+    /// <summary>The node for a path below the root, matched segment by segment without regard to case; -1 when absent.</summary>
+    public int FindByPath(string path, char separator = '\\')
+    {
+        ArgumentNullException.ThrowIfNull(path);
+
+        if (_count == 0)
+        {
+            return -1;
+        }
+
+        var root = Name(0).TrimEnd(separator);
+        var normalized = path.TrimEnd(separator);
+
+        if (!normalized.StartsWith(root, StringComparison.OrdinalIgnoreCase))
+        {
+            return -1;
+        }
+
+        if (normalized.Length == root.Length)
+        {
+            return 0;
+        }
+
+        if (normalized[root.Length] != separator)
+        {
+            return -1;
+        }
+
+        var current = 0;
+
+        foreach (var segment in normalized[(root.Length + 1)..].Split(separator, StringSplitOptions.RemoveEmptyEntries))
+        {
+            var next = -1;
+
+            foreach (var child in Children(current))
+            {
+                if (string.Equals(Name(child), segment, StringComparison.OrdinalIgnoreCase))
+                {
+                    next = child;
+                    break;
+                }
+            }
+
+            if (next < 0)
+            {
+                return -1;
+            }
+
+            current = next;
+        }
+
+        return current;
+    }
+
     /// <summary>The full path: the root's name is the scanned path itself.</summary>
     public string Path(int node, char separator = '\\')
     {

@@ -51,6 +51,17 @@ internal static partial class Shell32
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static partial bool Shell_NotifyIconW(uint dwMessage, ref NOTIFYICONDATAW lpData);
 
+    [LibraryImport("shell32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    internal static partial int SHQueryRecycleBinW(string? pszRootPath, ref SHQUERYRBINFO pSHQueryRBInfo);
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct SHQUERYRBINFO
+    {
+        public uint cbSize;
+        public long i64Size;
+        public long i64NumItems;
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct NOTIFYICONDATAW
     {

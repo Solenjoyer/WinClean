@@ -23,6 +23,15 @@ internal static partial class Kernel32
 
     internal const uint IOCTL_DISK_PERFORMANCE = 0x00070020;
 
+    internal const nint INVALID_HANDLE_VALUE = -1;
+
+    internal const uint INVALID_FILE_SIZE = 0xFFFFFFFF;
+
+    internal const uint IO_REPARSE_TAG_MOUNT_POINT = 0xA0000003;
+    internal const uint IO_REPARSE_TAG_SYMLINK = 0xA000000C;
+    internal const uint IO_REPARSE_TAG_CLOUD = 0x9000001A;
+    internal const uint IO_REPARSE_TAG_CLOUD_MASK = 0x0000F000;
+
     internal const uint PROCESS_TERMINATE = 0x0001;
     internal const uint PROCESS_SUSPEND_RESUME = 0x0800;
     internal const uint PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
@@ -138,6 +147,31 @@ internal static partial class Kernel32
     [LibraryImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static partial bool IsWow64Process2(SafeProcessHandle hProcess, out ushort pProcessMachine, out ushort pNativeMachine);
+
+    [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
+    internal static partial nint FindFirstFileW(string lpFileName, out WIN32_FIND_DATAW lpFindFileData);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool FindClose(nint hFindFile);
+
+    [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
+    internal static partial uint GetCompressedFileSizeW(string lpFileName, out uint lpFileSizeHigh);
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct WIN32_FIND_DATAW
+    {
+        public uint dwFileAttributes;
+        public long ftCreationTime;
+        public long ftLastAccessTime;
+        public long ftLastWriteTime;
+        public uint nFileSizeHigh;
+        public uint nFileSizeLow;
+        public uint dwReserved0;
+        public uint dwReserved1;
+        public fixed char cFileName[260];
+        public fixed char cAlternateFileName[14];
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct MEMORYSTATUSEX

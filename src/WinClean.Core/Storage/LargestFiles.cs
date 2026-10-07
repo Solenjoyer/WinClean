@@ -19,6 +19,9 @@ public sealed class LargestFiles
 
     public int Capacity => _capacity;
 
+    /// <summary>Whether a file of this size would make the list, so callers can skip building an entry for the rest.</summary>
+    public bool Accepts(long size) => size > Volatile.Read(ref _floor);
+
     public void Offer(FileEntry entry)
     {
         ArgumentNullException.ThrowIfNull(entry);
