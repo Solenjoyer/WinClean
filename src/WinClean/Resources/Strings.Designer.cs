@@ -434,4 +434,250 @@ public static class Strings
 
     /// <summary>"Expand or collapse" (Accessibility name of the chevron on a group row)</summary>
     public static string Processes_ToggleGroup => ResourceManager.GetString("Processes_ToggleGroup", Culture)!;
+
+    /// <summary>"About"</summary>
+    public static string Settings_About => ResourceManager.GetString("Settings_About", Culture)!;
+
+    /// <summary>"Administrator"</summary>
+    public static string Settings_Administrator => ResourceManager.GetString("Settings_Administrator", Culture)!;
+
+    /// <summary>"Appearance"</summary>
+    public static string Settings_Appearance => ResourceManager.GetString("Settings_Appearance", Culture)!;
+
+    /// <summary>"Celsius"</summary>
+    public static string Settings_Celsius => ResourceManager.GetString("Settings_Celsius", Culture)!;
+
+    /// <summary>"Cleanup"</summary>
+    public static string Settings_Cleanup => ResourceManager.GetString("Settings_Cleanup", Culture)!;
+
+    /// <summary>"Confirmation before deleting"</summary>
+    public static string Settings_CleanupConfirmation => ResourceManager.GetString("Settings_CleanupConfirmation", Culture)!;
+
+    /// <summary>"Always on. Every cleanup shows the exact files first and asks before deleting."</summary>
+    public static string Settings_CleanupConfirmationDescription => ResourceManager.GetString("Settings_CleanupConfirmationDescription", Culture)!;
+
+    /// <summary>"Keep running when the window is closed"</summary>
+    public static string Settings_CloseToTray => ResourceManager.GetString("Settings_CloseToTray", Culture)!;
+
+    /// <summary>"Closing the window hides it; Exit in the icon&apos;s menu ends WinClean."</summary>
+    public static string Settings_CloseToTrayDescription => ResourceManager.GetString("Settings_CloseToTrayDescription", Culture)!;
+
+    /// <summary>"Data"</summary>
+    public static string Settings_Data => ResourceManager.GetString("Settings_Data", Culture)!;
+
+    /// <summary>"Data folder"</summary>
+    public static string Settings_DataFolder => ResourceManager.GetString("Settings_DataFolder", Culture)!;
+
+    /// <summary>"Settings and logs for this account. Put a file named &quot;portable&quot; next to WinClean.exe to keep them beside the executable instead."</summary>
+    public static string Settings_DataFolderPerUser => ResourceManager.GetString("Settings_DataFolderPerUser", Culture)!;
+
+    /// <summary>"Portable mode: settings and logs live next to the executable because a file named &quot;portable&quot; sits beside it."</summary>
+    public static string Settings_DataFolderPortable => ResourceManager.GetString("Settings_DataFolderPortable", Culture)!;
+
+    /// <summary>"180 days"</summary>
+    public static string Settings_Days180 => ResourceManager.GetString("Settings_Days180", Culture)!;
+
+    /// <summary>"30 days"</summary>
+    public static string Settings_Days30 => ResourceManager.GetString("Settings_Days30", Culture)!;
+
+    /// <summary>"1 year"</summary>
+    public static string Settings_Days365 => ResourceManager.GetString("Settings_Days365", Culture)!;
+
+    /// <summary>"60 days"</summary>
+    public static string Settings_Days60 => ResourceManager.GetString("Settings_Days60", Culture)!;
+
+    /// <summary>"90 days"</summary>
+    public static string Settings_Days90 => ResourceManager.GetString("Settings_Days90", Culture)!;
+
+    /// <summary>"OK"</summary>
+    public static string Settings_DiagnosticOk => ResourceManager.GetString("Settings_DiagnosticOk", Culture)!;
+
+    /// <summary>"Diagnostics"</summary>
+    public static string Settings_Diagnostics => ResourceManager.GetString("Settings_Diagnostics", Culture)!;
+
+    /// <summary>"What each reader reported on this machine. The same list is written by WinClean.exe --self-check."</summary>
+    public static string Settings_DiagnosticsDescription => ResourceManager.GetString("Settings_DiagnosticsDescription", Culture)!;
+
+    /// <summary>"WinClean is running as administrator."</summary>
+    public static string Settings_Elevated => ResourceManager.GetString("Settings_Elevated", Culture)!;
+
+    /// <summary>"Fahrenheit"</summary>
+    public static string Settings_Fahrenheit => ResourceManager.GetString("Settings_Fahrenheit", Culture)!;
+
+    /// <summary>"Group processes by application"</summary>
+    public static string Settings_GroupByApplication => ResourceManager.GetString("Settings_GroupByApplication", Culture)!;
+
+    /// <summary>"The default for the Processes page; the toggle on the page changes it for the session."</summary>
+    public static string Settings_GroupByApplicationDescription => ResourceManager.GetString("Settings_GroupByApplicationDescription", Culture)!;
+
+    /// <summary>"1 hour"</summary>
+    public static string Settings_Hours1 => ResourceManager.GetString("Settings_Hours1", Culture)!;
+
+    /// <summary>"24 hours"</summary>
+    public static string Settings_Hours24 => ResourceManager.GetString("Settings_Hours24", Culture)!;
+
+    /// <summary>"48 hours"</summary>
+    public static string Settings_Hours48 => ResourceManager.GetString("Settings_Hours48", Culture)!;
+
+    /// <summary>"6 hours"</summary>
+    public static string Settings_Hours6 => ResourceManager.GetString("Settings_Hours6", Culture)!;
+
+    /// <summary>"Open source under the MIT license."</summary>
+    public static string Settings_License => ResourceManager.GetString("Settings_License", Culture)!;
+
+    /// <summary>"Logging"</summary>
+    public static string Settings_Logging => ResourceManager.GetString("Settings_Logging", Culture)!;
+
+    /// <summary>"Monitoring"</summary>
+    public static string Settings_Monitoring => ResourceManager.GetString("Settings_Monitoring", Culture)!;
+
+    /// <summary>"WinClean is running with standard rights. Administrator rights are needed for Windows temporary files, the Windows Update cache, processes of other accounts and CPU sensors."</summary>
+    public static string Settings_NotElevated => ResourceManager.GetString("Settings_NotElevated", Culture)!;
+
+    /// <summary>"Offer installers in Downloads after"</summary>
+    public static string Settings_OldDownloadDays => ResourceManager.GetString("Settings_OldDownloadDays", Culture)!;
+
+    /// <summary>"Open data folder"</summary>
+    public static string Settings_OpenDataFolder => ResourceManager.GetString("Settings_OpenDataFolder", Culture)!;
+
+    /// <summary>"Open log folder"</summary>
+    public static string Settings_OpenLogFolder => ResourceManager.GetString("Settings_OpenLogFolder", Culture)!;
+
+    /// <summary>"Releases"</summary>
+    public static string Settings_OpenReleases => ResourceManager.GetString("Settings_OpenReleases", Culture)!;
+
+    /// <summary>"Source code"</summary>
+    public static string Settings_OpenRepository => ResourceManager.GetString("Settings_OpenRepository", Culture)!;
+
+    /// <summary>"No account, no telemetry, no analytics, no crash upload and no update check. WinClean never opens a network connection on its own; links and the Windows Update check only run when you click them."</summary>
+    public static string Settings_Privacy => ResourceManager.GetString("Settings_Privacy", Culture)!;
+
+    /// <summary>"Refresh interval"</summary>
+    public static string Settings_RefreshInterval => ResourceManager.GetString("Settings_RefreshInterval", Culture)!;
+
+    /// <summary>"How often the Overview and Processes pages are updated while they are visible."</summary>
+    public static string Settings_RefreshIntervalDescription => ResourceManager.GetString("Settings_RefreshIntervalDescription", Culture)!;
+
+    /// <summary>"Restart as administrator"</summary>
+    public static string Settings_RestartAsAdministrator => ResourceManager.GetString("Settings_RestartAsAdministrator", Culture)!;
+
+    /// <summary>"1 second"</summary>
+    public static string Settings_Seconds1 => ResourceManager.GetString("Settings_Seconds1", Culture)!;
+
+    /// <summary>"2 seconds"</summary>
+    public static string Settings_Seconds2 => ResourceManager.GetString("Settings_Seconds2", Culture)!;
+
+    /// <summary>"5 seconds"</summary>
+    public static string Settings_Seconds5 => ResourceManager.GetString("Settings_Seconds5", Culture)!;
+
+    /// <summary>"Hardware sensors"</summary>
+    public static string Settings_Sensors => ResourceManager.GetString("Settings_Sensors", Culture)!;
+
+    /// <summary>"Reads CPU, motherboard, GPU and drive temperatures. CPU and motherboard sensors need the PawnIO driver from pawnio.eu and administrator rights; WinClean installs neither."</summary>
+    public static string Settings_SensorsDescription => ResourceManager.GetString("Settings_SensorsDescription", Culture)!;
+
+    /// <summary>"Show system processes"</summary>
+    public static string Settings_ShowSystemProcesses => ResourceManager.GetString("Settings_ShowSystemProcesses", Culture)!;
+
+    /// <summary>"Windows services and system processes are listed with everything else."</summary>
+    public static string Settings_ShowSystemProcessesDescription => ResourceManager.GetString("Settings_ShowSystemProcessesDescription", Culture)!;
+
+    /// <summary>"Consider developer folders stale after"</summary>
+    public static string Settings_StaleDays => ResourceManager.GetString("Settings_StaleDays", Culture)!;
+
+    /// <summary>"node_modules, build output and virtual environments in projects untouched for this long are offered for cleanup."</summary>
+    public static string Settings_StaleDaysDescription => ResourceManager.GetString("Settings_StaleDaysDescription", Culture)!;
+
+    /// <summary>"Start minimized"</summary>
+    public static string Settings_StartMinimized => ResourceManager.GetString("Settings_StartMinimized", Culture)!;
+
+    /// <summary>"Only the notification area icon appears at sign-in. Needs the icon to be enabled."</summary>
+    public static string Settings_StartMinimizedDescription => ResourceManager.GetString("Settings_StartMinimizedDescription", Culture)!;
+
+    /// <summary>"Start with Windows"</summary>
+    public static string Settings_StartWithWindows => ResourceManager.GetString("Settings_StartWithWindows", Culture)!;
+
+    /// <summary>"Adds WinClean to the Run key of your account; no service and no scheduled task."</summary>
+    public static string Settings_StartWithWindowsDescription => ResourceManager.GetString("Settings_StartWithWindowsDescription", Culture)!;
+
+    /// <summary>"Startup"</summary>
+    public static string Settings_Startup => ResourceManager.GetString("Settings_Startup", Culture)!;
+
+    /// <summary>"Temperature unit"</summary>
+    public static string Settings_TemperatureUnit => ResourceManager.GetString("Settings_TemperatureUnit", Culture)!;
+
+    /// <summary>"Leave temporary files alone for"</summary>
+    public static string Settings_TemporaryAge => ResourceManager.GetString("Settings_TemporaryAge", Culture)!;
+
+    /// <summary>"Files younger than this stay, so a running installer or build is never disturbed."</summary>
+    public static string Settings_TemporaryAgeDescription => ResourceManager.GetString("Settings_TemporaryAgeDescription", Culture)!;
+
+    /// <summary>"Theme"</summary>
+    public static string Settings_Theme => ResourceManager.GetString("Settings_Theme", Culture)!;
+
+    /// <summary>"Dark"</summary>
+    public static string Settings_ThemeDark => ResourceManager.GetString("Settings_ThemeDark", Culture)!;
+
+    /// <summary>"Light"</summary>
+    public static string Settings_ThemeLight => ResourceManager.GetString("Settings_ThemeLight", Culture)!;
+
+    /// <summary>"Follow Windows"</summary>
+    public static string Settings_ThemeSystem => ResourceManager.GetString("Settings_ThemeSystem", Culture)!;
+
+    /// <summary>"Notification area"</summary>
+    public static string Settings_Tray => ResourceManager.GetString("Settings_Tray", Culture)!;
+
+    /// <summary>"CPU"</summary>
+    public static string Settings_TrayCpu => ResourceManager.GetString("Settings_TrayCpu", Culture)!;
+
+    /// <summary>"System drive"</summary>
+    public static string Settings_TrayDisk => ResourceManager.GetString("Settings_TrayDisk", Culture)!;
+
+    /// <summary>"Show an icon in the notification area"</summary>
+    public static string Settings_TrayEnabled => ResourceManager.GetString("Settings_TrayEnabled", Culture)!;
+
+    /// <summary>"The icon shows live usage and opens WinClean with a click. Sampling continues in the background at a slower pace."</summary>
+    public static string Settings_TrayEnabledDescription => ResourceManager.GetString("Settings_TrayEnabledDescription", Culture)!;
+
+    /// <summary>"Memory"</summary>
+    public static string Settings_TrayMemory => ResourceManager.GetString("Settings_TrayMemory", Culture)!;
+
+    /// <summary>"Metrics"</summary>
+    public static string Settings_TrayMetrics => ResourceManager.GetString("Settings_TrayMetrics", Culture)!;
+
+    /// <summary>"Icon style"</summary>
+    public static string Settings_TrayStyle => ResourceManager.GetString("Settings_TrayStyle", Culture)!;
+
+    /// <summary>"Bars"</summary>
+    public static string Settings_TrayStyleBars => ResourceManager.GetString("Settings_TrayStyleBars", Culture)!;
+
+    /// <summary>"Numbers"</summary>
+    public static string Settings_TrayStyleNumber => ResourceManager.GetString("Settings_TrayStyleNumber", Culture)!;
+
+    /// <summary>"Verbose logging"</summary>
+    public static string Settings_VerboseLogging => ResourceManager.GetString("Settings_VerboseLogging", Culture)!;
+
+    /// <summary>"Writes debug detail to the log files. Useful when reporting a problem."</summary>
+    public static string Settings_VerboseLoggingDescription => ResourceManager.GetString("Settings_VerboseLoggingDescription", Culture)!;
+
+    /// <summary>"{0} {1}" (Name and version)</summary>
+    public static string Settings_VersionLine => ResourceManager.GetString("Settings_VersionLine", Culture)!;
+
+    /// <summary>"WinClean is using {0} of memory."</summary>
+    public static string Settings_WorkingSet => ResourceManager.GetString("Settings_WorkingSet", Culture)!;
+
+    /// <summary>"CPU {0}"</summary>
+    public static string Tray_CpuTip => ResourceManager.GetString("Tray_CpuTip", Culture)!;
+
+    /// <summary>"{0} {1} free of {2}"</summary>
+    public static string Tray_DiskTip => ResourceManager.GetString("Tray_DiskTip", Culture)!;
+
+    /// <summary>"Exit"</summary>
+    public static string Tray_Exit => ResourceManager.GetString("Tray_Exit", Culture)!;
+
+    /// <summary>"Memory {0} of {1} ({2})"</summary>
+    public static string Tray_MemoryTip => ResourceManager.GetString("Tray_MemoryTip", Culture)!;
+
+    /// <summary>"Open WinClean"</summary>
+    public static string Tray_Open => ResourceManager.GetString("Tray_Open", Culture)!;
 }

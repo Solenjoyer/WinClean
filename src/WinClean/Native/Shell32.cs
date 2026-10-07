@@ -14,6 +14,23 @@ internal static partial class Shell32
 
     internal const uint SHGFI_SMALLICON = 0x000000001;
 
+    internal const uint NIM_ADD = 0;
+    internal const uint NIM_MODIFY = 1;
+    internal const uint NIM_DELETE = 2;
+    internal const uint NIM_SETVERSION = 4;
+
+    internal const uint NIF_MESSAGE = 0x01;
+    internal const uint NIF_ICON = 0x02;
+    internal const uint NIF_TIP = 0x04;
+    internal const uint NIF_SHOWTIP = 0x80;
+
+    internal const uint NOTIFYICON_VERSION_4 = 4;
+
+    internal const int NIN_SELECT = 0x0400;
+    internal const int NIN_KEYSELECT = 0x0401;
+
+    internal const int ERROR_CANCELLED = 1223;
+
     [LibraryImport("shell32.dll", StringMarshalling = StringMarshalling.Utf16)]
     internal static partial nint ILCreateFromPathW(string pszPath);
 
@@ -29,6 +46,30 @@ internal static partial class Shell32
 
     [LibraryImport("shell32.dll", StringMarshalling = StringMarshalling.Utf16)]
     internal static partial nint SHGetFileInfoW(string pszPath, uint dwFileAttributes, ref SHFILEINFOW psfi, uint cbFileInfo, uint uFlags);
+
+    [LibraryImport("shell32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool Shell_NotifyIconW(uint dwMessage, ref NOTIFYICONDATAW lpData);
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct NOTIFYICONDATAW
+    {
+        public uint cbSize;
+        public nint hWnd;
+        public uint uID;
+        public uint uFlags;
+        public uint uCallbackMessage;
+        public nint hIcon;
+        public fixed char szTip[128];
+        public uint dwState;
+        public uint dwStateMask;
+        public fixed char szInfo[256];
+        public uint uVersion;
+        public fixed char szInfoTitle[64];
+        public uint dwInfoFlags;
+        public Guid guidItem;
+        public nint hBalloonIcon;
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct SHELLEXECUTEINFOW

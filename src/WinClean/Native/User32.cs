@@ -20,6 +20,18 @@ internal static partial class User32
 
     internal const uint GW_OWNER = 4;
 
+    internal const int SM_CXSMICON = 49;
+
+    internal const int WM_SETTINGCHANGE = 0x001A;
+
+    internal const int WM_LBUTTONUP = 0x0202;
+
+    internal const int WM_CONTEXTMENU = 0x007B;
+
+    internal const int WM_APP = 0x8000;
+
+    internal const long WS_EX_TOOLWINDOW_STYLE = 0x00000080;
+
     [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
     internal static partial uint RegisterWindowMessageW(string lpString);
 
@@ -71,4 +83,10 @@ internal static partial class User32
 
     [LibraryImport("user32.dll")]
     internal static partial uint GetDpiForSystem();
+
+    [LibraryImport("user32.dll")]
+    internal static partial int GetSystemMetricsForDpi(int nIndex, uint dpi);
+
+    [LibraryImport("user32.dll", SetLastError = true)]
+    internal static partial nint CreateIconFromResourceEx(ReadOnlySpan<byte> presbits, uint dwResSize, [MarshalAs(UnmanagedType.Bool)] bool fIcon, uint dwVer, int cxDesired, int cyDesired, uint Flags);
 }

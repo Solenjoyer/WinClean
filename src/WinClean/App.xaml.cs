@@ -24,11 +24,37 @@ public partial class App : Application
 
     private ServiceProvider? _services;
 
+    private TrayIcon? _tray;
+
     private bool _reportingCrash;
 
     public App(StartupOptions options)
     {
         _options = options;
+    }
+
+    /// <summary>Set once the application is leaving, so a window closing with "keep running" on does not hide instead.</summary>
+    public bool IsExiting { get; private set; }
+
+    public void ShowMainWindow(string? page)
+    {
+        if (_services is null)
+        {
+            return;
+        }
+
+        if (page is not null)
+        {
+            _services.GetRequiredService<ShellViewModel>().NavigateTo(page);
+        }
+
+        _services.GetRequiredService<MainWindow>().BringToFront();
+    }
+
+    public void ExitApplication()
+    {
+        IsExiting = true;
+        Shutdown();
     }
 
     protected override void OnStartup(StartupEventArgs e)
@@ -67,12 +93,31 @@ public partial class App : Application
         shell.IsCompact = settings.Current.CompactNavigation;
         shell.NavigateTo(_options.Page);
 
+        // The window is not what keeps the application alive: the notification area icon can outlive it.
+        ShutdownMode = ShutdownMode.OnExplicitShutdown;
+        _tray = _services.GetRequiredService<TrayIcon>();
+        _tray.OpenRequested += (_, page) => ShowMainWindow(page);
+        _tray.ExitRequested += (_, _) => ExitApplication();
+        _services.GetRequiredService<MonitoringCoordinator>();
+
+        if (_options.StartMinimized && settings.Current.Tray.Enabled)
+        {
+            return;
+        }
+
         var window = _services.GetRequiredService<MainWindow>();
+
+        if (_options.StartMinimized)
+        {
+            window.WindowState = WindowState.Minimized;
+        }
+
         window.Show();
     }
 
     protected override void OnExit(ExitEventArgs e)
     {
+        _tray?.Dispose();
         _services?.Dispose();
         _instance?.Dispose();
         base.OnExit(e);
@@ -100,6 +145,7 @@ public partial class App : Application
         services.AddSingleton<ShellLinks>();
         services.AddSingleton<IClipboard, ClipboardService>();
         services.AddSingleton<IDialogService, DialogService>();
+        services.AddSingleton<TrayIcon>();
         services.AddSingleton<ProcessIconCache>();
         services.AddSingleton<ProcessDetailsCache>();
         services.AddSingleton<ProcessActions>();

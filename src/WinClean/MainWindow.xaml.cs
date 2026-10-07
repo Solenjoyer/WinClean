@@ -69,6 +69,25 @@ public partial class MainWindow : Window, IDialogHost
             return;
         }
 
+        SavePlacement();
+
+        var tray = _settings.Current.Tray;
+
+        if (tray.Enabled && tray.CloseToTray && !((App)Application.Current).IsExiting)
+        {
+            e.Cancel = true;
+            Hide();
+        }
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        ((App)Application.Current).ExitApplication();
+    }
+
+    private void SavePlacement()
+    {
         var bounds = WindowState == WindowState.Normal ? new Rect(Left, Top, Width, Height) : RestoreBounds;
 
         _settings.Update(current => current with

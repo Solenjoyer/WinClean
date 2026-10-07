@@ -487,4 +487,251 @@
   <data name="Processes_OpenDetails" xml:space="preserve">
     <value>Show details pane</value>
   </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Open WinClean</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Tray_CpuTip" xml:space="preserve">
+    <value>CPU {0}</value>
+  </data>
+  <data name="Tray_MemoryTip" xml:space="preserve">
+    <value>Memory {0} of {1} ({2})</value>
+  </data>
+  <data name="Tray_DiskTip" xml:space="preserve">
+    <value>{0} {1} free of {2}</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>Follow Windows</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Settings_Monitoring" xml:space="preserve">
+    <value>Monitoring</value>
+  </data>
+  <data name="Settings_RefreshInterval" xml:space="preserve">
+    <value>Refresh interval</value>
+  </data>
+  <data name="Settings_RefreshIntervalDescription" xml:space="preserve">
+    <value>How often the Overview and Processes pages are updated while they are visible.</value>
+  </data>
+  <data name="Settings_Seconds1" xml:space="preserve">
+    <value>1 second</value>
+  </data>
+  <data name="Settings_Seconds2" xml:space="preserve">
+    <value>2 seconds</value>
+  </data>
+  <data name="Settings_Seconds5" xml:space="preserve">
+    <value>5 seconds</value>
+  </data>
+  <data name="Settings_ShowSystemProcesses" xml:space="preserve">
+    <value>Show system processes</value>
+  </data>
+  <data name="Settings_ShowSystemProcessesDescription" xml:space="preserve">
+    <value>Windows services and system processes are listed with everything else.</value>
+  </data>
+  <data name="Settings_GroupByApplication" xml:space="preserve">
+    <value>Group processes by application</value>
+  </data>
+  <data name="Settings_GroupByApplicationDescription" xml:space="preserve">
+    <value>The default for the Processes page; the toggle on the page changes it for the session.</value>
+  </data>
+  <data name="Settings_TemperatureUnit" xml:space="preserve">
+    <value>Temperature unit</value>
+  </data>
+  <data name="Settings_Celsius" xml:space="preserve">
+    <value>Celsius</value>
+  </data>
+  <data name="Settings_Fahrenheit" xml:space="preserve">
+    <value>Fahrenheit</value>
+  </data>
+  <data name="Settings_Sensors" xml:space="preserve">
+    <value>Hardware sensors</value>
+  </data>
+  <data name="Settings_SensorsDescription" xml:space="preserve">
+    <value>Reads CPU, motherboard, GPU and drive temperatures. CPU and motherboard sensors need the PawnIO driver from pawnio.eu and administrator rights; WinClean installs neither.</value>
+  </data>
+  <data name="Settings_Tray" xml:space="preserve">
+    <value>Notification area</value>
+  </data>
+  <data name="Settings_TrayEnabled" xml:space="preserve">
+    <value>Show an icon in the notification area</value>
+  </data>
+  <data name="Settings_TrayEnabledDescription" xml:space="preserve">
+    <value>The icon shows live usage and opens WinClean with a click. Sampling continues in the background at a slower pace.</value>
+  </data>
+  <data name="Settings_TrayStyle" xml:space="preserve">
+    <value>Icon style</value>
+  </data>
+  <data name="Settings_TrayStyleBars" xml:space="preserve">
+    <value>Bars</value>
+  </data>
+  <data name="Settings_TrayStyleNumber" xml:space="preserve">
+    <value>Numbers</value>
+  </data>
+  <data name="Settings_TrayMetrics" xml:space="preserve">
+    <value>Metrics</value>
+  </data>
+  <data name="Settings_TrayCpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Settings_TrayMemory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Settings_TrayDisk" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Settings_CloseToTray" xml:space="preserve">
+    <value>Keep running when the window is closed</value>
+  </data>
+  <data name="Settings_CloseToTrayDescription" xml:space="preserve">
+    <value>Closing the window hides it; Exit in the icon's menu ends WinClean.</value>
+  </data>
+  <data name="Settings_Startup" xml:space="preserve">
+    <value>Startup</value>
+  </data>
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="Settings_StartWithWindowsDescription" xml:space="preserve">
+    <value>Adds WinClean to the Run key of your account; no service and no scheduled task.</value>
+  </data>
+  <data name="Settings_StartMinimized" xml:space="preserve">
+    <value>Start minimized</value>
+  </data>
+  <data name="Settings_StartMinimizedDescription" xml:space="preserve">
+    <value>Only the notification area icon appears at sign-in. Needs the icon to be enabled.</value>
+  </data>
+  <data name="Settings_Cleanup" xml:space="preserve">
+    <value>Cleanup</value>
+  </data>
+  <data name="Settings_CleanupConfirmation" xml:space="preserve">
+    <value>Confirmation before deleting</value>
+  </data>
+  <data name="Settings_CleanupConfirmationDescription" xml:space="preserve">
+    <value>Always on. Every cleanup shows the exact files first and asks before deleting.</value>
+  </data>
+  <data name="Settings_TemporaryAge" xml:space="preserve">
+    <value>Leave temporary files alone for</value>
+  </data>
+  <data name="Settings_TemporaryAgeDescription" xml:space="preserve">
+    <value>Files younger than this stay, so a running installer or build is never disturbed.</value>
+  </data>
+  <data name="Settings_Hours1" xml:space="preserve">
+    <value>1 hour</value>
+  </data>
+  <data name="Settings_Hours6" xml:space="preserve">
+    <value>6 hours</value>
+  </data>
+  <data name="Settings_Hours24" xml:space="preserve">
+    <value>24 hours</value>
+  </data>
+  <data name="Settings_Hours48" xml:space="preserve">
+    <value>48 hours</value>
+  </data>
+  <data name="Settings_StaleDays" xml:space="preserve">
+    <value>Consider developer folders stale after</value>
+  </data>
+  <data name="Settings_StaleDaysDescription" xml:space="preserve">
+    <value>node_modules, build output and virtual environments in projects untouched for this long are offered for cleanup.</value>
+  </data>
+  <data name="Settings_OldDownloadDays" xml:space="preserve">
+    <value>Offer installers in Downloads after</value>
+  </data>
+  <data name="Settings_Days30" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="Settings_Days60" xml:space="preserve">
+    <value>60 days</value>
+  </data>
+  <data name="Settings_Days90" xml:space="preserve">
+    <value>90 days</value>
+  </data>
+  <data name="Settings_Days180" xml:space="preserve">
+    <value>180 days</value>
+  </data>
+  <data name="Settings_Days365" xml:space="preserve">
+    <value>1 year</value>
+  </data>
+  <data name="Settings_Administrator" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Settings_Elevated" xml:space="preserve">
+    <value>WinClean is running as administrator.</value>
+  </data>
+  <data name="Settings_NotElevated" xml:space="preserve">
+    <value>WinClean is running with standard rights. Administrator rights are needed for Windows temporary files, the Windows Update cache, processes of other accounts and CPU sensors.</value>
+  </data>
+  <data name="Settings_RestartAsAdministrator" xml:space="preserve">
+    <value>Restart as administrator</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="Settings_VerboseLogging" xml:space="preserve">
+    <value>Verbose logging</value>
+  </data>
+  <data name="Settings_VerboseLoggingDescription" xml:space="preserve">
+    <value>Writes debug detail to the log files. Useful when reporting a problem.</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Settings_Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Settings_DataFolder" xml:space="preserve">
+    <value>Data folder</value>
+  </data>
+  <data name="Settings_DataFolderPortable" xml:space="preserve">
+    <value>Portable mode: settings and logs live next to the executable because a file named "portable" sits beside it.</value>
+  </data>
+  <data name="Settings_DataFolderPerUser" xml:space="preserve">
+    <value>Settings and logs for this account. Put a file named "portable" next to WinClean.exe to keep them beside the executable instead.</value>
+  </data>
+  <data name="Settings_OpenDataFolder" xml:space="preserve">
+    <value>Open data folder</value>
+  </data>
+  <data name="Settings_Diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="Settings_DiagnosticsDescription" xml:space="preserve">
+    <value>What each reader reported on this machine. The same list is written by WinClean.exe --self-check.</value>
+  </data>
+  <data name="Settings_DiagnosticOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Settings_VersionLine" xml:space="preserve">
+    <value>{0} {1}</value>
+    <comment>Name and version</comment>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>Open source under the MIT license.</value>
+  </data>
+  <data name="Settings_Privacy" xml:space="preserve">
+    <value>No account, no telemetry, no analytics, no crash upload and no update check. WinClean never opens a network connection on its own; links and the Windows Update check only run when you click them.</value>
+  </data>
+  <data name="Settings_WorkingSet" xml:space="preserve">
+    <value>WinClean is using {0} of memory.</value>
+  </data>
+  <data name="Settings_OpenReleases" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="Settings_OpenRepository" xml:space="preserve">
+    <value>Source code</value>
+  </data>
 </root>
