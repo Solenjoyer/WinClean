@@ -52,14 +52,15 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
 
+  <!--
+    Strings.Designer.cs is generated from Strings.resx and committed. After editing the resx run:
+    dotnet run eng/UpdateStrings.cs
+  -->
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Strings.resx">
-      <StronglyTypedFileName>$(IntermediateOutputPath)Strings.Designer.cs</StronglyTypedFileName>
-      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
-      <StronglyTypedNamespace>WinClean.Resources</StronglyTypedNamespace>
-      <StronglyTypedClassName>Strings</StronglyTypedClassName>
-      <PublicClass>true</PublicClass>
-    </EmbeddedResource>
+    <Compile Update="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,17 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Series colours for sparklines and bars. Everything else comes from the Fluent theme. -->
+    <SolidColorBrush x:Key="CpuSeriesBrush" Color="#2F80C9" />
+    <SolidColorBrush x:Key="MemorySeriesBrush" Color="#7B5BC7" />
+    <SolidColorBrush x:Key="DiskSeriesBrush" Color="#2E8B57" />
+    <SolidColorBrush x:Key="GpuSeriesBrush" Color="#C2641C" />
+    <SolidColorBrush x:Key="NetworkSeriesBrush" Color="#0E8A9E" />
+
+    <SolidColorBrush x:Key="CpuSeriesFillBrush" Color="#1E2F80C9" />
+    <SolidColorBrush x:Key="MemorySeriesFillBrush" Color="#1E7B5BC7" />
+    <SolidColorBrush x:Key="DiskSeriesFillBrush" Color="#1E2E8B57" />
+    <SolidColorBrush x:Key="GpuSeriesFillBrush" Color="#1EC2641C" />
+    <SolidColorBrush x:Key="NetworkSeriesFillBrush" Color="#1E0E8A9E" />
+
+</ResourceDictionary>
