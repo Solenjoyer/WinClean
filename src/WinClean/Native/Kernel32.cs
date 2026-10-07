@@ -193,13 +193,22 @@ internal static partial class Kernel32
     [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
     internal static partial uint GetCompressedFileSizeW(string lpFileName, out uint lpFileSizeHigh);
 
+    // Two 32-bit halves rather than a long: the SDK aligns FILETIME on 4 bytes, and a long would
+    // shift every field after dwFileAttributes by 4 bytes.
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct FILETIME
+    {
+        public uint dwLowDateTime;
+        public uint dwHighDateTime;
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct WIN32_FIND_DATAW
     {
         public uint dwFileAttributes;
-        public long ftCreationTime;
-        public long ftLastAccessTime;
-        public long ftLastWriteTime;
+        public FILETIME ftCreationTime;
+        public FILETIME ftLastAccessTime;
+        public FILETIME ftLastWriteTime;
         public uint nFileSizeHigh;
         public uint nFileSizeLow;
         public uint dwReserved0;
