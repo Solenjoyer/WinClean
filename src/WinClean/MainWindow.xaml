@@ -10,6 +10,7 @@
         Title="WinClean"
         Width="1180" Height="760"
         MinWidth="960" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI Variable Text, Segoe UI"
         UseLayoutRounding="True"
         TextOptions.TextFormattingMode="Display">

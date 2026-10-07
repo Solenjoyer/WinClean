@@ -1,7 +1,9 @@
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using WinClean.Core.Settings;
 using WinClean.Services;
+using WinClean.Services.Logging;
 using WinClean.Services.Shell;
 using WinClean.ViewModels;
 
@@ -22,10 +24,23 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        _services = BuildServices();
-        ThemeResources.Apply(this, ThemePreference.System);
+        var location = DataLocation.Detect();
+        _services = BuildServices(location);
+
+        var settings = _services.GetRequiredService<SettingsStore>();
+        settings.Load();
+        ApplySettings(settings.Current);
+        settings.Changed += (_, current) => ApplySettings(current);
+
+        _services.GetRequiredService<ILogger<App>>().LogInformation(
+            "{Name} {Version} starting; {Mode} data folder {Directory}",
+            AppInfo.Name,
+            AppInfo.Version,
+            location.IsPortable ? "portable" : "per-user",
+            location.DataDirectory);
 
         var shell = _services.GetRequiredService<ShellViewModel>();
+        shell.IsCompact = settings.Current.CompactNavigation;
         shell.NavigateTo(_options.Page);
 
         var window = _services.GetRequiredService<MainWindow>();
@@ -38,11 +53,24 @@ public partial class App : Application
         base.OnExit(e);
     }
 
-    private ServiceProvider BuildServices()
+    private void ApplySettings(AppSettings current)
+    {
+        var logging = _services!.GetRequiredService<FileLoggerProvider>();
+        logging.MinimumLevel = current.VerboseLogging ? LogLevel.Debug : LogLevel.Information;
+        ThemeResources.Apply(this, current.Theme);
+    }
+
+    private ServiceProvider BuildServices(SettingsLocation location)
     {
         var services = new ServiceCollection();
 
         services.AddSingleton(_options);
+        services.AddSingleton(location);
+        services.AddSingleton(_ => new FileLoggerProvider(location.LogDirectory));
+        services.AddLogging(builder => builder
+            .SetMinimumLevel(LogLevel.Trace)
+            .Services.AddSingleton<ILoggerProvider>(provider => provider.GetRequiredService<FileLoggerProvider>()));
+        services.AddSingleton<SettingsStore>();
 
         services.AddSingleton<OverviewViewModel>();
         services.AddSingleton<ProcessesViewModel>();

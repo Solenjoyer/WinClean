@@ -61,6 +61,10 @@ dotnet_style_prefer_conditional_expression_over_return = false:none
 dotnet_diagnostic.IDE0005.severity = warning
 dotnet_diagnostic.IDE0055.severity = warning
 
+# Logging happens a few times per session; LoggerMessage delegates would only add boilerplate.
+dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA1873.severity = none
+
 # Naming: constants and static readonly fields are PascalCase, other private fields are _camelCase,
 # interfaces start with I, async methods end with Async. Rules are matched top to bottom.
 dotnet_naming_rule.constants_pascal.severity = warning
