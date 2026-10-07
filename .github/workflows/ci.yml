@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+
+jobs:
+  linux:
+    name: Format, build and Core tests (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Restore
+        run: dotnet restore WinClean.slnx --locked-mode
+
+      - name: Check formatting
+        run: dotnet format WinClean.slnx --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build WinClean.slnx -c Release --no-restore
+
+      - name: Test
+        run: >
+          dotnet test tests/WinClean.Core.Tests -c Release --no-build
+          --logger "trx;LogFileName=core-linux.trx"
+          --results-directory artifacts/test-results
+          --collect:"XPlat Code Coverage"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-linux
+          path: artifacts/test-results
+          retention-days: 7
+
+  windows:
+    name: Build, tests and self-check (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Restore
+        run: dotnet restore WinClean.slnx --locked-mode
+
+      - name: Build
+        run: dotnet build WinClean.slnx -c Release --no-restore
+
+      - name: Test
+        run: >
+          dotnet test WinClean.slnx -c Release --no-build
+          --logger "trx"
+          --results-directory artifacts/test-results
+
+      - name: Publish smoke build
+        run: >
+          dotnet publish src/WinClean/WinClean.csproj -c Release -r win-x64
+          -p:RestoreLockedMode=true -o artifacts/publish/smoke
+
+      - name: Check publish output
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem artifacts/publish/smoke -File
+          if (@($files.Name) -ne @('WinClean.exe')) {
+            throw "Unexpected publish output: $($files.Name -join ', ')"
+          }
+          $size = (Get-Item artifacts/publish/smoke/WinClean.exe).Length
+          $line = 'WinClean.exe: {0:N1} MB' -f ($size / 1MB)
+          $line | Tee-Object -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          if ($size -gt 200MB) {
+            throw 'The executable exceeds the 200 MB budget'
+          }
+
+      - name: Self-check
+        shell: pwsh
+        timeout-minutes: 3
+        run: |
+          $process = Start-Process -FilePath artifacts/publish/smoke/WinClean.exe `
+            -ArgumentList '--self-check', '--report', 'artifacts/self-check.txt' `
+            -Wait -PassThru -NoNewWindow
+          if (Test-Path artifacts/self-check.txt) {
+            Get-Content artifacts/self-check.txt | Tee-Object -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          }
+          if ($process.ExitCode -eq 1) {
+            throw 'The self-check reported failures'
+          }
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-results
+          path: |
+            artifacts/test-results
+            artifacts/self-check.txt
+          retention-days: 7
