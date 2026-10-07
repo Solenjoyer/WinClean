@@ -18,4 +18,7 @@ public sealed partial class FactItem : ObservableObject
 
     [ObservableProperty]
     public partial bool IsVisible { get; set; } = true;
+
+    /// <summary>Serial numbers and the like, hidden until the user asks to see them.</summary>
+    public bool IsSensitive { get; init; }
 }
