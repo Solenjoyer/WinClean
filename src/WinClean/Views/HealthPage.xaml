@@ -3,10 +3,270 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:WinClean.Controls"
              xmlns:r="clr-namespace:WinClean.Resources"
              xmlns:vm="clr-namespace:WinClean.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:HealthViewModel}">
-    <controls:EmptyState Title="{x:Static r:Strings.Page_NothingYet}" />
+             d:DataContext="{d:DesignInstance vm:HealthViewModel}"
+             Loaded="OnLoaded">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+    </UserControl.InputBindings>
+
+    <UserControl.Resources>
+        <Style x:Key="FactLabel" TargetType="TextBlock" BasedOn="{StaticResource SecondaryText}">
+            <Setter Property="Margin" Value="0,3,16,3" />
+        </Style>
+        <Style x:Key="FactValue" TargetType="TextBlock" BasedOn="{StaticResource BodyText}">
+            <Setter Property="Margin" Value="0,3" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style x:Key="RowStyle" TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8,4" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,0,24,24">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Health_Windows}" />
+                    <Grid Margin="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_Edition}" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding WindowsName}" />
+                        <TextBlock Grid.Row="1" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_Version}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding VersionText}" />
+                        <TextBlock Grid.Row="2" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_Build}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding BuildText}" />
+                        <TextBlock Grid.Row="3" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_Installed}" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding InstalledText}" />
+                    </Grid>
+                    <DockPanel Margin="0,12,0,0">
+                        <Ellipse DockPanel.Dock="Left" Width="8" Height="8" Margin="0,6,8,0" VerticalAlignment="Top">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SupportEnded}" Value="True">
+                                            <Setter Property="Fill" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding ServicingText}" TextWrapping="Wrap" />
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Health_Updates}" />
+                    <Grid Margin="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition /><RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_LastCheck}" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding LastCheckText}" ToolTip="{x:Static r:Strings.Health_AsReported}" />
+                        <TextBlock Grid.Row="1" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_LastInstall}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding LastInstallText}" ToolTip="{x:Static r:Strings.Health_AsReported}" />
+                    </Grid>
+                    <DockPanel Margin="0,8,0,0">
+                        <Ellipse DockPanel.Dock="Left" Width="8" Height="8" Margin="0,6,8,0" VerticalAlignment="Top">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RestartPending}" Value="True">
+                                            <Setter Property="Fill" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BodyText}" Text="{Binding RestartText}" />
+                            <ItemsControl ItemsSource="{Binding RestartSignals}" Focusable="False">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding}" TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DockPanel>
+                    <TextBlock Style="{StaticResource CaptionText}" Text="{x:Static r:Strings.Health_RecentUpdates}" Margin="0,12,0,4" />
+                    <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Health_NoHistory}"
+                               Visibility="{Binding HasHistory, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+                    <ItemsControl ItemsSource="{Binding History}" Focusable="False">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type vm:UpdateRow}">
+                                <DockPanel Margin="0,2">
+                                    <TextBlock DockPanel.Dock="Right" Style="{StaticResource SecondaryText}" Text="{Binding DateText}" Margin="12,0,0,0" />
+                                    <TextBlock DockPanel.Dock="Right" Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Health_UpdateFailed}" Margin="12,0,0,0"
+                                               Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                               Visibility="{Binding Failed, Converter={StaticResource BoolToVisibility}}" />
+                                    <TextBlock Style="{StaticResource BodyText}" Text="{Binding Title}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Title}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <Button Content="{x:Static r:Strings.Health_OpenWindowsUpdate}" Command="{Binding OpenWindowsUpdateCommand}" />
+                        <Button Content="{x:Static r:Strings.Health_CheckNow}" Command="{Binding CheckNowCommand}" IsEnabled="{Binding IsChecking, Converter={StaticResource InverseBool}}" Margin="8,0,0,0" />
+                        <TextBlock Style="{StaticResource CaptionText}" Text="{x:Static r:Strings.Health_CheckNowCaption}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding CheckResult}" TextWrapping="Wrap" Margin="0,8,0,0"
+                               Visibility="{Binding CheckResult, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}" />
+                    <ItemsControl ItemsSource="{Binding AvailableUpdates}" Focusable="False" Margin="0,2,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource BodyText}" Text="{Binding}" TextWrapping="Wrap" Margin="0,1" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,12,0,0">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Health_System}" />
+                    <Grid Margin="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_SystemDrive}" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding SystemDriveText}" />
+                        <TextBlock Grid.Row="1" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_LastRestart}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding LastRestartText}" />
+                        <TextBlock Grid.Row="2" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_Firmware}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding FirmwareText}" />
+                        <TextBlock Grid.Row="3" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Health_SecureBoot}" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding SecureBootText}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource Card}" Margin="0,12,0,0" Padding="0">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="16,12,16,8">
+                        <CheckBox DockPanel.Dock="Right" Content="{x:Static r:Strings.Health_ShowAllDevices}" IsChecked="{Binding ShowAllDevices}" VerticalAlignment="Top" Margin="16,0,0,0" />
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Health_Drivers}" />
+                            <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Health_DriversDescription}" TextWrapping="Wrap" Margin="0,2,0,0" />
+                        </StackPanel>
+                    </DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Health_NoDrivers}" Margin="16,0,16,12"
+                               Visibility="{Binding HasDrivers, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+                    <ListView ItemsSource="{Binding Drivers}"
+                              ItemContainerStyle="{StaticResource RowStyle}"
+                              BorderThickness="0"
+                              MaxHeight="520"
+                              VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              VirtualizingPanel.ScrollUnit="Pixel"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="300">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Health_ColumnDevice}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:DriverRow}">
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource BodyText}" Text="{Binding Device}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Device}" />
+                                                <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Problem}" Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                                           Visibility="{Binding HasProblem, Converter={StaticResource BoolToVisibility}}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="100">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Storage_ColumnKind}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:DriverRow}">
+                                            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Group}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="170">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Health_ColumnProvider}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:DriverRow}">
+                                            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Provider}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="130">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Health_ColumnVersion}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:DriverRow}">
+                                            <TextBlock Style="{StaticResource BodyText}" Text="{Binding Version}" Typography.NumeralAlignment="Tabular" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="200">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Health_ColumnDate}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:DriverRow}">
+                                            <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding DateText}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="190">
+                                    <GridViewColumnHeader Content="{x:Static r:Strings.Health_ColumnSource}" Style="{StaticResource HeaderStyle}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:DriverRow}">
+                                            <Button Style="{StaticResource TextButton}"
+                                                    Command="{Binding DataContext.OpenSourceCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="{Binding SourceTooltip}"
+                                                    HorizontalAlignment="Left"
+                                                    Visibility="{Binding HasSource, Converter={StaticResource BoolToVisibility}}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{StaticResource BodyText}" Text="{Binding SourceLabel}" />
+                                                    <TextBlock Style="{StaticResource GlyphText}" Text="{x:Static vm:Glyphs.OpenInNewWindow}" FontSize="11" Margin="6,0,0,0" />
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

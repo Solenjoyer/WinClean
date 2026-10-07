@@ -9,6 +9,7 @@ using WinClean.Resources;
 using WinClean.Services;
 using WinClean.Services.Cleanup;
 using WinClean.Services.Diagnostics;
+using WinClean.Services.Health;
 using WinClean.Services.Logging;
 using WinClean.Services.Monitoring;
 using WinClean.Services.Processes;
@@ -156,6 +157,7 @@ public partial class App : Application
         services.AddSingleton<CleanupDiscovery>();
         services.AddSingleton<CleanupExecutor>();
         services.AddSingleton<CleanupLog>();
+        services.AddSingleton<WindowsUpdateReader>();
         services.AddSingleton<ProcessIconCache>();
         services.AddSingleton<ProcessDetailsCache>();
         services.AddSingleton<ProcessActions>();
