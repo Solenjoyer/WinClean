@@ -78,7 +78,7 @@ public sealed class MonitoringCoordinator : IDisposable
 
         return _shell.SelectedItem.Key switch
         {
-            PageKeys.Overview => new MonitoringDemand(true, true, false, interval),
+            PageKeys.Overview => new MonitoringDemand(true, true, true, interval),
             PageKeys.Processes => new MonitoringDemand(true, true, true, interval),
             _ => new MonitoringDemand(true, false, false, interval),
         };

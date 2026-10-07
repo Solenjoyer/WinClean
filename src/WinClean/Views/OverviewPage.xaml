@@ -56,27 +56,54 @@
             </UniformGrid>
 
             <Grid ColumnDefinitions="2*,12,*" Margin="0,12,0,0">
-                <Border Style="{StaticResource Card}">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Overview_Storage}" />
-                        <ItemsControl ItemsSource="{Binding Volumes}" Margin="0,8,0,0">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vm:VolumeItem}">
-                                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="0,6">
-                                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding Title}" />
-                                        <TextBlock Grid.Column="1" Style="{StaticResource SecondaryText}" Text="{Binding FreeText}" Margin="12,0,0,0" />
-                                        <controls:ProportionBar Grid.Row="1" Grid.ColumnSpan="2" Value="{Binding UsedPercent}" IsCritical="{Binding IsCritical}" Margin="0,6,0,0" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Border>
+                <StackPanel>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Overview_TopApplications}" />
+                            <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Overview_NoProcesses}" Margin="0,8,0,0"
+                                       Visibility="{Binding HasTopApplications, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+                            <ItemsControl ItemsSource="{Binding TopApplications}" Margin="0,8,0,0" Focusable="False">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:TopApplicationItem}">
+                                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="0,5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource BodyText}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                                                <Border Style="{StaticResource Badge}" Margin="8,0,0,0"
+                                                        Visibility="{Binding Category, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}">
+                                                    <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Category}" />
+                                                </Border>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Style="{StaticResource NumericText}" Text="{Binding MemoryText}" Margin="12,0,0,0" />
+                                            <controls:ProportionBar Grid.Row="1" Grid.ColumnSpan="2" Value="{Binding Percent}" Margin="0,5,0,0" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Overview_Storage}" />
+                            <ItemsControl ItemsSource="{Binding Volumes}" Margin="0,8,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:VolumeItem}">
+                                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="0,6">
+                                            <TextBlock Style="{StaticResource BodyText}" Text="{Binding Title}" />
+                                            <TextBlock Grid.Column="1" Style="{StaticResource SecondaryText}" Text="{Binding FreeText}" Margin="12,0,0,0" />
+                                            <controls:ProportionBar Grid.Row="1" Grid.ColumnSpan="2" Value="{Binding UsedPercent}" IsCritical="{Binding IsCritical}" Margin="0,6,0,0" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
 
                 <Border Grid.Column="2" Style="{StaticResource Card}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource BodyStrongText}" Text="{x:Static r:Strings.Overview_System}" />
-                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" Margin="0,8,0,0">
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Margin="0,8,0,0">
                             <Grid.Resources>
                                 <Style TargetType="TextBlock" BasedOn="{StaticResource SecondaryText}" x:Key="FactLabel">
                                     <Setter Property="Margin" Value="0,4,16,4" />
@@ -96,6 +123,10 @@
                                        Visibility="{Binding BatteryVisible, Converter={StaticResource BoolToVisibility}}" />
                             <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding BatteryText}"
                                        Visibility="{Binding BatteryVisible, Converter={StaticResource BoolToVisibility}}" />
+                            <TextBlock Grid.Row="4" Style="{StaticResource FactLabel}" Text="{x:Static r:Strings.Overview_Temperatures}"
+                                       Visibility="{Binding TemperaturesVisible, Converter={StaticResource BoolToVisibility}}" />
+                            <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource FactValue}" Text="{Binding TemperaturesText}"
+                                       Visibility="{Binding TemperaturesVisible, Converter={StaticResource BoolToVisibility}}" />
                         </Grid>
                     </StackPanel>
                 </Border>

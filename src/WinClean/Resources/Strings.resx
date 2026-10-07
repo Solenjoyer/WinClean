@@ -1541,4 +1541,16 @@
   <data name="Hardware_Reading" xml:space="preserve">
     <value>Reading</value>
   </data>
+  <data name="Overview_TopApplications" xml:space="preserve">
+    <value>Top applications by memory</value>
+  </data>
+  <data name="Overview_NoProcesses" xml:space="preserve">
+    <value>Waiting for the first process snapshot.</value>
+  </data>
+  <data name="Overview_Temperatures" xml:space="preserve">
+    <value>Temperatures</value>
+  </data>
+  <data name="Overview_SensorsOff" xml:space="preserve">
+    <value>Sensors are off. Enable them in Settings.</value>
+  </data>
 </root>

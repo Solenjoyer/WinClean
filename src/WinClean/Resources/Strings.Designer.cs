@@ -930,6 +930,9 @@ public static class Strings
     /// <summary>"Network activity history" (Accessibility name)</summary>
     public static string Overview_NetworkHistory => ResourceManager.GetString("Overview_NetworkHistory", Culture)!;
 
+    /// <summary>"Waiting for the first process snapshot."</summary>
+    public static string Overview_NoProcesses => ResourceManager.GetString("Overview_NoProcesses", Culture)!;
+
     /// <summary>"of {0}, {1} available" (Memory caption: of 32 GB, 13.8 GB available)</summary>
     public static string Overview_OfTotalAvailable => ResourceManager.GetString("Overview_OfTotalAvailable", Culture)!;
 
@@ -945,6 +948,9 @@ public static class Strings
     /// <summary>"{0} read, {1} write"</summary>
     public static string Overview_ReadWrite => ResourceManager.GetString("Overview_ReadWrite", Culture)!;
 
+    /// <summary>"Sensors are off. Enable them in Settings."</summary>
+    public static string Overview_SensorsOff => ResourceManager.GetString("Overview_SensorsOff", Culture)!;
+
     /// <summary>"Storage"</summary>
     public static string Overview_Storage => ResourceManager.GetString("Overview_Storage", Culture)!;
 
@@ -953,6 +959,12 @@ public static class Strings
 
     /// <summary>"System drive"</summary>
     public static string Overview_SystemVolume => ResourceManager.GetString("Overview_SystemVolume", Culture)!;
+
+    /// <summary>"Temperatures"</summary>
+    public static string Overview_Temperatures => ResourceManager.GetString("Overview_Temperatures", Culture)!;
+
+    /// <summary>"Top applications by memory"</summary>
+    public static string Overview_TopApplications => ResourceManager.GetString("Overview_TopApplications", Culture)!;
 
     /// <summary>"Uptime"</summary>
     public static string Overview_Uptime => ResourceManager.GetString("Overview_Uptime", Culture)!;

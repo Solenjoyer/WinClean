@@ -3,7 +3,9 @@ using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WinClean.Core.Formatting;
 using WinClean.Core.Monitoring;
+using WinClean.Core.Settings;
 using WinClean.Resources;
+using WinClean.Services;
 using WinClean.Services.Monitoring;
 
 namespace WinClean.ViewModels;
@@ -12,12 +14,18 @@ public sealed partial class OverviewViewModel : ObservableObject
 {
     private const string Pending = "—";
 
+    private const int TopApplicationCount = 8;
+
     private readonly MonitoringScheduler _scheduler;
 
-    public OverviewViewModel(MonitoringScheduler scheduler)
+    private readonly SettingsStore _settings;
+
+    public OverviewViewModel(MonitoringScheduler scheduler, SettingsStore settings)
     {
         _scheduler = scheduler;
+        _settings = settings;
         History = scheduler.History;
+        TemperaturesText = string.Empty;
 
         CpuValue = Pending;
         CpuCaption = string.Format(CultureInfo.CurrentCulture, Strings.Overview_Processors, scheduler.ProcessorCount);
@@ -40,6 +48,17 @@ public sealed partial class OverviewViewModel : ObservableObject
     public MetricHistory History { get; }
 
     public ObservableCollection<VolumeItem> Volumes { get; } = [];
+
+    public ObservableCollection<TopApplicationItem> TopApplications { get; } = [];
+
+    [ObservableProperty]
+    public partial bool HasTopApplications { get; private set; }
+
+    [ObservableProperty]
+    public partial string TemperaturesText { get; private set; }
+
+    [ObservableProperty]
+    public partial bool TemperaturesVisible { get; private set; }
 
     [ObservableProperty]
     public partial int HistoryVersion { get; private set; }
@@ -153,7 +172,97 @@ public sealed partial class OverviewViewModel : ObservableObject
         }
 
         UpdateVolumes(sample.Volumes);
+        UpdateTopApplications(sample);
+        UpdateTemperatures(sample.Sensors);
         HistoryVersion = History.Cpu.Version;
+    }
+
+    private void UpdateTopApplications(SystemSample sample)
+    {
+        if (sample.Processes is not { } snapshot || sample.Memory is not { } memory)
+        {
+            return;
+        }
+
+        var byPid = new Dictionary<int, ProcessSample>(snapshot.Processes.Count);
+
+        foreach (var process in snapshot.Processes)
+        {
+            byPid[process.Pid] = process;
+        }
+
+        var top = snapshot.Grouping.Groups
+            .Select(group => (Group: group, Memory: group.MemberPids.Sum(pid => byPid.TryGetValue(pid, out var process) ? process.PrivateWorkingSet : 0)))
+            .Where(pair => pair.Memory > 0)
+            .OrderByDescending(pair => pair.Memory)
+            .Take(TopApplicationCount)
+            .ToList();
+
+        for (var index = 0; index < top.Count; index++)
+        {
+            var (group, bytes) = top[index];
+            TopApplicationItem item;
+
+            if (index < TopApplications.Count && string.Equals(TopApplications[index].Key, group.Key, StringComparison.Ordinal))
+            {
+                item = TopApplications[index];
+            }
+            else
+            {
+                item = new TopApplicationItem(group.Key);
+
+                if (index < TopApplications.Count)
+                {
+                    TopApplications[index] = item;
+                }
+                else
+                {
+                    TopApplications.Add(item);
+                }
+            }
+
+            item.Name = group.DisplayName;
+            item.Category = group.Application is null ? string.Empty : CategoryNames.For(group.Category);
+            item.MemoryText = ByteSize.Format(bytes);
+            item.Percent = memory.Total > 0 ? 100.0 * bytes / memory.Total : 0;
+        }
+
+        while (TopApplications.Count > top.Count)
+        {
+            TopApplications.RemoveAt(TopApplications.Count - 1);
+        }
+
+        HasTopApplications = TopApplications.Count > 0;
+    }
+
+    private void UpdateTemperatures(IReadOnlyList<SensorReading>? readings)
+    {
+        if (!_settings.Current.SensorsEnabled)
+        {
+            TemperaturesVisible = false;
+            return;
+        }
+
+        var parts = new List<string>();
+        var unit = _settings.Current.TemperatureUnit;
+
+        if (readings is not null)
+        {
+            foreach (var kind in new[] { SensorHardwareKind.Cpu, SensorHardwareKind.Gpu, SensorHardwareKind.Storage })
+            {
+                var temperatures = readings.Where(reading => reading.HardwareKind == kind && reading.Kind == SensorKind.Temperature).ToList();
+
+                if (temperatures.Count > 0)
+                {
+                    var label = kind switch { SensorHardwareKind.Cpu => Strings.Overview_Cpu, SensorHardwareKind.Gpu => Strings.Overview_Gpu, _ => Strings.Overview_Disk };
+                    var value = temperatures.Max(reading => reading.Value);
+                    parts.Add(label + " " + (unit == TemperatureUnit.Fahrenheit ? (value * 9 / 5 + 32).ToString("0", CultureInfo.CurrentCulture) + " °F" : value.ToString("0", CultureInfo.CurrentCulture) + " °C"));
+                }
+            }
+        }
+
+        TemperaturesVisible = true;
+        TemperaturesText = parts.Count == 0 ? Strings.NotAvailable : string.Join("   ", parts);
     }
 
     private void UpdateVolumes(IReadOnlyList<VolumeSample> volumes)
