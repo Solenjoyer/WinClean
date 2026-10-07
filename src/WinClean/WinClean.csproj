@@ -60,6 +60,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="System.ServiceProcess.ServiceController" />
+    <PackageReference Include="LibreHardwareMonitorLib" />
   </ItemGroup>
 
   <!--

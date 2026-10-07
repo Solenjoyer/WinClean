@@ -1304,4 +1304,241 @@
   <data name="DeviceGroup_Other" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="Hardware_CopySummary" xml:space="preserve">
+    <value>Copy summary</value>
+  </data>
+  <data name="Hardware_ShowIdentifiers" xml:space="preserve">
+    <value>Show identifiers</value>
+  </data>
+  <data name="Hardware_Hidden" xml:space="preserve">
+    <value>hidden</value>
+  </data>
+  <data name="Hardware_Processor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="Hardware_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Hardware_CoresThreads" xml:space="preserve">
+    <value>Cores and threads</value>
+  </data>
+  <data name="Hardware_CoresThreadsValue" xml:space="preserve">
+    <value>{0} cores, {1} threads</value>
+  </data>
+  <data name="Hardware_HybridCores" xml:space="preserve">
+    <value>{0} performance and {1} efficiency cores, {2} threads</value>
+  </data>
+  <data name="Hardware_Packages" xml:space="preserve">
+    <value>Sockets</value>
+  </data>
+  <data name="Hardware_BaseClock" xml:space="preserve">
+    <value>Base clock</value>
+  </data>
+  <data name="Hardware_Caches" xml:space="preserve">
+    <value>Caches</value>
+  </data>
+  <data name="Hardware_Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="Hardware_Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="Hardware_Virtualization" xml:space="preserve">
+    <value>Virtualization in firmware</value>
+  </data>
+  <data name="Hardware_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Hardware_Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Hardware_Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="Hardware_TemperatureNeedsSensors" xml:space="preserve">
+    <value>Not available. Enable sensors in Settings.</value>
+  </data>
+  <data name="Hardware_TemperatureNeedsAdmin" xml:space="preserve">
+    <value>Not available. Reading CPU sensors needs the PawnIO driver and administrator rights.</value>
+  </data>
+  <data name="Hardware_TemperatureNotReported" xml:space="preserve">
+    <value>Not reported by this hardware</value>
+  </data>
+  <data name="Hardware_Graphics" xml:space="preserve">
+    <value>Graphics</value>
+  </data>
+  <data name="Hardware_DedicatedMemory" xml:space="preserve">
+    <value>Dedicated memory</value>
+  </data>
+  <data name="Hardware_SharedMemory" xml:space="preserve">
+    <value>Shared memory</value>
+  </data>
+  <data name="Hardware_Driver" xml:space="preserve">
+    <value>Driver</value>
+  </data>
+  <data name="Hardware_DriverValue" xml:space="preserve">
+    <value>{0}, {1}</value>
+    <comment>version and date</comment>
+  </data>
+  <data name="Hardware_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Hardware_Installed" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Hardware_SlotsUsed" xml:space="preserve">
+    <value>Slots</value>
+  </data>
+  <data name="Hardware_SlotsUsedValue" xml:space="preserve">
+    <value>{0} of {1} used</value>
+  </data>
+  <data name="Hardware_MaximumCapacity" xml:space="preserve">
+    <value>Maximum capacity</value>
+  </data>
+  <data name="Hardware_ModuleValue" xml:space="preserve">
+    <value>{0} {1}, {2} MT/s</value>
+    <comment>size, type, speed</comment>
+  </data>
+  <data name="Hardware_ModuleConfigured" xml:space="preserve">
+    <value>{0} {1}, {2} MT/s (configured {3} MT/s)</value>
+  </data>
+  <data name="Hardware_ModuleDetail" xml:space="preserve">
+    <value>{0} {1}</value>
+    <comment>manufacturer and part number</comment>
+  </data>
+  <data name="Hardware_EmptySlot" xml:space="preserve">
+    <value>empty</value>
+  </data>
+  <data name="Hardware_Motherboard" xml:space="preserve">
+    <value>Motherboard</value>
+  </data>
+  <data name="Hardware_Manufacturer" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="Hardware_Product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="Hardware_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Hardware_SerialNumber" xml:space="preserve">
+    <value>Serial number</value>
+  </data>
+  <data name="Hardware_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Hardware_Family" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="Hardware_Uuid" xml:space="preserve">
+    <value>UUID</value>
+  </data>
+  <data name="Hardware_Firmware" xml:space="preserve">
+    <value>BIOS / UEFI</value>
+  </data>
+  <data name="Hardware_Vendor" xml:space="preserve">
+    <value>Vendor</value>
+  </data>
+  <data name="Hardware_ReleaseDate" xml:space="preserve">
+    <value>Release date</value>
+  </data>
+  <data name="Hardware_Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Hardware_SecureBoot" xml:space="preserve">
+    <value>Secure Boot</value>
+  </data>
+  <data name="Hardware_Tpm" xml:space="preserve">
+    <value>TPM</value>
+  </data>
+  <data name="Hardware_NotPresent" xml:space="preserve">
+    <value>Not present</value>
+  </data>
+  <data name="Hardware_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Hardware_Disk" xml:space="preserve">
+    <value>Disk {0}</value>
+  </data>
+  <data name="Hardware_Bus" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="Hardware_MediaType" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Hardware_SolidState" xml:space="preserve">
+    <value>Solid state</value>
+  </data>
+  <data name="Hardware_Rotational" xml:space="preserve">
+    <value>Rotational</value>
+  </data>
+  <data name="Hardware_Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Hardware_Trim" xml:space="preserve">
+    <value>TRIM</value>
+  </data>
+  <data name="Hardware_Volumes" xml:space="preserve">
+    <value>Volumes</value>
+  </data>
+  <data name="Hardware_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Hardware_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Hardware_Speed" xml:space="preserve">
+    <value>Link speed</value>
+  </data>
+  <data name="Hardware_SpeedValue" xml:space="preserve">
+    <value>{0} Mbit/s</value>
+  </data>
+  <data name="Hardware_SpeedGbit" xml:space="preserve">
+    <value>{0} Gbit/s</value>
+  </data>
+  <data name="Hardware_PhysicalAddress" xml:space="preserve">
+    <value>MAC address</value>
+  </data>
+  <data name="Hardware_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Hardware_Up" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="Hardware_Down" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="Hardware_Displays" xml:space="preserve">
+    <value>Displays</value>
+  </data>
+  <data name="Hardware_Resolution" xml:space="preserve">
+    <value>Resolution</value>
+  </data>
+  <data name="Hardware_ResolutionValue" xml:space="preserve">
+    <value>{0} × {1} at {2} Hz</value>
+  </data>
+  <data name="Hardware_Adapter" xml:space="preserve">
+    <value>Adapter</value>
+  </data>
+  <data name="Hardware_Primary" xml:space="preserve">
+    <value>primary</value>
+  </data>
+  <data name="Hardware_Scale" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Hardware_Sensors" xml:space="preserve">
+    <value>Sensors</value>
+  </data>
+  <data name="Hardware_SensorsOff" xml:space="preserve">
+    <value>Sensors are off. Enable them in Settings to read temperatures, fans and power.</value>
+  </data>
+  <data name="Hardware_SensorsNone" xml:space="preserve">
+    <value>No sensor reported a value yet.</value>
+  </data>
+  <data name="Hardware_SensorsUnsupported" xml:space="preserve">
+    <value>Sensors are not available on ARM64.</value>
+  </data>
+  <data name="Hardware_Reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
 </root>

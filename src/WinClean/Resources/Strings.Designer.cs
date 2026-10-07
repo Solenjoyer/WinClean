@@ -405,6 +405,240 @@ public static class Strings
     /// <summary>"Unexpected error"</summary>
     public static string Error_Title => ResourceManager.GetString("Error_Title", Culture)!;
 
+    /// <summary>"Adapter"</summary>
+    public static string Hardware_Adapter => ResourceManager.GetString("Hardware_Adapter", Culture)!;
+
+    /// <summary>"Architecture"</summary>
+    public static string Hardware_Architecture => ResourceManager.GetString("Hardware_Architecture", Culture)!;
+
+    /// <summary>"Base clock"</summary>
+    public static string Hardware_BaseClock => ResourceManager.GetString("Hardware_BaseClock", Culture)!;
+
+    /// <summary>"Bus"</summary>
+    public static string Hardware_Bus => ResourceManager.GetString("Hardware_Bus", Culture)!;
+
+    /// <summary>"Caches"</summary>
+    public static string Hardware_Caches => ResourceManager.GetString("Hardware_Caches", Culture)!;
+
+    /// <summary>"Capacity"</summary>
+    public static string Hardware_Capacity => ResourceManager.GetString("Hardware_Capacity", Culture)!;
+
+    /// <summary>"Copy summary"</summary>
+    public static string Hardware_CopySummary => ResourceManager.GetString("Hardware_CopySummary", Culture)!;
+
+    /// <summary>"Cores and threads"</summary>
+    public static string Hardware_CoresThreads => ResourceManager.GetString("Hardware_CoresThreads", Culture)!;
+
+    /// <summary>"{0} cores, {1} threads"</summary>
+    public static string Hardware_CoresThreadsValue => ResourceManager.GetString("Hardware_CoresThreadsValue", Culture)!;
+
+    /// <summary>"Dedicated memory"</summary>
+    public static string Hardware_DedicatedMemory => ResourceManager.GetString("Hardware_DedicatedMemory", Culture)!;
+
+    /// <summary>"Disabled"</summary>
+    public static string Hardware_Disabled => ResourceManager.GetString("Hardware_Disabled", Culture)!;
+
+    /// <summary>"Disk {0}"</summary>
+    public static string Hardware_Disk => ResourceManager.GetString("Hardware_Disk", Culture)!;
+
+    /// <summary>"Displays"</summary>
+    public static string Hardware_Displays => ResourceManager.GetString("Hardware_Displays", Culture)!;
+
+    /// <summary>"Disconnected"</summary>
+    public static string Hardware_Down => ResourceManager.GetString("Hardware_Down", Culture)!;
+
+    /// <summary>"Driver"</summary>
+    public static string Hardware_Driver => ResourceManager.GetString("Hardware_Driver", Culture)!;
+
+    /// <summary>"{0}, {1}" (version and date)</summary>
+    public static string Hardware_DriverValue => ResourceManager.GetString("Hardware_DriverValue", Culture)!;
+
+    /// <summary>"empty"</summary>
+    public static string Hardware_EmptySlot => ResourceManager.GetString("Hardware_EmptySlot", Culture)!;
+
+    /// <summary>"Enabled"</summary>
+    public static string Hardware_Enabled => ResourceManager.GetString("Hardware_Enabled", Culture)!;
+
+    /// <summary>"Family"</summary>
+    public static string Hardware_Family => ResourceManager.GetString("Hardware_Family", Culture)!;
+
+    /// <summary>"Features"</summary>
+    public static string Hardware_Features => ResourceManager.GetString("Hardware_Features", Culture)!;
+
+    /// <summary>"BIOS / UEFI"</summary>
+    public static string Hardware_Firmware => ResourceManager.GetString("Hardware_Firmware", Culture)!;
+
+    /// <summary>"Graphics"</summary>
+    public static string Hardware_Graphics => ResourceManager.GetString("Hardware_Graphics", Culture)!;
+
+    /// <summary>"hidden"</summary>
+    public static string Hardware_Hidden => ResourceManager.GetString("Hardware_Hidden", Culture)!;
+
+    /// <summary>"{0} performance and {1} efficiency cores, {2} threads"</summary>
+    public static string Hardware_HybridCores => ResourceManager.GetString("Hardware_HybridCores", Culture)!;
+
+    /// <summary>"Installed"</summary>
+    public static string Hardware_Installed => ResourceManager.GetString("Hardware_Installed", Culture)!;
+
+    /// <summary>"Manufacturer"</summary>
+    public static string Hardware_Manufacturer => ResourceManager.GetString("Hardware_Manufacturer", Culture)!;
+
+    /// <summary>"Maximum capacity"</summary>
+    public static string Hardware_MaximumCapacity => ResourceManager.GetString("Hardware_MaximumCapacity", Culture)!;
+
+    /// <summary>"Media"</summary>
+    public static string Hardware_MediaType => ResourceManager.GetString("Hardware_MediaType", Culture)!;
+
+    /// <summary>"Memory"</summary>
+    public static string Hardware_Memory => ResourceManager.GetString("Hardware_Memory", Culture)!;
+
+    /// <summary>"Mode"</summary>
+    public static string Hardware_Mode => ResourceManager.GetString("Hardware_Mode", Culture)!;
+
+    /// <summary>"{0} {1}, {2} MT/s (configured {3} MT/s)"</summary>
+    public static string Hardware_ModuleConfigured => ResourceManager.GetString("Hardware_ModuleConfigured", Culture)!;
+
+    /// <summary>"{0} {1}" (manufacturer and part number)</summary>
+    public static string Hardware_ModuleDetail => ResourceManager.GetString("Hardware_ModuleDetail", Culture)!;
+
+    /// <summary>"{0} {1}, {2} MT/s" (size, type, speed)</summary>
+    public static string Hardware_ModuleValue => ResourceManager.GetString("Hardware_ModuleValue", Culture)!;
+
+    /// <summary>"Motherboard"</summary>
+    public static string Hardware_Motherboard => ResourceManager.GetString("Hardware_Motherboard", Culture)!;
+
+    /// <summary>"Name"</summary>
+    public static string Hardware_Name => ResourceManager.GetString("Hardware_Name", Culture)!;
+
+    /// <summary>"Network"</summary>
+    public static string Hardware_Network => ResourceManager.GetString("Hardware_Network", Culture)!;
+
+    /// <summary>"Not present"</summary>
+    public static string Hardware_NotPresent => ResourceManager.GetString("Hardware_NotPresent", Culture)!;
+
+    /// <summary>"Sockets"</summary>
+    public static string Hardware_Packages => ResourceManager.GetString("Hardware_Packages", Culture)!;
+
+    /// <summary>"MAC address"</summary>
+    public static string Hardware_PhysicalAddress => ResourceManager.GetString("Hardware_PhysicalAddress", Culture)!;
+
+    /// <summary>"primary"</summary>
+    public static string Hardware_Primary => ResourceManager.GetString("Hardware_Primary", Culture)!;
+
+    /// <summary>"Processor"</summary>
+    public static string Hardware_Processor => ResourceManager.GetString("Hardware_Processor", Culture)!;
+
+    /// <summary>"Product"</summary>
+    public static string Hardware_Product => ResourceManager.GetString("Hardware_Product", Culture)!;
+
+    /// <summary>"Reading"</summary>
+    public static string Hardware_Reading => ResourceManager.GetString("Hardware_Reading", Culture)!;
+
+    /// <summary>"Release date"</summary>
+    public static string Hardware_ReleaseDate => ResourceManager.GetString("Hardware_ReleaseDate", Culture)!;
+
+    /// <summary>"Resolution"</summary>
+    public static string Hardware_Resolution => ResourceManager.GetString("Hardware_Resolution", Culture)!;
+
+    /// <summary>"{0} × {1} at {2} Hz"</summary>
+    public static string Hardware_ResolutionValue => ResourceManager.GetString("Hardware_ResolutionValue", Culture)!;
+
+    /// <summary>"Rotational"</summary>
+    public static string Hardware_Rotational => ResourceManager.GetString("Hardware_Rotational", Culture)!;
+
+    /// <summary>"Scale"</summary>
+    public static string Hardware_Scale => ResourceManager.GetString("Hardware_Scale", Culture)!;
+
+    /// <summary>"Secure Boot"</summary>
+    public static string Hardware_SecureBoot => ResourceManager.GetString("Hardware_SecureBoot", Culture)!;
+
+    /// <summary>"Sensors"</summary>
+    public static string Hardware_Sensors => ResourceManager.GetString("Hardware_Sensors", Culture)!;
+
+    /// <summary>"No sensor reported a value yet."</summary>
+    public static string Hardware_SensorsNone => ResourceManager.GetString("Hardware_SensorsNone", Culture)!;
+
+    /// <summary>"Sensors are off. Enable them in Settings to read temperatures, fans and power."</summary>
+    public static string Hardware_SensorsOff => ResourceManager.GetString("Hardware_SensorsOff", Culture)!;
+
+    /// <summary>"Sensors are not available on ARM64."</summary>
+    public static string Hardware_SensorsUnsupported => ResourceManager.GetString("Hardware_SensorsUnsupported", Culture)!;
+
+    /// <summary>"Serial number"</summary>
+    public static string Hardware_SerialNumber => ResourceManager.GetString("Hardware_SerialNumber", Culture)!;
+
+    /// <summary>"Shared memory"</summary>
+    public static string Hardware_SharedMemory => ResourceManager.GetString("Hardware_SharedMemory", Culture)!;
+
+    /// <summary>"Show identifiers"</summary>
+    public static string Hardware_ShowIdentifiers => ResourceManager.GetString("Hardware_ShowIdentifiers", Culture)!;
+
+    /// <summary>"Slots"</summary>
+    public static string Hardware_SlotsUsed => ResourceManager.GetString("Hardware_SlotsUsed", Culture)!;
+
+    /// <summary>"{0} of {1} used"</summary>
+    public static string Hardware_SlotsUsedValue => ResourceManager.GetString("Hardware_SlotsUsedValue", Culture)!;
+
+    /// <summary>"Solid state"</summary>
+    public static string Hardware_SolidState => ResourceManager.GetString("Hardware_SolidState", Culture)!;
+
+    /// <summary>"Link speed"</summary>
+    public static string Hardware_Speed => ResourceManager.GetString("Hardware_Speed", Culture)!;
+
+    /// <summary>"{0} Gbit/s"</summary>
+    public static string Hardware_SpeedGbit => ResourceManager.GetString("Hardware_SpeedGbit", Culture)!;
+
+    /// <summary>"{0} Mbit/s"</summary>
+    public static string Hardware_SpeedValue => ResourceManager.GetString("Hardware_SpeedValue", Culture)!;
+
+    /// <summary>"Status"</summary>
+    public static string Hardware_Status => ResourceManager.GetString("Hardware_Status", Culture)!;
+
+    /// <summary>"Storage"</summary>
+    public static string Hardware_Storage => ResourceManager.GetString("Hardware_Storage", Culture)!;
+
+    /// <summary>"System"</summary>
+    public static string Hardware_System => ResourceManager.GetString("Hardware_System", Culture)!;
+
+    /// <summary>"Temperature"</summary>
+    public static string Hardware_Temperature => ResourceManager.GetString("Hardware_Temperature", Culture)!;
+
+    /// <summary>"Not available. Reading CPU sensors needs the PawnIO driver and administrator rights."</summary>
+    public static string Hardware_TemperatureNeedsAdmin => ResourceManager.GetString("Hardware_TemperatureNeedsAdmin", Culture)!;
+
+    /// <summary>"Not available. Enable sensors in Settings."</summary>
+    public static string Hardware_TemperatureNeedsSensors => ResourceManager.GetString("Hardware_TemperatureNeedsSensors", Culture)!;
+
+    /// <summary>"Not reported by this hardware"</summary>
+    public static string Hardware_TemperatureNotReported => ResourceManager.GetString("Hardware_TemperatureNotReported", Culture)!;
+
+    /// <summary>"TPM"</summary>
+    public static string Hardware_Tpm => ResourceManager.GetString("Hardware_Tpm", Culture)!;
+
+    /// <summary>"TRIM"</summary>
+    public static string Hardware_Trim => ResourceManager.GetString("Hardware_Trim", Culture)!;
+
+    /// <summary>"Type"</summary>
+    public static string Hardware_Type => ResourceManager.GetString("Hardware_Type", Culture)!;
+
+    /// <summary>"Connected"</summary>
+    public static string Hardware_Up => ResourceManager.GetString("Hardware_Up", Culture)!;
+
+    /// <summary>"UUID"</summary>
+    public static string Hardware_Uuid => ResourceManager.GetString("Hardware_Uuid", Culture)!;
+
+    /// <summary>"Vendor"</summary>
+    public static string Hardware_Vendor => ResourceManager.GetString("Hardware_Vendor", Culture)!;
+
+    /// <summary>"Version"</summary>
+    public static string Hardware_Version => ResourceManager.GetString("Hardware_Version", Culture)!;
+
+    /// <summary>"Virtualization in firmware"</summary>
+    public static string Hardware_Virtualization => ResourceManager.GetString("Hardware_Virtualization", Culture)!;
+
+    /// <summary>"Volumes"</summary>
+    public static string Hardware_Volumes => ResourceManager.GetString("Hardware_Volumes", Culture)!;
+
     /// <summary>"as reported by the Windows Update Agent"</summary>
     public static string Health_AsReported => ResourceManager.GetString("Health_AsReported", Culture)!;
 

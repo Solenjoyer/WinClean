@@ -28,6 +28,23 @@ internal static partial class Kernel32
     internal const uint FirmwareTypeBios = 1;
     internal const uint FirmwareTypeUefi = 2;
 
+    internal const uint FirmwareTableProviderSmbios = 0x52534D42;
+
+    internal const int RelationAll = 0xFFFF;
+
+    internal const uint PF_VIRT_FIRMWARE_ENABLED = 21;
+    internal const uint PF_AVX2_INSTRUCTIONS_AVAILABLE = 40;
+    internal const uint PF_AVX512F_INSTRUCTIONS_AVAILABLE = 41;
+    internal const uint PF_ARM_V8_INSTRUCTIONS_AVAILABLE = 29;
+
+    internal const uint IOCTL_STORAGE_QUERY_PROPERTY = 0x002D1400;
+    internal const uint IOCTL_DISK_GET_DRIVE_GEOMETRY_EX = 0x000700A0;
+    internal const uint IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS = 0x00560000;
+
+    internal const int StorageDeviceProperty = 0;
+    internal const int StorageDeviceSeekPenaltyProperty = 7;
+    internal const int StorageDeviceTrimProperty = 8;
+
     internal const uint INVALID_FILE_SIZE = 0xFFFFFFFF;
 
     internal const uint IO_REPARSE_TAG_MOUNT_POINT = 0xA0000003;
@@ -79,6 +96,17 @@ internal static partial class Kernel32
     [LibraryImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static partial bool GetFirmwareType(out uint FirmwareType);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    internal static partial uint GetSystemFirmwareTable(uint FirmwareTableProviderSignature, uint FirmwareTableID, Span<byte> pFirmwareTableBuffer, uint BufferSize);
+
+    [LibraryImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool GetLogicalProcessorInformationEx(int RelationshipType, Span<byte> Buffer, ref uint ReturnedLength);
+
+    [LibraryImport("kernel32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool IsProcessorFeaturePresent(uint ProcessorFeature);
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
     internal static partial uint GetLogicalDrives();

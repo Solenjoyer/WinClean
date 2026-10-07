@@ -87,6 +87,39 @@ internal static partial class User32
     [LibraryImport("user32.dll")]
     internal static partial int GetSystemMetricsForDpi(int nIndex, uint dpi);
 
+    [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool EnumDisplayDevicesW(string? lpDevice, uint iDevNum, ref DISPLAY_DEVICEW lpDisplayDevice, uint dwFlags);
+
+    [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool EnumDisplaySettingsW(string? lpszDeviceName, int iModeNum, ref DEVMODEW lpDevMode);
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct DISPLAY_DEVICEW
+    {
+        public uint cb;
+        public fixed char DeviceName[32];
+        public fixed char DeviceString[128];
+        public uint StateFlags;
+        public fixed char DeviceID[128];
+        public fixed char DeviceKey[128];
+    }
+
+    /// <summary>DEVMODEW as a raw 220-byte block; the few fields used are read by offset.</summary>
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct DEVMODEW
+    {
+        public const int Size = 220;
+
+        public fixed byte Data[Size];
+    }
+
+    internal const uint DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = 0x1;
+    internal const uint DISPLAY_DEVICE_PRIMARY_DEVICE = 0x4;
+    internal const uint DISPLAY_DEVICE_MIRRORING_DRIVER = 0x8;
+    internal const int ENUM_CURRENT_SETTINGS = -1;
+
     [LibraryImport("user32.dll", SetLastError = true)]
     internal static partial nint CreateIconFromResourceEx(ReadOnlySpan<byte> presbits, uint dwResSize, [MarshalAs(UnmanagedType.Bool)] bool fIcon, uint dwVer, int cxDesired, int cyDesired, uint Flags);
 }

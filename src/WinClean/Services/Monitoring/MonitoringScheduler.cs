@@ -70,9 +70,12 @@ public sealed class MonitoringScheduler : IDisposable
 
     private long? _detailedSampledAt;
 
-    public MonitoringScheduler(ILogger<MonitoringScheduler> logger, ProcessDetailsCache details)
+    private readonly SensorProvider? _sensors;
+
+    public MonitoringScheduler(ILogger<MonitoringScheduler> logger, ProcessDetailsCache details, SensorProvider? sensors = null)
     {
         _logger = logger;
+        _sensors = sensors;
         _processes = new ProcessSnapshotReader(details);
         _ui = SynchronizationContext.Current ?? new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher);
     }
@@ -113,6 +116,7 @@ public sealed class MonitoringScheduler : IDisposable
         new("Battery", _battery.Reason is null, _battery.Reason),
         new("GPU", _gpu.Reason is null, _gpu.Reason),
         new("Processes", _processes.Reason is null, _processes.Reason),
+        new("Sensors", _sensors is { Enabled: true, Reason: null }, _sensors is null or { Enabled: false } ? "Sensors are off; enable them in Settings." : _sensors.Reason),
     ];
 
     public void Start()
@@ -246,7 +250,8 @@ public sealed class MonitoringScheduler : IDisposable
             _cachedBattery,
             demand.Detailed ? _cachedGpus : [],
             TimeSpan.FromMilliseconds(Kernel32.GetTickCount64()),
-            processes);
+            processes,
+            demand.Detailed && _sensors is { Enabled: true } ? _sensors.Readings : null);
 
         Latest = sample;
         return sample;

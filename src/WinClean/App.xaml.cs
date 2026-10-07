@@ -161,6 +161,7 @@ public partial class App : Application
         services.AddSingleton<ProcessIconCache>();
         services.AddSingleton<ProcessDetailsCache>();
         services.AddSingleton<ProcessActions>();
+        services.AddSingleton<SensorProvider>();
         services.AddSingleton<MonitoringScheduler>();
         services.AddSingleton<MonitoringCoordinator>();
 
