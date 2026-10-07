@@ -5,9 +5,16 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging.Abstractions;
 using WinClean.Core.Formatting;
+using WinClean.Core.Health;
 using WinClean.Core.Settings;
+using WinClean.Core.Storage;
+using WinClean.Services.Cleanup;
+using WinClean.Services.Hardware;
+using WinClean.Services.Health;
 using WinClean.Services.Monitoring;
 using WinClean.Services.Processes;
+using WinClean.Services.Shell;
+using WinClean.Services.Storage;
 
 namespace WinClean.Services.Diagnostics;
 
@@ -35,7 +42,7 @@ internal static class SelfCheck
 
         var worst = CheckStatus.Ok;
 
-        foreach (var item in Checks())
+        foreach (var item in Checks(options))
         {
             var stopwatch = Stopwatch.StartNew();
             CheckResult result;
@@ -78,11 +85,125 @@ internal static class SelfCheck
         };
     }
 
-    private static IEnumerable<SelfCheckItem> Checks()
+    private static IEnumerable<SelfCheckItem> Checks(StartupOptions options)
     {
         yield return new SelfCheckItem("Settings round trip", CheckSettingsRoundTrip);
         yield return new SelfCheckItem("System metrics", CheckSystemMetrics);
         yield return new SelfCheckItem("Process list", CheckProcessList);
+        yield return new SelfCheckItem("Windows version", CheckWindowsVersion);
+        yield return new SelfCheckItem("Update facts", CheckUpdateFacts);
+        yield return new SelfCheckItem("Driver inventory", CheckDrivers);
+        yield return new SelfCheckItem("Hardware facts", CheckHardware);
+        yield return new SelfCheckItem("Storage scan", CheckStorageScan);
+        yield return new SelfCheckItem("Known locations", CheckKnownLocations);
+        yield return new SelfCheckItem("Cleanup discovery (dry run)", CheckCleanupDiscovery);
+        yield return new SelfCheckItem("Notification area icon", CheckTrayIcon);
+
+        if (options.IncludeSensors)
+        {
+            yield return new SelfCheckItem("Sensors", CheckSensors);
+        }
+    }
+
+    private static CheckResult CheckWindowsVersion()
+    {
+        var version = WindowsVersionReader.Read();
+        var status = ServicingTable.Evaluate(version.Build, version.EditionId, DateOnly.FromDateTime(DateTime.Today));
+        var restart = PendingRestartEvaluator.Evaluate(PendingRestartReader.Read());
+        var summary = $"{version.DisplayName} {version.DisplayVersion} build {version.BuildString}, {status.State}, restart signals: {(restart.Count == 0 ? "none" : string.Join(", ", restart))}, firmware {(FirmwareReader.IsUefi() == true ? "UEFI" : "BIOS or unknown")}";
+        return version.Build == 0 ? CheckResult.Failed(summary) : CheckResult.Ok(summary);
+    }
+
+    private static CheckResult CheckUpdateFacts()
+    {
+        var reader = new WindowsUpdateReader(NullLogger<WindowsUpdateReader>.Instance);
+        var facts = reader.ReadAsync().GetAwaiter().GetResult();
+        var summary = $"last check {facts.LastDetect?.ToString("u", CultureInfo.InvariantCulture) ?? "unknown"}, last install {facts.LastInstall?.ToString("u", CultureInfo.InvariantCulture) ?? "unknown"}, {facts.History.Count} history entries, reboot required: {facts.RebootRequired?.ToString() ?? "unknown"}";
+        return facts.History.Count == 0 && facts.RebootRequired is null ? CheckResult.Degraded(summary + "; the Windows Update Agent did not answer") : CheckResult.Ok(summary);
+    }
+
+    private static CheckResult CheckDrivers()
+    {
+        var drivers = DriverInventory.Read();
+        var highlighted = drivers.Count(driver => DeviceClasses.IsHighlighted(driver.Group));
+        var problems = drivers.Count(driver => driver.ProblemCode != 0);
+        var summary = $"{drivers.Count} devices, {highlighted} in the highlighted classes, {problems} with a problem code";
+        return drivers.Count == 0 ? CheckResult.Failed(summary) : CheckResult.Ok(summary);
+    }
+
+    private static CheckResult CheckHardware()
+    {
+        var smbios = SmbiosReader.Read();
+        var processor = ProcessorReader.Read();
+        var gpus = GpuReader.Read();
+        var disks = PhysicalDiskReader.Read(DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Fixed).Select(drive => drive.RootDirectory.FullName));
+        var displays = DisplayReader.Read();
+        var adapters = NetworkAdapterReader.Read();
+        var summary = $"SMBIOS {smbios.SpecificationVersion} with {smbios.MemoryDevices.Count} memory devices; {processor.Name} ({processor.Topology.Cores} cores, {processor.Topology.LogicalProcessors} threads, {processor.Topology.Caches.Count} cache levels); {gpus.Count} GPUs; {disks.Count} disks; {displays.Count} displays; {adapters.Count} network adapters; TPM {TpmReader.Version() ?? "none"}";
+
+        if (processor.Topology.LogicalProcessors == 0)
+        {
+            return CheckResult.Failed(summary);
+        }
+
+        return smbios.System is null || disks.Count == 0 ? CheckResult.Degraded(summary) : CheckResult.Ok(summary);
+    }
+
+    private static CheckResult CheckStorageScan()
+    {
+        var scanner = new StorageScanner(NullLogger<StorageScanner>.Instance);
+        var target = Path.Combine(Environment.SystemDirectory, "drivers");
+        var result = scanner.ScanAsync(target, 4, null, CancellationToken.None).GetAwaiter().GetResult();
+        var summary = $"{target}: {result.Tree.Count} folders, {result.TotalFiles} files, {result.TotalBytes} bytes, {result.LargestFiles.Count} largest kept, {result.Categories.Count} categories, {result.DeniedFolders} denied, {result.Duration.TotalMilliseconds:F0} ms";
+        return result.TotalFiles == 0 ? CheckResult.Failed(summary) : CheckResult.Ok(summary);
+    }
+
+    private static CheckResult CheckKnownLocations()
+    {
+        var sizer = new KnownLocationSizer();
+        var present = KnownLocations.All.Select(location => (location, paths: sizer.Expand(location))).Where(pair => pair.paths.Count > 0).ToList();
+        var temp = sizer.Measure(KnownLocations.Find("user-temp")!, CancellationToken.None);
+        var summary = $"{present.Count} of {KnownLocations.All.Count} locations present; temporary files: {temp.Files} files, {temp.Bytes} bytes; Recycle Bin: {RecycleBinReader.Query(Path.GetPathRoot(Environment.SystemDirectory)!)?.Items.ToString(CultureInfo.InvariantCulture) ?? "not answered"} items";
+        return temp.Exists ? CheckResult.Ok(summary) : CheckResult.Failed(summary);
+    }
+
+    private static CheckResult CheckCleanupDiscovery()
+    {
+        var discovery = new CleanupDiscovery(new KnownLocationSizer(), new DockerCli(NullLogger<DockerCli>.Instance), new ScanResults(), NullLogger<CleanupDiscovery>.Instance);
+        var categories = discovery.DiscoverAsync(new Core.Settings.AppSettings(), null, CancellationToken.None).GetAwaiter().GetResult();
+        var items = categories.Sum(category => category.Count);
+        var bytes = categories.Sum(category => category.Bytes);
+        var summary = $"{categories.Count} categories, {items} items, {bytes} bytes; nothing was deleted";
+        return categories.Count == 0 ? CheckResult.Failed(summary) : CheckResult.Ok(summary);
+    }
+
+    private static CheckResult CheckTrayIcon()
+    {
+        var size = Native.User32.GetSystemMetricsForDpi(Native.User32.SM_CXSMICON, Native.User32.GetDpiForSystem());
+        var bars = TrayIconRenderer.RenderBars([23, 61, 44], size, darkTaskbar: true);
+        var number = TrayIconRenderer.RenderNumber(42, size, darkTaskbar: false);
+        var icon = Native.User32.CreateIconFromResourceEx(bars, (uint)bars.Length, true, 0x00030000, 0, 0, 0);
+
+        if (icon == 0)
+        {
+            return CheckResult.Failed($"a {size} px icon could not be created from {bars.Length} PNG bytes: {Win32Reason.LastError()}");
+        }
+
+        Native.User32.DestroyIcon(icon);
+        return CheckResult.Ok($"{size} px icons rendered: bars {bars.Length} bytes, number {number.Length} bytes");
+    }
+
+    private static CheckResult CheckSensors()
+    {
+        var settings = new SettingsStore(new SettingsLocation(Path.GetTempPath(), IsPortable: true), NullLogger<SettingsStore>.Instance);
+        settings.Load();
+        settings.Update(current => current with { SensorsEnabled = true });
+        using var provider = new SensorProvider(settings, NullLogger<SensorProvider>.Instance);
+        provider.Start();
+        Thread.Sleep(8000);
+        var readings = provider.Readings;
+        var summary = $"{readings.Count} readings; {provider.Reason ?? "all sensor groups available"}";
+        return readings.Count == 0 ? CheckResult.Degraded(summary) : CheckResult.Ok(summary);
     }
 
     private static CheckResult CheckProcessList()
