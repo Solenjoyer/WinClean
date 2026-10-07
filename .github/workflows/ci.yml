@@ -40,6 +40,11 @@ jobs:
       - name: Check formatting
         run: dotnet format WinClean.slnx --verify-no-changes --no-restore
 
+      - name: Check generated files
+        run: |
+          dotnet run eng/UpdateStrings.cs -- --check
+          dotnet run eng/UpdateCleanupRules.cs -- --check
+
       - name: Build
         run: dotnet build WinClean.slnx -c Release --no-restore
 
