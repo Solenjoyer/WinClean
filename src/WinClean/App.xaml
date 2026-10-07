@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Resources/Typography.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Cards.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Nav.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Controls.xaml" />
                 <ResourceDictionary Source="Resources/Pages.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
