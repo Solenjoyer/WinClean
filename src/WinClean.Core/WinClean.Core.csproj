@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>WinClean.Core</RootNamespace>
+    <Description>Platform-neutral models, rules and parsers behind WinClean.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WinClean.Core.Tests" />
+  </ItemGroup>
+
+</Project>

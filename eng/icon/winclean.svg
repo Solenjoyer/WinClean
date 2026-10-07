@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Source of truth for the WinClean mark. eng/make-icon.py draws the same geometry into WinClean.ico. -->
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="#1f5fa8"/>
+  <path d="M 76.7 179.3 A 72.5 72.5 0 1 1 179.3 179.3" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="128" cy="128" r="17" fill="#ffffff"/>
+</svg>

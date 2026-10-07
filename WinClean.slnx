@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/WinClean.Core/WinClean.Core.csproj" />
+    <Project Path="src/WinClean/WinClean.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/WinClean.Core.Tests/WinClean.Core.Tests.csproj" />
+  </Folder>
+</Solution>
