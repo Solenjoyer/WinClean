@@ -9,3 +9,5 @@
 *.bin binary
 *.pfx binary
 *.snk binary
+*.ps1 text eol=crlf
+*.iss text eol=crlf
