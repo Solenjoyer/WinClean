@@ -118,4 +118,27 @@
     <value>Nothing to show yet.</value>
     <comment>Placeholder while a page has no data.</comment>
   </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Unexpected error</value>
+  </data>
+  <data name="Error_Heading" xml:space="preserve">
+    <value>WinClean ran into a problem.</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>The details were saved to {0}. You can keep using WinClean. If this happens again, please report it with the details attached.</value>
+    <comment>{0} is the report file path.</comment>
+  </data>
+  <data name="Error_MessageNoFile" xml:space="preserve">
+    <value>The details could not be saved to the log folder. You can keep using WinClean. If this happens again, please report it with the details below.</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>Copy details</value>
+  </data>
+  <data name="Error_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Error_Report" xml:space="preserve">
+    <value>Report on GitHub</value>
+    <comment>Opens the browser; the only network action here.</comment>
+  </data>
 </root>

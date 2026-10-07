@@ -1,7 +1,10 @@
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Interop;
 using WinClean.Core.Settings;
+using WinClean.Native;
 using WinClean.Services;
+using WinClean.Services.Shell;
 using WinClean.ViewModels;
 
 namespace WinClean;
@@ -23,6 +26,33 @@ public partial class MainWindow : Window
         RestorePlacement(settings.Current.Window);
     }
 
+    /// <summary>Restores, shows and activates the window, for the tray and for a second launch.</summary>
+    public void BringToFront()
+    {
+        if (WindowState == WindowState.Minimized)
+        {
+            WindowState = WindowState.Normal;
+        }
+
+        Show();
+        Activate();
+        User32.SetForegroundWindow(new WindowInteropHelper(this).Handle);
+    }
+
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+
+        var source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
+        source?.AddHook(HandleWindowMessage);
+
+        if (source is not null && ProcessContext.IsElevated)
+        {
+            // An elevated window ignores messages from ordinary processes unless told otherwise.
+            User32.ChangeWindowMessageFilterEx(source.Handle, SingleInstance.ActivationMessage, User32.MSGFLT_ALLOW, 0);
+        }
+    }
+
     protected override void OnClosing(CancelEventArgs e)
     {
         base.OnClosing(e);
@@ -39,6 +69,18 @@ public partial class MainWindow : Window
             Window = new WindowPlacement(bounds.Left, bounds.Top, bounds.Width, bounds.Height, WindowState == WindowState.Maximized),
             CompactNavigation = _shell.IsCompact,
         });
+    }
+
+    private nint HandleWindowMessage(nint hwnd, int message, nint wParam, nint lParam, ref bool handled)
+    {
+        if ((uint)message == SingleInstance.ActivationMessage)
+        {
+            BringToFront();
+            _shell.NavigateTo(PageKeys.FromIndex((int)wParam));
+            handled = true;
+        }
+
+        return 0;
     }
 
     /// <summary>Puts the window back where it was, unless that spot is no longer on a connected screen.</summary>

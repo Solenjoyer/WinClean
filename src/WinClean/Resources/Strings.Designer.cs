@@ -45,6 +45,27 @@ public static class Strings
     /// <summary>"Refresh"</summary>
     public static string Common_Refresh => ResourceManager.GetString("Common_Refresh", Culture)!;
 
+    /// <summary>"Copy details"</summary>
+    public static string Error_CopyDetails => ResourceManager.GetString("Error_CopyDetails", Culture)!;
+
+    /// <summary>"WinClean ran into a problem."</summary>
+    public static string Error_Heading => ResourceManager.GetString("Error_Heading", Culture)!;
+
+    /// <summary>"The details were saved to {0}. You can keep using WinClean. If this happens again, please report it with the details attached." ({0} is the report file path.)</summary>
+    public static string Error_Message => ResourceManager.GetString("Error_Message", Culture)!;
+
+    /// <summary>"The details could not be saved to the log folder. You can keep using WinClean. If this happens again, please report it with the details below."</summary>
+    public static string Error_MessageNoFile => ResourceManager.GetString("Error_MessageNoFile", Culture)!;
+
+    /// <summary>"Open log folder"</summary>
+    public static string Error_OpenLogFolder => ResourceManager.GetString("Error_OpenLogFolder", Culture)!;
+
+    /// <summary>"Report on GitHub" (Opens the browser; the only network action here.)</summary>
+    public static string Error_Report => ResourceManager.GetString("Error_Report", Culture)!;
+
+    /// <summary>"Unexpected error"</summary>
+    public static string Error_Title => ResourceManager.GetString("Error_Title", Culture)!;
+
     /// <summary>"Cleanup"</summary>
     public static string Nav_Cleanup => ResourceManager.GetString("Nav_Cleanup", Culture)!;
 
