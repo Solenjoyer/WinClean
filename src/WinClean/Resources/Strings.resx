@@ -947,4 +947,172 @@
   <data name="LocationGroup_Downloads" xml:space="preserve">
     <value>Downloads</value>
   </data>
+  <data name="Cleanup_RecycleBin" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
+  <data name="Cleanup_RecycleBinDescription" xml:space="preserve">
+    <value>Deleted files waiting in the Recycle Bin of every fixed drive. Emptying it is permanent.</value>
+  </data>
+  <data name="Cleanup_Docker" xml:space="preserve">
+    <value>Docker</value>
+  </data>
+  <data name="Cleanup_DockerDescription" xml:space="preserve">
+    <value>Unused images, stopped containers and build cache, pruned by Docker itself. Volumes are never touched.</value>
+  </data>
+  <data name="Cleanup_DockerNotInstalled" xml:space="preserve">
+    <value>Docker is not installed.</value>
+  </data>
+  <data name="Cleanup_DockerNotRunning" xml:space="preserve">
+    <value>Docker is not running.</value>
+  </data>
+  <data name="Cleanup_DeveloperFolders" xml:space="preserve">
+    <value>Stale developer folders</value>
+  </data>
+  <data name="Cleanup_DeveloperFoldersDescription" xml:space="preserve">
+    <value>node_modules, build output and virtual environments of projects that have not changed in a while. The tool recreates them; deleting is permanent.</value>
+  </data>
+  <data name="Cleanup_DeveloperFoldersNeedScan" xml:space="preserve">
+    <value>Scan a drive or folder on the Storage page first.</value>
+  </data>
+  <data name="Cleanup_Analyze" xml:space="preserve">
+    <value>Analyse</value>
+  </data>
+  <data name="Cleanup_Analyzing" xml:space="preserve">
+    <value>Looking at {0}</value>
+  </data>
+  <data name="Cleanup_NotAnalyzed" xml:space="preserve">
+    <value>Nothing has been analysed yet.</value>
+  </data>
+  <data name="Cleanup_NotAnalyzedDescription" xml:space="preserve">
+    <value>Analyse lists what each category would delete, with exact files and sizes. Nothing is deleted until you confirm.</value>
+  </data>
+  <data name="Cleanup_Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Cleanup_HidePreview" xml:space="preserve">
+    <value>Hide preview</value>
+  </data>
+  <data name="Cleanup_CleanSelected" xml:space="preserve">
+    <value>Clean selected</value>
+  </data>
+  <data name="Cleanup_Summary" xml:space="preserve">
+    <value>{0} categories, {1} files, {2} selected</value>
+  </data>
+  <data name="Cleanup_NothingSelected" xml:space="preserve">
+    <value>Nothing selected</value>
+  </data>
+  <data name="Cleanup_RiskSafe" xml:space="preserve">
+    <value>Safe</value>
+  </data>
+  <data name="Cleanup_RiskCaution" xml:space="preserve">
+    <value>Caution</value>
+  </data>
+  <data name="Cleanup_RiskAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="Cleanup_NeedsAdministrator" xml:space="preserve">
+    <value>Needs administrator</value>
+  </data>
+  <data name="Cleanup_NeedsAdministratorBanner" xml:space="preserve">
+    <value>Some categories can only be cleaned with administrator rights: Windows temporary files, the Windows Update cache, servicing logs and system crash dumps.</value>
+  </data>
+  <data name="Cleanup_Running" xml:space="preserve">
+    <value>{0} is running. Files in use will be skipped.</value>
+  </data>
+  <data name="Cleanup_ItemCount" xml:space="preserve">
+    <value>{0} items</value>
+  </data>
+  <data name="Cleanup_PreviewTitle" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Cleanup_PreviewFilter" xml:space="preserve">
+    <value>Filter by name or path</value>
+  </data>
+  <data name="Cleanup_PreviewTotal" xml:space="preserve">
+    <value>{0} items, {1}</value>
+  </data>
+  <data name="Cleanup_AllOrNothing" xml:space="preserve">
+    <value>The Recycle Bin is emptied as a whole; single entries cannot be left out.</value>
+  </data>
+  <data name="Cleanup_ConfirmTitle" xml:space="preserve">
+    <value>Delete {0} files?</value>
+  </data>
+  <data name="Cleanup_ConfirmTitleItems" xml:space="preserve">
+    <value>Remove {0} items?</value>
+  </data>
+  <data name="Cleanup_ConfirmMessage" xml:space="preserve">
+    <value>{0} will be freed. Deleted files cannot be recovered.</value>
+  </data>
+  <data name="Cleanup_ConfirmRecycleNote" xml:space="preserve">
+    <value>Installers in Downloads are moved to the Recycle Bin, not deleted.</value>
+  </data>
+  <data name="Cleanup_ConfirmDeveloperNote" xml:space="preserve">
+    <value>{0} developer folders will be deleted with everything inside them.</value>
+  </data>
+  <data name="Cleanup_ConfirmAndMore" xml:space="preserve">
+    <value>and {0} more</value>
+  </data>
+  <data name="Cleanup_ConfirmDelete" xml:space="preserve">
+    <value>Delete {0} files</value>
+  </data>
+  <data name="Cleanup_ConfirmRemove" xml:space="preserve">
+    <value>Remove {0} items</value>
+  </data>
+  <data name="Cleanup_FolderConfirmTitle" xml:space="preserve">
+    <value>Delete {0}?</value>
+  </data>
+  <data name="Cleanup_FolderConfirmMessage" xml:space="preserve">
+    <value>{0} and everything in it will be deleted permanently. Type the folder name to confirm.</value>
+  </data>
+  <data name="Cleanup_FolderConfirmDelete" xml:space="preserve">
+    <value>Delete folder</value>
+  </data>
+  <data name="Cleanup_Deleting" xml:space="preserve">
+    <value>Deleting {0} of {1}</value>
+  </data>
+  <data name="Cleanup_Finished" xml:space="preserve">
+    <value>Cleanup finished</value>
+  </data>
+  <data name="Cleanup_FinishedSummary" xml:space="preserve">
+    <value>{0} freed, {1} items removed, {2} skipped (in use), {3} access denied</value>
+  </data>
+  <data name="Cleanup_NotRemoved" xml:space="preserve">
+    <value>Not removed</value>
+  </data>
+  <data name="Cleanup_OpenLog" xml:space="preserve">
+    <value>Open log</value>
+  </data>
+  <data name="Cleanup_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Cleanup_ReasonInUse" xml:space="preserve">
+    <value>In use</value>
+  </data>
+  <data name="Cleanup_ReasonAccessDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="Cleanup_ReasonGone" xml:space="preserve">
+    <value>Already gone</value>
+  </data>
+  <data name="Cleanup_ReasonSkipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
+  <data name="Cleanup_ReasonFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Cleanup_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Cleanup_ColumnSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Cleanup_ColumnPath" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Cleanup_ColumnReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Cleanup_ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
 </root>

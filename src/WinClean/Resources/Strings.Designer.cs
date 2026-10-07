@@ -99,6 +99,174 @@ public static class Strings
     /// <summary>"Windows"</summary>
     public static string Category_Windows => ResourceManager.GetString("Category_Windows", Culture)!;
 
+    /// <summary>"The Recycle Bin is emptied as a whole; single entries cannot be left out."</summary>
+    public static string Cleanup_AllOrNothing => ResourceManager.GetString("Cleanup_AllOrNothing", Culture)!;
+
+    /// <summary>"Analyse"</summary>
+    public static string Cleanup_Analyze => ResourceManager.GetString("Cleanup_Analyze", Culture)!;
+
+    /// <summary>"Looking at {0}"</summary>
+    public static string Cleanup_Analyzing => ResourceManager.GetString("Cleanup_Analyzing", Culture)!;
+
+    /// <summary>"Clean selected"</summary>
+    public static string Cleanup_CleanSelected => ResourceManager.GetString("Cleanup_CleanSelected", Culture)!;
+
+    /// <summary>"Category"</summary>
+    public static string Cleanup_ColumnCategory => ResourceManager.GetString("Cleanup_ColumnCategory", Culture)!;
+
+    /// <summary>"Name"</summary>
+    public static string Cleanup_ColumnName => ResourceManager.GetString("Cleanup_ColumnName", Culture)!;
+
+    /// <summary>"Path"</summary>
+    public static string Cleanup_ColumnPath => ResourceManager.GetString("Cleanup_ColumnPath", Culture)!;
+
+    /// <summary>"Reason"</summary>
+    public static string Cleanup_ColumnReason => ResourceManager.GetString("Cleanup_ColumnReason", Culture)!;
+
+    /// <summary>"Size"</summary>
+    public static string Cleanup_ColumnSize => ResourceManager.GetString("Cleanup_ColumnSize", Culture)!;
+
+    /// <summary>"and {0} more"</summary>
+    public static string Cleanup_ConfirmAndMore => ResourceManager.GetString("Cleanup_ConfirmAndMore", Culture)!;
+
+    /// <summary>"Delete {0} files"</summary>
+    public static string Cleanup_ConfirmDelete => ResourceManager.GetString("Cleanup_ConfirmDelete", Culture)!;
+
+    /// <summary>"{0} developer folders will be deleted with everything inside them."</summary>
+    public static string Cleanup_ConfirmDeveloperNote => ResourceManager.GetString("Cleanup_ConfirmDeveloperNote", Culture)!;
+
+    /// <summary>"{0} will be freed. Deleted files cannot be recovered."</summary>
+    public static string Cleanup_ConfirmMessage => ResourceManager.GetString("Cleanup_ConfirmMessage", Culture)!;
+
+    /// <summary>"Installers in Downloads are moved to the Recycle Bin, not deleted."</summary>
+    public static string Cleanup_ConfirmRecycleNote => ResourceManager.GetString("Cleanup_ConfirmRecycleNote", Culture)!;
+
+    /// <summary>"Remove {0} items"</summary>
+    public static string Cleanup_ConfirmRemove => ResourceManager.GetString("Cleanup_ConfirmRemove", Culture)!;
+
+    /// <summary>"Delete {0} files?"</summary>
+    public static string Cleanup_ConfirmTitle => ResourceManager.GetString("Cleanup_ConfirmTitle", Culture)!;
+
+    /// <summary>"Remove {0} items?"</summary>
+    public static string Cleanup_ConfirmTitleItems => ResourceManager.GetString("Cleanup_ConfirmTitleItems", Culture)!;
+
+    /// <summary>"Deleting {0} of {1}"</summary>
+    public static string Cleanup_Deleting => ResourceManager.GetString("Cleanup_Deleting", Culture)!;
+
+    /// <summary>"Stale developer folders"</summary>
+    public static string Cleanup_DeveloperFolders => ResourceManager.GetString("Cleanup_DeveloperFolders", Culture)!;
+
+    /// <summary>"node_modules, build output and virtual environments of projects that have not changed in a while. The tool recreates them; deleting is permanent."</summary>
+    public static string Cleanup_DeveloperFoldersDescription => ResourceManager.GetString("Cleanup_DeveloperFoldersDescription", Culture)!;
+
+    /// <summary>"Scan a drive or folder on the Storage page first."</summary>
+    public static string Cleanup_DeveloperFoldersNeedScan => ResourceManager.GetString("Cleanup_DeveloperFoldersNeedScan", Culture)!;
+
+    /// <summary>"Docker"</summary>
+    public static string Cleanup_Docker => ResourceManager.GetString("Cleanup_Docker", Culture)!;
+
+    /// <summary>"Unused images, stopped containers and build cache, pruned by Docker itself. Volumes are never touched."</summary>
+    public static string Cleanup_DockerDescription => ResourceManager.GetString("Cleanup_DockerDescription", Culture)!;
+
+    /// <summary>"Docker is not installed."</summary>
+    public static string Cleanup_DockerNotInstalled => ResourceManager.GetString("Cleanup_DockerNotInstalled", Culture)!;
+
+    /// <summary>"Docker is not running."</summary>
+    public static string Cleanup_DockerNotRunning => ResourceManager.GetString("Cleanup_DockerNotRunning", Culture)!;
+
+    /// <summary>"Done"</summary>
+    public static string Cleanup_Done => ResourceManager.GetString("Cleanup_Done", Culture)!;
+
+    /// <summary>"Cleanup finished"</summary>
+    public static string Cleanup_Finished => ResourceManager.GetString("Cleanup_Finished", Culture)!;
+
+    /// <summary>"{0} freed, {1} items removed, {2} skipped (in use), {3} access denied"</summary>
+    public static string Cleanup_FinishedSummary => ResourceManager.GetString("Cleanup_FinishedSummary", Culture)!;
+
+    /// <summary>"Delete folder"</summary>
+    public static string Cleanup_FolderConfirmDelete => ResourceManager.GetString("Cleanup_FolderConfirmDelete", Culture)!;
+
+    /// <summary>"{0} and everything in it will be deleted permanently. Type the folder name to confirm."</summary>
+    public static string Cleanup_FolderConfirmMessage => ResourceManager.GetString("Cleanup_FolderConfirmMessage", Culture)!;
+
+    /// <summary>"Delete {0}?"</summary>
+    public static string Cleanup_FolderConfirmTitle => ResourceManager.GetString("Cleanup_FolderConfirmTitle", Culture)!;
+
+    /// <summary>"Hide preview"</summary>
+    public static string Cleanup_HidePreview => ResourceManager.GetString("Cleanup_HidePreview", Culture)!;
+
+    /// <summary>"{0} items"</summary>
+    public static string Cleanup_ItemCount => ResourceManager.GetString("Cleanup_ItemCount", Culture)!;
+
+    /// <summary>"Needs administrator"</summary>
+    public static string Cleanup_NeedsAdministrator => ResourceManager.GetString("Cleanup_NeedsAdministrator", Culture)!;
+
+    /// <summary>"Some categories can only be cleaned with administrator rights: Windows temporary files, the Windows Update cache, servicing logs and system crash dumps."</summary>
+    public static string Cleanup_NeedsAdministratorBanner => ResourceManager.GetString("Cleanup_NeedsAdministratorBanner", Culture)!;
+
+    /// <summary>"Nothing has been analysed yet."</summary>
+    public static string Cleanup_NotAnalyzed => ResourceManager.GetString("Cleanup_NotAnalyzed", Culture)!;
+
+    /// <summary>"Analyse lists what each category would delete, with exact files and sizes. Nothing is deleted until you confirm."</summary>
+    public static string Cleanup_NotAnalyzedDescription => ResourceManager.GetString("Cleanup_NotAnalyzedDescription", Culture)!;
+
+    /// <summary>"Not removed"</summary>
+    public static string Cleanup_NotRemoved => ResourceManager.GetString("Cleanup_NotRemoved", Culture)!;
+
+    /// <summary>"Nothing selected"</summary>
+    public static string Cleanup_NothingSelected => ResourceManager.GetString("Cleanup_NothingSelected", Culture)!;
+
+    /// <summary>"Open log"</summary>
+    public static string Cleanup_OpenLog => ResourceManager.GetString("Cleanup_OpenLog", Culture)!;
+
+    /// <summary>"Preview"</summary>
+    public static string Cleanup_Preview => ResourceManager.GetString("Cleanup_Preview", Culture)!;
+
+    /// <summary>"Filter by name or path"</summary>
+    public static string Cleanup_PreviewFilter => ResourceManager.GetString("Cleanup_PreviewFilter", Culture)!;
+
+    /// <summary>"Preview"</summary>
+    public static string Cleanup_PreviewTitle => ResourceManager.GetString("Cleanup_PreviewTitle", Culture)!;
+
+    /// <summary>"{0} items, {1}"</summary>
+    public static string Cleanup_PreviewTotal => ResourceManager.GetString("Cleanup_PreviewTotal", Culture)!;
+
+    /// <summary>"Access denied"</summary>
+    public static string Cleanup_ReasonAccessDenied => ResourceManager.GetString("Cleanup_ReasonAccessDenied", Culture)!;
+
+    /// <summary>"Failed"</summary>
+    public static string Cleanup_ReasonFailed => ResourceManager.GetString("Cleanup_ReasonFailed", Culture)!;
+
+    /// <summary>"Already gone"</summary>
+    public static string Cleanup_ReasonGone => ResourceManager.GetString("Cleanup_ReasonGone", Culture)!;
+
+    /// <summary>"In use"</summary>
+    public static string Cleanup_ReasonInUse => ResourceManager.GetString("Cleanup_ReasonInUse", Culture)!;
+
+    /// <summary>"Skipped"</summary>
+    public static string Cleanup_ReasonSkipped => ResourceManager.GetString("Cleanup_ReasonSkipped", Culture)!;
+
+    /// <summary>"Recycle Bin"</summary>
+    public static string Cleanup_RecycleBin => ResourceManager.GetString("Cleanup_RecycleBin", Culture)!;
+
+    /// <summary>"Deleted files waiting in the Recycle Bin of every fixed drive. Emptying it is permanent."</summary>
+    public static string Cleanup_RecycleBinDescription => ResourceManager.GetString("Cleanup_RecycleBinDescription", Culture)!;
+
+    /// <summary>"Advanced"</summary>
+    public static string Cleanup_RiskAdvanced => ResourceManager.GetString("Cleanup_RiskAdvanced", Culture)!;
+
+    /// <summary>"Caution"</summary>
+    public static string Cleanup_RiskCaution => ResourceManager.GetString("Cleanup_RiskCaution", Culture)!;
+
+    /// <summary>"Safe"</summary>
+    public static string Cleanup_RiskSafe => ResourceManager.GetString("Cleanup_RiskSafe", Culture)!;
+
+    /// <summary>"{0} is running. Files in use will be skipped."</summary>
+    public static string Cleanup_Running => ResourceManager.GetString("Cleanup_Running", Culture)!;
+
+    /// <summary>"{0} categories, {1} files, {2} selected"</summary>
+    public static string Cleanup_Summary => ResourceManager.GetString("Cleanup_Summary", Culture)!;
+
     /// <summary>"Cancel"</summary>
     public static string Common_Cancel => ResourceManager.GetString("Common_Cancel", Culture)!;
 

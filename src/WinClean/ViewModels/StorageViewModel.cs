@@ -22,6 +22,8 @@ public sealed partial class StorageViewModel : ObservableObject, IDisposable
 
     private readonly KnownLocationSizer _sizer;
 
+    private readonly ScanResults _scans;
+
     private readonly ShellLinks _links;
 
     private readonly IClipboard _clipboard;
@@ -42,6 +44,7 @@ public sealed partial class StorageViewModel : ObservableObject, IDisposable
         MonitoringScheduler scheduler,
         StorageScanner scanner,
         KnownLocationSizer sizer,
+        ScanResults scans,
         ShellLinks links,
         IClipboard clipboard,
         SettingsStore settings,
@@ -51,6 +54,7 @@ public sealed partial class StorageViewModel : ObservableObject, IDisposable
 
         _scanner = scanner;
         _sizer = sizer;
+        _scans = scans;
         _links = links;
         _clipboard = clipboard;
         _settings = settings;
@@ -267,6 +271,7 @@ public sealed partial class StorageViewModel : ObservableObject, IDisposable
     private void Present(ScanResult result)
     {
         _result = result;
+        _scans.Publish(result);
         var culture = CultureInfo.CurrentCulture;
 
         ResultNote = result.Cancelled

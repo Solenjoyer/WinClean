@@ -31,6 +31,10 @@ internal static partial class Shell32
 
     internal const int ERROR_CANCELLED = 1223;
 
+    internal const uint SHERB_NOCONFIRMATION = 0x1;
+    internal const uint SHERB_NOPROGRESSUI = 0x2;
+    internal const uint SHERB_NOSOUND = 0x4;
+
     [LibraryImport("shell32.dll", StringMarshalling = StringMarshalling.Utf16)]
     internal static partial nint ILCreateFromPathW(string pszPath);
 
@@ -53,6 +57,9 @@ internal static partial class Shell32
 
     [LibraryImport("shell32.dll", StringMarshalling = StringMarshalling.Utf16)]
     internal static partial int SHQueryRecycleBinW(string? pszRootPath, ref SHQUERYRBINFO pSHQueryRBInfo);
+
+    [LibraryImport("shell32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    internal static partial int SHEmptyRecycleBinW(nint hwnd, string? pszRootPath, uint dwFlags);
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct SHQUERYRBINFO
