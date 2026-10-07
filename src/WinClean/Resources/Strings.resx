@@ -241,4 +241,250 @@
     <value>{0} ({1})</value>
     <comment>Volume title: Windows (C:)</comment>
   </data>
+  <data name="Common_Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Common_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="Processes_SearchPlaceholder" xml:space="preserve">
+    <value>Search by name, PID or path</value>
+  </data>
+  <data name="Processes_GroupByApplication" xml:space="preserve">
+    <value>Group by application</value>
+  </data>
+  <data name="Processes_ShowSystem" xml:space="preserve">
+    <value>Show system processes</value>
+  </data>
+  <data name="Processes_EndProcess" xml:space="preserve">
+    <value>End process</value>
+  </data>
+  <data name="Processes_EndProcessTree" xml:space="preserve">
+    <value>End process tree</value>
+  </data>
+  <data name="Processes_Suspend" xml:space="preserve">
+    <value>Suspend</value>
+  </data>
+  <data name="Processes_Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="Processes_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Processes_Pause" xml:space="preserve">
+    <value>Pause updates</value>
+  </data>
+  <data name="Processes_ResumeUpdates" xml:space="preserve">
+    <value>Resume updates</value>
+  </data>
+  <data name="Processes_Paused" xml:space="preserve">
+    <value>Updates paused</value>
+  </data>
+  <data name="Processes_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Processes_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Processes_ColumnPid" xml:space="preserve">
+    <value>PID</value>
+  </data>
+  <data name="Processes_ColumnCpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Processes_ColumnMemory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Processes_ColumnIo" xml:space="preserve">
+    <value>I/O</value>
+  </data>
+  <data name="Processes_ColumnGpu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Processes_MemoryTooltip" xml:space="preserve">
+    <value>Private working set, the memory only this process uses</value>
+  </data>
+  <data name="Processes_IoTooltip" xml:space="preserve">
+    <value>Bytes read and written through files, pipes and sockets</value>
+  </data>
+  <data name="Processes_StatusSuspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="Processes_StatusNotResponding" xml:space="preserve">
+    <value>Not responding</value>
+  </data>
+  <data name="Processes_MemberCount" xml:space="preserve">
+    <value>{0} processes</value>
+    <comment>Group row badge</comment>
+  </data>
+  <data name="Processes_Summary" xml:space="preserve">
+    <value>{0} processes</value>
+  </data>
+  <data name="Processes_SummaryGrouped" xml:space="preserve">
+    <value>{0} processes, {1} applications</value>
+  </data>
+  <data name="Processes_NoSelection" xml:space="preserve">
+    <value>Select a process to see its details.</value>
+  </data>
+  <data name="Processes_RowAutomation" xml:space="preserve">
+    <value>{0}, {1} memory, {2} CPU</value>
+    <comment>Screen reader name of a row</comment>
+  </data>
+  <data name="Processes_ProtectedSelf" xml:space="preserve">
+    <value>This is WinClean itself. Close the window to end it.</value>
+  </data>
+  <data name="Processes_ProtectedKernel" xml:space="preserve">
+    <value>Protected Windows process. End and suspend are not available because Windows depends on it.</value>
+  </data>
+  <data name="Processes_ProtectedVm" xml:space="preserve">
+    <value>Memory of a virtual machine. Shut the machine down from WSL, Docker Desktop or Hyper-V instead; wsl --shutdown stops WSL.</value>
+  </data>
+  <data name="Processes_ProtectedCritical" xml:space="preserve">
+    <value>Windows marks this process as critical. Ending it would stop Windows.</value>
+  </data>
+  <data name="Processes_ComponentWarning" xml:space="preserve">
+    <value>This is a Windows component. Ending it can make Windows unstable or sign you out.</value>
+  </data>
+  <data name="Processes_SystemAccountWarning" xml:space="preserve">
+    <value>This process runs as a system account. Ending it can stop a Windows service.</value>
+  </data>
+  <data name="Processes_EndTitle" xml:space="preserve">
+    <value>End {0} (PID {1})?</value>
+  </data>
+  <data name="Processes_EndTreeTitle" xml:space="preserve">
+    <value>End {0} and the {1} processes it started?</value>
+  </data>
+  <data name="Processes_EndGroupTitle" xml:space="preserve">
+    <value>End {0} ({1} processes)?</value>
+  </data>
+  <data name="Processes_EndMessage" xml:space="preserve">
+    <value>Unsaved data in this process will be lost.</value>
+  </data>
+  <data name="Processes_EndManyMessage" xml:space="preserve">
+    <value>Unsaved data in these processes will be lost.</value>
+  </data>
+  <data name="Processes_Acknowledge" xml:space="preserve">
+    <value>I understand the risk</value>
+  </data>
+  <data name="Processes_ActionAccessDenied" xml:space="preserve">
+    <value>Access denied. {0} belongs to another account; restart WinClean as administrator to manage it.</value>
+  </data>
+  <data name="Processes_ActionGone" xml:space="preserve">
+    <value>{0} had already exited.</value>
+  </data>
+  <data name="Processes_ActionFailed" xml:space="preserve">
+    <value>{0} could not be changed: {1}</value>
+  </data>
+  <data name="Processes_ActionPartial" xml:space="preserve">
+    <value>{0} of {1} processes could not be ended.</value>
+  </data>
+  <data name="Details_Pid" xml:space="preserve">
+    <value>PID</value>
+  </data>
+  <data name="Details_Parent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Details_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Details_Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="Details_Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="Details_Elevated" xml:space="preserve">
+    <value>Elevated</value>
+  </data>
+  <data name="Details_Session" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="Details_Threads" xml:space="preserve">
+    <value>Threads</value>
+  </data>
+  <data name="Details_Handles" xml:space="preserve">
+    <value>Handles</value>
+  </data>
+  <data name="Details_CpuTime" xml:space="preserve">
+    <value>CPU time</value>
+  </data>
+  <data name="Details_PrivateWorkingSet" xml:space="preserve">
+    <value>Private working set</value>
+  </data>
+  <data name="Details_WorkingSet" xml:space="preserve">
+    <value>Working set</value>
+  </data>
+  <data name="Details_Commit" xml:space="preserve">
+    <value>Commit</value>
+  </data>
+  <data name="Details_GpuMemory" xml:space="preserve">
+    <value>GPU memory</value>
+  </data>
+  <data name="Details_Io" xml:space="preserve">
+    <value>I/O</value>
+  </data>
+  <data name="Details_CommandLine" xml:space="preserve">
+    <value>Command line</value>
+  </data>
+  <data name="Details_Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Details_Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Details_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Details_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Details_AccessDenied" xml:space="preserve">
+    <value>Not available (access denied)</value>
+  </data>
+  <data name="Category_AiAgent" xml:space="preserve">
+    <value>Coding agent</value>
+  </data>
+  <data name="Category_Editor" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Category_Ide" xml:space="preserve">
+    <value>IDE</value>
+  </data>
+  <data name="Category_Container" xml:space="preserve">
+    <value>Containers</value>
+  </data>
+  <data name="Category_VirtualMachine" xml:space="preserve">
+    <value>Virtual machine</value>
+  </data>
+  <data name="Category_Runtime" xml:space="preserve">
+    <value>Runtime</value>
+  </data>
+  <data name="Category_PackageManager" xml:space="preserve">
+    <value>Package manager</value>
+  </data>
+  <data name="Category_VersionControl" xml:space="preserve">
+    <value>Version control</value>
+  </data>
+  <data name="Category_Shell" xml:space="preserve">
+    <value>Shell</value>
+  </data>
+  <data name="Category_Terminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="Category_Browser" xml:space="preserve">
+    <value>Browser</value>
+  </data>
+  <data name="Category_Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Common_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Processes_ToggleGroup" xml:space="preserve">
+    <value>Expand or collapse</value>
+    <comment>Accessibility name of the chevron on a group row</comment>
+  </data>
+  <data name="Processes_OpenDetails" xml:space="preserve">
+    <value>Show details pane</value>
+  </data>
 </root>

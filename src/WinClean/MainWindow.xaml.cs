@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
 using WinClean.Core.Settings;
+using WinClean.Dialogs;
 using WinClean.Native;
 using WinClean.Services;
 using WinClean.Services.Monitoring;
@@ -10,7 +11,7 @@ using WinClean.ViewModels;
 
 namespace WinClean;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window, IDialogHost
 {
     private readonly ShellViewModel _shell;
 
@@ -76,6 +77,8 @@ public partial class MainWindow : Window
             CompactNavigation = _shell.IsCompact,
         });
     }
+
+    public void SetDialogOpen(bool open) => Smoke.Visibility = open ? Visibility.Visible : Visibility.Collapsed;
 
     private void UpdateVisibility() => _monitoring.WindowVisible = IsVisible && WindowState != WindowState.Minimized;
 

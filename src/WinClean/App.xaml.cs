@@ -98,6 +98,8 @@ public partial class App : Application
         services.AddSingleton<SettingsStore>();
         services.AddSingleton<CrashReporter>();
         services.AddSingleton<ShellLinks>();
+        services.AddSingleton<IClipboard, ClipboardService>();
+        services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<ProcessIconCache>();
         services.AddSingleton<ProcessDetailsCache>();
         services.AddSingleton<ProcessActions>();

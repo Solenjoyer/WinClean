@@ -27,8 +27,47 @@ public static class Strings
     /// <summary>"WinClean"</summary>
     public static string AppName => ResourceManager.GetString("AppName", Culture)!;
 
+    /// <summary>"Coding agent"</summary>
+    public static string Category_AiAgent => ResourceManager.GetString("Category_AiAgent", Culture)!;
+
+    /// <summary>"Browser"</summary>
+    public static string Category_Browser => ResourceManager.GetString("Category_Browser", Culture)!;
+
+    /// <summary>"Containers"</summary>
+    public static string Category_Container => ResourceManager.GetString("Category_Container", Culture)!;
+
+    /// <summary>"Editor"</summary>
+    public static string Category_Editor => ResourceManager.GetString("Category_Editor", Culture)!;
+
+    /// <summary>"IDE"</summary>
+    public static string Category_Ide => ResourceManager.GetString("Category_Ide", Culture)!;
+
+    /// <summary>"Package manager"</summary>
+    public static string Category_PackageManager => ResourceManager.GetString("Category_PackageManager", Culture)!;
+
+    /// <summary>"Runtime"</summary>
+    public static string Category_Runtime => ResourceManager.GetString("Category_Runtime", Culture)!;
+
+    /// <summary>"Shell"</summary>
+    public static string Category_Shell => ResourceManager.GetString("Category_Shell", Culture)!;
+
+    /// <summary>"Terminal"</summary>
+    public static string Category_Terminal => ResourceManager.GetString("Category_Terminal", Culture)!;
+
+    /// <summary>"Version control"</summary>
+    public static string Category_VersionControl => ResourceManager.GetString("Category_VersionControl", Culture)!;
+
+    /// <summary>"Virtual machine"</summary>
+    public static string Category_VirtualMachine => ResourceManager.GetString("Category_VirtualMachine", Culture)!;
+
+    /// <summary>"Windows"</summary>
+    public static string Category_Windows => ResourceManager.GetString("Category_Windows", Culture)!;
+
     /// <summary>"Cancel"</summary>
     public static string Common_Cancel => ResourceManager.GetString("Common_Cancel", Culture)!;
+
+    /// <summary>"Clear"</summary>
+    public static string Common_Clear => ResourceManager.GetString("Common_Clear", Culture)!;
 
     /// <summary>"Close"</summary>
     public static string Common_Close => ResourceManager.GetString("Common_Close", Culture)!;
@@ -39,11 +78,80 @@ public static class Strings
     /// <summary>"Copy path"</summary>
     public static string Common_CopyPath => ResourceManager.GetString("Common_CopyPath", Culture)!;
 
+    /// <summary>"Dismiss"</summary>
+    public static string Common_Dismiss => ResourceManager.GetString("Common_Dismiss", Culture)!;
+
     /// <summary>"Open file location"</summary>
     public static string Common_OpenLocation => ResourceManager.GetString("Common_OpenLocation", Culture)!;
 
+    /// <summary>"Properties"</summary>
+    public static string Common_Properties => ResourceManager.GetString("Common_Properties", Culture)!;
+
     /// <summary>"Refresh"</summary>
     public static string Common_Refresh => ResourceManager.GetString("Common_Refresh", Culture)!;
+
+    /// <summary>"Not available (access denied)"</summary>
+    public static string Details_AccessDenied => ResourceManager.GetString("Details_AccessDenied", Culture)!;
+
+    /// <summary>"Architecture"</summary>
+    public static string Details_Architecture => ResourceManager.GetString("Details_Architecture", Culture)!;
+
+    /// <summary>"Command line"</summary>
+    public static string Details_CommandLine => ResourceManager.GetString("Details_CommandLine", Culture)!;
+
+    /// <summary>"Commit"</summary>
+    public static string Details_Commit => ResourceManager.GetString("Details_Commit", Culture)!;
+
+    /// <summary>"CPU time"</summary>
+    public static string Details_CpuTime => ResourceManager.GetString("Details_CpuTime", Culture)!;
+
+    /// <summary>"Elevated"</summary>
+    public static string Details_Elevated => ResourceManager.GetString("Details_Elevated", Culture)!;
+
+    /// <summary>"GPU memory"</summary>
+    public static string Details_GpuMemory => ResourceManager.GetString("Details_GpuMemory", Culture)!;
+
+    /// <summary>"Handles"</summary>
+    public static string Details_Handles => ResourceManager.GetString("Details_Handles", Culture)!;
+
+    /// <summary>"I/O"</summary>
+    public static string Details_Io => ResourceManager.GetString("Details_Io", Culture)!;
+
+    /// <summary>"No"</summary>
+    public static string Details_No => ResourceManager.GetString("Details_No", Culture)!;
+
+    /// <summary>"Parent"</summary>
+    public static string Details_Parent => ResourceManager.GetString("Details_Parent", Culture)!;
+
+    /// <summary>"Path"</summary>
+    public static string Details_Path => ResourceManager.GetString("Details_Path", Culture)!;
+
+    /// <summary>"PID"</summary>
+    public static string Details_Pid => ResourceManager.GetString("Details_Pid", Culture)!;
+
+    /// <summary>"Private working set"</summary>
+    public static string Details_PrivateWorkingSet => ResourceManager.GetString("Details_PrivateWorkingSet", Culture)!;
+
+    /// <summary>"Session"</summary>
+    public static string Details_Session => ResourceManager.GetString("Details_Session", Culture)!;
+
+    /// <summary>"Started"</summary>
+    public static string Details_Started => ResourceManager.GetString("Details_Started", Culture)!;
+
+    /// <summary>"Threads"</summary>
+    public static string Details_Threads => ResourceManager.GetString("Details_Threads", Culture)!;
+
+    /// <summary>"User"</summary>
+    public static string Details_User => ResourceManager.GetString("Details_User", Culture)!;
+
+    /// <summary>"Windows"</summary>
+    public static string Details_Windows => ResourceManager.GetString("Details_Windows", Culture)!;
+
+    /// <summary>"Working set"</summary>
+    public static string Details_WorkingSet => ResourceManager.GetString("Details_WorkingSet", Culture)!;
+
+    /// <summary>"Yes"</summary>
+    public static string Details_Yes => ResourceManager.GetString("Details_Yes", Culture)!;
 
     /// <summary>"Copy details"</summary>
     public static string Error_CopyDetails => ResourceManager.GetString("Error_CopyDetails", Culture)!;
@@ -191,4 +299,139 @@ public static class Strings
 
     /// <summary>"Nothing to show yet." (Placeholder while a page has no data.)</summary>
     public static string Page_NothingYet => ResourceManager.GetString("Page_NothingYet", Culture)!;
+
+    /// <summary>"I understand the risk"</summary>
+    public static string Processes_Acknowledge => ResourceManager.GetString("Processes_Acknowledge", Culture)!;
+
+    /// <summary>"Access denied. {0} belongs to another account; restart WinClean as administrator to manage it."</summary>
+    public static string Processes_ActionAccessDenied => ResourceManager.GetString("Processes_ActionAccessDenied", Culture)!;
+
+    /// <summary>"{0} could not be changed: {1}"</summary>
+    public static string Processes_ActionFailed => ResourceManager.GetString("Processes_ActionFailed", Culture)!;
+
+    /// <summary>"{0} had already exited."</summary>
+    public static string Processes_ActionGone => ResourceManager.GetString("Processes_ActionGone", Culture)!;
+
+    /// <summary>"{0} of {1} processes could not be ended."</summary>
+    public static string Processes_ActionPartial => ResourceManager.GetString("Processes_ActionPartial", Culture)!;
+
+    /// <summary>"CPU"</summary>
+    public static string Processes_ColumnCpu => ResourceManager.GetString("Processes_ColumnCpu", Culture)!;
+
+    /// <summary>"GPU"</summary>
+    public static string Processes_ColumnGpu => ResourceManager.GetString("Processes_ColumnGpu", Culture)!;
+
+    /// <summary>"I/O"</summary>
+    public static string Processes_ColumnIo => ResourceManager.GetString("Processes_ColumnIo", Culture)!;
+
+    /// <summary>"Memory"</summary>
+    public static string Processes_ColumnMemory => ResourceManager.GetString("Processes_ColumnMemory", Culture)!;
+
+    /// <summary>"Name"</summary>
+    public static string Processes_ColumnName => ResourceManager.GetString("Processes_ColumnName", Culture)!;
+
+    /// <summary>"PID"</summary>
+    public static string Processes_ColumnPid => ResourceManager.GetString("Processes_ColumnPid", Culture)!;
+
+    /// <summary>"Status"</summary>
+    public static string Processes_ColumnStatus => ResourceManager.GetString("Processes_ColumnStatus", Culture)!;
+
+    /// <summary>"This is a Windows component. Ending it can make Windows unstable or sign you out."</summary>
+    public static string Processes_ComponentWarning => ResourceManager.GetString("Processes_ComponentWarning", Culture)!;
+
+    /// <summary>"Details"</summary>
+    public static string Processes_Details => ResourceManager.GetString("Processes_Details", Culture)!;
+
+    /// <summary>"End {0} ({1} processes)?"</summary>
+    public static string Processes_EndGroupTitle => ResourceManager.GetString("Processes_EndGroupTitle", Culture)!;
+
+    /// <summary>"Unsaved data in these processes will be lost."</summary>
+    public static string Processes_EndManyMessage => ResourceManager.GetString("Processes_EndManyMessage", Culture)!;
+
+    /// <summary>"Unsaved data in this process will be lost."</summary>
+    public static string Processes_EndMessage => ResourceManager.GetString("Processes_EndMessage", Culture)!;
+
+    /// <summary>"End process"</summary>
+    public static string Processes_EndProcess => ResourceManager.GetString("Processes_EndProcess", Culture)!;
+
+    /// <summary>"End process tree"</summary>
+    public static string Processes_EndProcessTree => ResourceManager.GetString("Processes_EndProcessTree", Culture)!;
+
+    /// <summary>"End {0} (PID {1})?"</summary>
+    public static string Processes_EndTitle => ResourceManager.GetString("Processes_EndTitle", Culture)!;
+
+    /// <summary>"End {0} and the {1} processes it started?"</summary>
+    public static string Processes_EndTreeTitle => ResourceManager.GetString("Processes_EndTreeTitle", Culture)!;
+
+    /// <summary>"Group by application"</summary>
+    public static string Processes_GroupByApplication => ResourceManager.GetString("Processes_GroupByApplication", Culture)!;
+
+    /// <summary>"Bytes read and written through files, pipes and sockets"</summary>
+    public static string Processes_IoTooltip => ResourceManager.GetString("Processes_IoTooltip", Culture)!;
+
+    /// <summary>"{0} processes" (Group row badge)</summary>
+    public static string Processes_MemberCount => ResourceManager.GetString("Processes_MemberCount", Culture)!;
+
+    /// <summary>"Private working set, the memory only this process uses"</summary>
+    public static string Processes_MemoryTooltip => ResourceManager.GetString("Processes_MemoryTooltip", Culture)!;
+
+    /// <summary>"Select a process to see its details."</summary>
+    public static string Processes_NoSelection => ResourceManager.GetString("Processes_NoSelection", Culture)!;
+
+    /// <summary>"Show details pane"</summary>
+    public static string Processes_OpenDetails => ResourceManager.GetString("Processes_OpenDetails", Culture)!;
+
+    /// <summary>"Pause updates"</summary>
+    public static string Processes_Pause => ResourceManager.GetString("Processes_Pause", Culture)!;
+
+    /// <summary>"Updates paused"</summary>
+    public static string Processes_Paused => ResourceManager.GetString("Processes_Paused", Culture)!;
+
+    /// <summary>"Windows marks this process as critical. Ending it would stop Windows."</summary>
+    public static string Processes_ProtectedCritical => ResourceManager.GetString("Processes_ProtectedCritical", Culture)!;
+
+    /// <summary>"Protected Windows process. End and suspend are not available because Windows depends on it."</summary>
+    public static string Processes_ProtectedKernel => ResourceManager.GetString("Processes_ProtectedKernel", Culture)!;
+
+    /// <summary>"This is WinClean itself. Close the window to end it."</summary>
+    public static string Processes_ProtectedSelf => ResourceManager.GetString("Processes_ProtectedSelf", Culture)!;
+
+    /// <summary>"Memory of a virtual machine. Shut the machine down from WSL, Docker Desktop or Hyper-V instead; wsl --shutdown stops WSL."</summary>
+    public static string Processes_ProtectedVm => ResourceManager.GetString("Processes_ProtectedVm", Culture)!;
+
+    /// <summary>"Resume"</summary>
+    public static string Processes_Resume => ResourceManager.GetString("Processes_Resume", Culture)!;
+
+    /// <summary>"Resume updates"</summary>
+    public static string Processes_ResumeUpdates => ResourceManager.GetString("Processes_ResumeUpdates", Culture)!;
+
+    /// <summary>"{0}, {1} memory, {2} CPU" (Screen reader name of a row)</summary>
+    public static string Processes_RowAutomation => ResourceManager.GetString("Processes_RowAutomation", Culture)!;
+
+    /// <summary>"Search by name, PID or path"</summary>
+    public static string Processes_SearchPlaceholder => ResourceManager.GetString("Processes_SearchPlaceholder", Culture)!;
+
+    /// <summary>"Show system processes"</summary>
+    public static string Processes_ShowSystem => ResourceManager.GetString("Processes_ShowSystem", Culture)!;
+
+    /// <summary>"Not responding"</summary>
+    public static string Processes_StatusNotResponding => ResourceManager.GetString("Processes_StatusNotResponding", Culture)!;
+
+    /// <summary>"Suspended"</summary>
+    public static string Processes_StatusSuspended => ResourceManager.GetString("Processes_StatusSuspended", Culture)!;
+
+    /// <summary>"{0} processes"</summary>
+    public static string Processes_Summary => ResourceManager.GetString("Processes_Summary", Culture)!;
+
+    /// <summary>"{0} processes, {1} applications"</summary>
+    public static string Processes_SummaryGrouped => ResourceManager.GetString("Processes_SummaryGrouped", Culture)!;
+
+    /// <summary>"Suspend"</summary>
+    public static string Processes_Suspend => ResourceManager.GetString("Processes_Suspend", Culture)!;
+
+    /// <summary>"This process runs as a system account. Ending it can stop a Windows service."</summary>
+    public static string Processes_SystemAccountWarning => ResourceManager.GetString("Processes_SystemAccountWarning", Culture)!;
+
+    /// <summary>"Expand or collapse" (Accessibility name of the chevron on a group row)</summary>
+    public static string Processes_ToggleGroup => ResourceManager.GetString("Processes_ToggleGroup", Culture)!;
 }

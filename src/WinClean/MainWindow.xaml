@@ -43,5 +43,11 @@
                                 Focusable="False" />
             </DockPanel>
         </Border>
+
+        <!-- Dims the window while one of its dialogs is open. -->
+        <Border x:Name="Smoke"
+                Grid.ColumnSpan="2"
+                Background="{DynamicResource SmokeFillColorDefaultBrush}"
+                Visibility="Collapsed" />
     </Grid>
 </Window>

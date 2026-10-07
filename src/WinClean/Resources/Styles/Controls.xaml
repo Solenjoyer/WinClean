@@ -1,6 +1,84 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:WinClean.Controls">
+                    xmlns:controls="clr-namespace:WinClean.Controls"
+                    xmlns:converters="clr-namespace:WinClean.Converters">
+
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    <converters:EmptyToVisibleConverter x:Key="EmptyToVisible" />
+
+    <!-- A glyph-only button without a visible surface until it is hovered: clear, dismiss, chevrons. -->
+    <Style x:Key="SubtleGlyphButton" TargetType="Button">
+        <Setter Property="Width" Value="28" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource SymbolThemeFontFamily}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Surface"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- The expand chevron on a group row; the glyph follows the row's state rather than the button's own. -->
+    <Style x:Key="RowChevron" TargetType="Button">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource SymbolThemeFontFamily}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Content" Value="&#xE76C;" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Surface"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Surface" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                <Setter Property="Content" Value="&#xE70D;" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Text-only label next to a name: an application category or a member count. -->
+    <Style x:Key="Badge" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Padding" Value="6,1" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
 
     <Style TargetType="controls:ProportionBar">
         <Setter Property="Track" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
