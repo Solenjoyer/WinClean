@@ -58,17 +58,17 @@ public sealed class MonitoringScheduler : IDisposable
 
     private IReadOnlyList<VolumeSample> _cachedVolumes = [];
 
-    private long _volumesSampledAt = long.MinValue;
+    private long? _volumesSampledAt;
 
     private BatterySample? _cachedBattery;
 
-    private long _batterySampledAt = long.MinValue;
+    private long? _batterySampledAt;
 
     private double? _cachedFrequency;
 
     private IReadOnlyList<GpuSample> _cachedGpus = [];
 
-    private long _detailedSampledAt = long.MinValue;
+    private long? _detailedSampledAt;
 
     public MonitoringScheduler(ILogger<MonitoringScheduler> logger, ProcessDetailsCache details)
     {
@@ -209,19 +209,19 @@ public sealed class MonitoringScheduler : IDisposable
         var network = _network.Sample(now);
         var disk = _disk.Sample(now);
 
-        if (now - _volumesSampledAt > 5 * TimeSpan.TicksPerSecond)
+        if (Due(_volumesSampledAt, now, 5 * TimeSpan.TicksPerSecond))
         {
             _cachedVolumes = _volumes.Sample();
             _volumesSampledAt = now;
         }
 
-        if (now - _batterySampledAt > 5 * TimeSpan.TicksPerSecond)
+        if (Due(_batterySampledAt, now, 5 * TimeSpan.TicksPerSecond))
         {
             _cachedBattery = _battery.Sample();
             _batterySampledAt = now;
         }
 
-        if (demand.Detailed && now - _detailedSampledAt >= 2 * TimeSpan.TicksPerSecond - TimeSpan.TicksPerMillisecond * 50)
+        if (demand.Detailed && Due(_detailedSampledAt, now, 2 * TimeSpan.TicksPerSecond - TimeSpan.TicksPerMillisecond * 50))
         {
             _cachedGpus = _gpu.Sample();
             _cachedFrequency = _frequency.Sample();
@@ -251,6 +251,9 @@ public sealed class MonitoringScheduler : IDisposable
         Latest = sample;
         return sample;
     }
+
+    /// <summary>Whether a slow reader should run again: never read yet, or read longer ago than its interval.</summary>
+    private static bool Due(long? lastTicks, long now, long intervalTicks) => lastTicks is null || now - lastTicks.Value >= intervalTicks;
 
     private void ResetBaselines()
     {

@@ -13,21 +13,23 @@ internal sealed class DiskActivitySampler : IDisposable
 {
     private const int MaximumDiskNumber = 32;
 
-    private const int ERROR_INVALID_FUNCTION = 1;
-
     private static readonly TimeSpan EnumerationInterval = TimeSpan.FromSeconds(60);
 
     private readonly List<Disk> _disks = [];
 
     private readonly byte[] _buffer = new byte[DiskPerformanceParser.Size];
 
-    private long _lastEnumerationTicks = long.MinValue;
+    private string? _openError;
+
+    private string? _ioctlError;
+
+    private long? _lastEnumerationTicks;
 
     public string? Reason { get; private set; }
 
     public DiskActivitySample? Sample(long nowTicks)
     {
-        if (nowTicks - _lastEnumerationTicks > EnumerationInterval.Ticks)
+        if (_lastEnumerationTicks is null || nowTicks - _lastEnumerationTicks.Value > EnumerationInterval.Ticks)
         {
             Enumerate();
             _lastEnumerationTicks = nowTicks;
@@ -35,7 +37,9 @@ internal sealed class DiskActivitySampler : IDisposable
 
         if (_disks.Count == 0)
         {
-            Reason ??= "No physical disk answered IOCTL_DISK_PERFORMANCE; disk counters may be disabled (diskperf -Y).";
+            Reason ??= _openError is null
+                ? "No physical disk could be opened."
+                : $"Physical disks could not be opened: {_openError}.";
             return null;
         }
 
@@ -51,6 +55,7 @@ internal sealed class DiskActivitySampler : IDisposable
             if (!Kernel32.DeviceIoControl(disk.Handle, Kernel32.IOCTL_DISK_PERFORMANCE, [], 0, _buffer, (uint)_buffer.Length, out _, 0)
                 || !DiskPerformanceParser.TryParse(_buffer, out var performance))
             {
+                _ioctlError = Win32Reason.LastError();
                 disk.Handle.Dispose();
                 _disks.RemoveAt(index);
                 continue;
@@ -79,6 +84,12 @@ internal sealed class DiskActivitySampler : IDisposable
             read += readRate.Value;
             write += writeRate.Value;
             measured++;
+        }
+
+        if (_disks.Count == 0)
+        {
+            Reason = $"IOCTL_DISK_PERFORMANCE failed: {_ioctlError}; disk counters may be disabled (diskperf -Y).";
+            return null;
         }
 
         Reason = null;
@@ -126,6 +137,14 @@ internal sealed class DiskActivitySampler : IDisposable
 
             if (handle.IsInvalid)
             {
+                // Numbers are not contiguous, so a missing disk is normal; the error is only kept for the report.
+                var error = Win32Reason.LastError();
+
+                if (!error.StartsWith("The system cannot find the file specified", StringComparison.Ordinal))
+                {
+                    _openError = error;
+                }
+
                 handle.Dispose();
                 continue;
             }
