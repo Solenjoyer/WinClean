@@ -16,7 +16,7 @@ const drivers = [
   {device: 'Intel Chipset SATA/PCIe RST', provider: 'Intel', version: '20.2.0.1026', date: '9 Jun 2026 · 4 months ago', source: 'intel.com'},
 ];
 
-export const DRIVERS_FROM = 36;
+export const DRIVERS_FROM = 30;
 export const DRIVER_EVERY = 5;
 
 const Line: React.FC<{label: string; value: string; status?: string; delay: number}> = ({label, value, status, delay}) => {

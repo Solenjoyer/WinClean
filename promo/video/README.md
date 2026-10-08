@@ -1,8 +1,9 @@
 # Launch video
 
-A 47-second motion video for WinClean, built with [Remotion](https://www.remotion.dev). After the
+A 55-second motion video for WinClean, built with [Remotion](https://www.remotion.dev). After the
 intro, a Windows desktop appears and the WinClean window opens maximised; a pointer walks through the
-pages, the window is restored and minimised, and the desktop widget takes over. Every frame is React;
+pages with a centred sentence between features, the window is restored and minimised, and the
+desktop widget takes over. Every frame is React;
 every sound is synthesised by `tools/make-audio.py`, so the folder carries no third-party media.
 
 ```

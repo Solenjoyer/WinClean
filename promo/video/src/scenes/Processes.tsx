@@ -50,7 +50,7 @@ const columns: React.CSSProperties = {display: 'grid', gridTemplateColumns: '1fr
 const rowHeight = 44;
 
 export const TABLE = {x: 32, y: 140, w: 1636, h: 760};
-export const EXPAND_AT = 110;
+export const EXPAND_AT = 60;
 export const ROWS_FROM = 20;
 export const ROW_EVERY = 5;
 

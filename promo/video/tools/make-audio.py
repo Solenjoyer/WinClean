@@ -207,7 +207,7 @@ def pad_voice(freq, n, cutoff, detune):
     return out
 
 
-def bed(duration=47.0):
+def bed(duration=56.0):
     n = int(SR * duration)
     t = np.arange(n) / SR
     left = np.zeros(n)
@@ -268,7 +268,7 @@ def bed(duration=47.0):
     clap *= 0.33
 
     beats = int(duration / BEAT)
-    drums_end = 43.0
+    drums_end = 51.0
     for beat in range(beats):
         when = beat * BEAT
         if when >= drums_end:
@@ -293,7 +293,7 @@ def bed(duration=47.0):
     for step in range(sixteenths):
         when = step * BEAT / 4
         bar = int(when / BAR)
-        if bar < 4 or when >= 42.0:
+        if bar < 4 or when >= 50.0:
             continue
         chord = CHORDS[bar % len(CHORDS)]
         name, octave = chord[step % 3]

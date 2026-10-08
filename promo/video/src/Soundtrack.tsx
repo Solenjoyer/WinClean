@@ -1,11 +1,11 @@
 import React from 'react';
 import {Audio, Sequence, interpolate, staticFile} from 'remotion';
-import {CHECKS_FROM, CHECK_EVERY, CLEAN_CLICK, CONFIRM_CLICK, DIALOG_AT, RESULT_AT} from './scenes/Cleanup';
+import {CHECKS_FROM, CHECK_EVERY, DIALOG_AT, RESULT_AT} from './scenes/Cleanup';
 import {DRIVERS_FROM, DRIVER_EVERY} from './scenes/Health';
 import {EXPAND_AT, ROWS_FROM, ROW_EVERY} from './scenes/Processes';
 import {BARS_FROM, BAR_EVERY, DEV_FROM, RISER_AT} from './scenes/Storage';
-import {DRAG_RELEASE, TERMINAL_IN, WIDGET_IN, clicks} from './Stage';
-import {INTRO, OUTRO, STAGE, TOTAL_FRAMES, stage} from './timeline';
+import {DRAG_RELEASE, TERMINAL_IN, WIDGET_IN, clicks, interstitials} from './Stage';
+import {INTRO, OUTRO, PAGES, PageKey, STAGE, TOTAL_FRAMES, stage} from './timeline';
 
 type Cue = {sound: string; frame: number; volume: number};
 
@@ -14,7 +14,7 @@ const cue = (sound: string, frame: number, volume = 0.6): Cue => ({sound, frame,
 const stagger = (sound: string, first: number, count: number, every: number, volume: number) =>
   Array.from({length: count}, (_, i) => cue(sound, first + i * every, volume));
 
-const page = (key: keyof typeof STAGE, offset: number) => stage(STAGE[key] + offset);
+const content = (key: PageKey, offset: number) => stage(PAGES[key].content + offset);
 
 // Every effect is attached to the moment it underlines; the frames come from the scene files.
 export const cues: Cue[] = [
@@ -23,30 +23,31 @@ export const cues: Cue[] = [
   cue('whoosh', INTRO.from + 42, 0.7),
   ...stagger('tick', INTRO.from + 62, 8, 3, 0.3),
 
-  cue('whoosh', stage(2), 0.6),
-  ...stagger('whoosh-soft', page('overview', 8), 4, 5, 0.4),
-  ...stagger('pop', page('overview', 32), 5, 6, 0.3),
+  ...interstitials.map((item) => cue('whoosh-soft', stage(item.from), 0.5)),
+  ...stagger('tick', stage(PAGES.processes.text + 18), 11, 3, 0.22),
+
+  cue('whoosh', stage(PAGES.overview.content - 4), 0.6),
+  ...stagger('whoosh-soft', content('overview', 8), 4, 5, 0.4),
+  ...stagger('pop', content('overview', 32), 5, 6, 0.3),
 
   ...clicks.map((click) => cue('click', stage(click.frame), 0.7)),
-  ...[STAGE.processes, STAGE.storage, STAGE.cleanup, STAGE.health].map((at) => cue('whoosh-soft', stage(at + 2), 0.4)),
 
-  ...stagger('pop', page('processes', ROWS_FROM), 10, ROW_EVERY, 0.3),
-  ...stagger('tick', page('processes', EXPAND_AT + 4), 5, 3, 0.3),
-  ...stagger('tick', stage(345), 11, 3, 0.22),
+  ...stagger('pop', content('processes', ROWS_FROM), 10, ROW_EVERY, 0.3),
+  ...stagger('tick', content('processes', EXPAND_AT + 4), 5, 3, 0.3),
 
-  cue('riser', page('storage', RISER_AT), 0.5),
-  cue('impact', page('storage', BARS_FROM - 1), 0.6),
-  ...stagger('pop', page('storage', BARS_FROM), 7, BAR_EVERY, 0.3),
-  ...stagger('tick', page('storage', DEV_FROM), 6, 6, 0.25),
+  cue('riser', content('storage', RISER_AT), 0.5),
+  cue('impact', content('storage', BARS_FROM - 1), 0.6),
+  ...stagger('pop', content('storage', BARS_FROM), 7, BAR_EVERY, 0.3),
+  ...stagger('tick', content('storage', DEV_FROM), 6, 6, 0.25),
 
-  ...stagger('check', page('cleanup', CHECKS_FROM), 6, CHECK_EVERY, 0.5),
-  cue('whoosh-soft', page('cleanup', DIALOG_AT), 0.5),
-  cue('riser', page('cleanup', DIALOG_AT + 22), 0.55),
-  cue('impact', page('cleanup', RESULT_AT), 0.95),
-  cue('chime', page('cleanup', RESULT_AT + 2), 0.5),
+  ...stagger('check', content('cleanup', CHECKS_FROM), 6, CHECK_EVERY, 0.5),
+  cue('whoosh-soft', content('cleanup', DIALOG_AT), 0.5),
+  cue('riser', content('cleanup', DIALOG_AT + 22), 0.55),
+  cue('impact', content('cleanup', RESULT_AT), 0.95),
+  cue('chime', content('cleanup', RESULT_AT + 2), 0.5),
 
-  ...stagger('pop', page('health', 8), 3, 6, 0.3),
-  ...stagger('tick', page('health', DRIVERS_FROM), 6, DRIVER_EVERY, 0.22),
+  ...stagger('pop', content('health', 8), 3, 6, 0.3),
+  ...stagger('tick', content('health', DRIVERS_FROM), 6, DRIVER_EVERY, 0.22),
 
   cue('whoosh-soft', stage(STAGE.restoreClick + 2), 0.45),
   cue('whoosh-down', stage(STAGE.minimizeClick + 2), 0.6),
@@ -63,7 +64,7 @@ export const cues: Cue[] = [
   cue('tick', OUTRO.from + 50, 0.3),
 ];
 
-const ducks = [INTRO.from + 10, page('storage', BARS_FROM - 1), page('cleanup', RESULT_AT), OUTRO.from + 4];
+const ducks = [INTRO.from + 10, content('storage', BARS_FROM - 1), content('cleanup', RESULT_AT), OUTRO.from + 4];
 
 const bedVolume = (frame: number) => {
   let volume = interpolate(frame, [0, 20], [0.1, 0.5], {extrapolateRight: 'clamp'});
