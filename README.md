@@ -28,6 +28,8 @@ Screenshots will be added before the first release (`docs/screenshots/`).
 
 **Notification area.** Optional icon with CPU, memory and system drive as bars or figures, a menu, and an option to keep running when the window is closed.
 
+**Desktop widget.** A small window with CPU, memory, disk and network and a minute of history for each, the developer tools and agents running right now (Claude Code at 12 % of the CPU and 1.2 GB, Docker Desktop, WSL) and the free space on the system drive. Always on top, behind every other window above the wallpaper, or a normal window; full or compact; adjustable opacity; optional click-through so it never gets in the way of a terminal or a game. Some ways to use it: keep an eye on an agent run while you code, watch memory with Docker and WSL up, see disk activity during a long build, leave it on a second monitor as an ambient dashboard, or start WinClean with `--widget` from a shortcut and never open the window at all. While the widget is shown, closing the main window keeps WinClean running.
+
 ## Download
 
 WinClean is not released yet. Each release will ship:

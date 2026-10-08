@@ -13,3 +13,4 @@ All notable changes to WinClean are listed here. The format follows [Keep a Chan
 - Health page with the Windows version and bundled support dates, update facts and history, pending-restart signals, firmware, Secure Boot and a driver table with vendor links.
 - Hardware page with processor, graphics, memory modules, motherboard, firmware, TPM, disks, network adapters, displays and optional sensors.
 - Notification area icon, start with Windows, close to the icon, restart as administrator, settings, diagnostics and a headless self-check.
+- Desktop widget with live metrics and history, the running developer tools and agents, and the system drive; always on top, behind other windows or normal; full or compact layout, opacity, lock, click-through, and a `--widget` switch that starts without the main window.

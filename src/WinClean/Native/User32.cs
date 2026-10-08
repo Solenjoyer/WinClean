@@ -32,6 +32,28 @@ internal static partial class User32
 
     internal const long WS_EX_TOOLWINDOW_STYLE = 0x00000080;
 
+    internal const long WS_EX_TRANSPARENT = 0x00000020;
+
+    internal const long WS_EX_APPWINDOW = 0x00040000;
+
+    internal const long WS_EX_NOACTIVATE = 0x08000000;
+
+    internal const nint HWND_TOP = 0;
+
+    internal const nint HWND_BOTTOM = 1;
+
+    internal const uint SWP_NOSIZE = 0x0001;
+
+    internal const uint SWP_NOMOVE = 0x0002;
+
+    internal const uint SWP_NOZORDER = 0x0004;
+
+    internal const uint SWP_NOACTIVATE = 0x0010;
+
+    internal const uint SWP_NOSENDCHANGING = 0x0400;
+
+    internal const int WM_WINDOWPOSCHANGING = 0x0046;
+
     [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
     internal static partial uint RegisterWindowMessageW(string lpString);
 
@@ -46,6 +68,13 @@ internal static partial class User32
     [LibraryImport("user32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static partial bool ChangeWindowMessageFilterEx(nint hwnd, uint message, uint action, nint pChangeFilterStruct);
+
+    [LibraryImport("user32.dll")]
+    internal static partial nint GetForegroundWindow();
+
+    [LibraryImport("user32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool SetWindowPos(nint hWnd, nint hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
     [LibraryImport("user32.dll", SetLastError = true)]
     internal static partial nint GetWindowLongPtrW(nint hWnd, int nIndex);
@@ -104,6 +133,19 @@ internal static partial class User32
         public uint StateFlags;
         public fixed char DeviceID[128];
         public fixed char DeviceKey[128];
+    }
+
+    /// <summary>The WM_WINDOWPOSCHANGING payload; a hook may edit it before the window moves.</summary>
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct WINDOWPOS
+    {
+        public nint hwnd;
+        public nint hwndInsertAfter;
+        public int x;
+        public int y;
+        public int cx;
+        public int cy;
+        public uint flags;
     }
 
     /// <summary>DEVMODEW as a raw 220-byte block; the few fields used are read by offset.</summary>

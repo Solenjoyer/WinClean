@@ -14,6 +14,7 @@ public class SettingsSerializerTests
             ShowSystemProcesses = true,
             TemperatureUnit = TemperatureUnit.Fahrenheit,
             Tray = new TraySettings { Enabled = true, Style = TrayIconStyle.Number, ShowDisk = true },
+            Widget = new WidgetSettings { Enabled = true, Placement = WidgetPlacement.BehindWindows, Layout = WidgetLayout.Compact, Opacity = 75, Left = 1500.5, Top = 24 },
             Window = new WindowPlacement(10, 20, 1200, 800, Maximized: false),
         };
 
@@ -108,9 +109,21 @@ public class SettingsSerializerTests
     [Fact]
     public void Deserialize_NullSections_AreReplacedByDefaults()
     {
-        var result = SettingsSerializer.Deserialize("""{ "tray": null, "cleanup": null }""");
+        var result = SettingsSerializer.Deserialize("""{ "tray": null, "cleanup": null, "widget": null }""");
 
         Assert.Equal(new TraySettings(), result.Settings.Tray);
         Assert.Equal(new CleanupSettings(), result.Settings.Cleanup);
+        Assert.Equal(new WidgetSettings(), result.Settings.Widget);
+    }
+
+    [Theory]
+    [InlineData(10, 60)]
+    [InlineData(85, 85)]
+    [InlineData(150, 100)]
+    public void Deserialize_WidgetOpacityOutOfRange_IsClamped(int stored, int expected)
+    {
+        var result = SettingsSerializer.Deserialize($$"""{ "widget": { "opacity": {{stored}} } }""");
+
+        Assert.Equal(expected, result.Settings.Widget.Opacity);
     }
 }

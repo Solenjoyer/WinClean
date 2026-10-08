@@ -29,6 +29,8 @@ public partial class App : Application
 
     private TrayIcon? _tray;
 
+    private WidgetWindow? _widget;
+
     private bool _reportingCrash;
 
     public App(StartupOptions options)
@@ -51,7 +53,9 @@ public partial class App : Application
             _services.GetRequiredService<ShellViewModel>().NavigateTo(page);
         }
 
-        _services.GetRequiredService<MainWindow>().BringToFront();
+        var window = _services.GetRequiredService<MainWindow>();
+        MainWindow = window;
+        window.BringToFront();
     }
 
     public void ExitApplication()
@@ -103,12 +107,21 @@ public partial class App : Application
         _tray.ExitRequested += (_, _) => ExitApplication();
         _services.GetRequiredService<MonitoringCoordinator>();
 
-        if (_options.StartMinimized && settings.Current.Tray.Enabled)
+        if (_options.Widget)
+        {
+            settings.Update(current => current with { Widget = current.Widget with { Enabled = true } });
+        }
+
+        settings.Changed += (_, current) => SyncWidget(current.Widget.Enabled);
+        SyncWidget(settings.Current.Widget.Enabled);
+
+        if (_options.Widget || (_options.StartMinimized && (settings.Current.Tray.Enabled || settings.Current.Widget.Enabled)))
         {
             return;
         }
 
         var window = _services.GetRequiredService<MainWindow>();
+        MainWindow = window;
 
         if (_options.StartMinimized)
         {
@@ -120,10 +133,30 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
+        // Shutdown has already closed every window, the widget included.
         _tray?.Dispose();
         _services?.Dispose();
         _instance?.Dispose();
         base.OnExit(e);
+    }
+
+    private void SyncWidget(bool enabled)
+    {
+        if (!Dispatcher.CheckAccess())
+        {
+            Dispatcher.BeginInvoke(() => SyncWidget(enabled));
+            return;
+        }
+
+        if (enabled)
+        {
+            _widget ??= _services!.GetRequiredService<WidgetWindow>();
+            _widget.Show();
+        }
+        else
+        {
+            _widget?.Hide();
+        }
     }
 
     private void ApplySettings(AppSettings current)
@@ -174,6 +207,8 @@ public partial class App : Application
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<ShellViewModel>();
         services.AddSingleton<MainWindow>();
+        services.AddSingleton<WidgetViewModel>();
+        services.AddSingleton<WidgetWindow>();
 
         return services.BuildServiceProvider();
     }

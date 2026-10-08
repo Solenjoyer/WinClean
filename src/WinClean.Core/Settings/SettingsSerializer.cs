@@ -33,6 +33,8 @@ public static class SettingsSerializer
 
     private static AppSettings Normalize(AppSettings settings)
     {
+        var widget = settings.Widget ?? new WidgetSettings();
+
         return settings with
         {
             SchemaVersion = AppSettings.CurrentSchemaVersion,
@@ -42,6 +44,7 @@ public static class SettingsSerializer
                 AppSettings.MaximumRefreshIntervalSeconds),
             Tray = settings.Tray ?? new TraySettings(),
             Cleanup = settings.Cleanup ?? new CleanupSettings(),
+            Widget = widget with { Opacity = Math.Clamp(widget.Opacity, WidgetSettings.MinimumOpacity, WidgetSettings.MaximumOpacity) },
         };
     }
 }

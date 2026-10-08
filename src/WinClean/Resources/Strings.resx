@@ -1553,4 +1553,123 @@
   <data name="Overview_SensorsOff" xml:space="preserve">
     <value>Sensors are off. Enable them in Settings.</value>
   </data>
+  <data name="Settings_Widget" xml:space="preserve">
+    <value>Desktop widget</value>
+  </data>
+  <data name="Settings_WidgetEnabled" xml:space="preserve">
+    <value>Show the widget</value>
+  </data>
+  <data name="Settings_WidgetEnabledDescription" xml:space="preserve">
+    <value>A small window with live CPU, memory, disk and network figures and the developer tools running right now. While it is shown, closing the main window keeps WinClean running.</value>
+  </data>
+  <data name="Settings_WidgetPlacement" xml:space="preserve">
+    <value>Placement</value>
+  </data>
+  <data name="Settings_WidgetPlacementDescription" xml:space="preserve">
+    <value>Behind other windows keeps the widget above the wallpaper and under everything else; Show desktop hides it until the desktop is toggled back.</value>
+  </data>
+  <data name="Settings_WidgetAlwaysOnTop" xml:space="preserve">
+    <value>Always on top</value>
+  </data>
+  <data name="Settings_WidgetBehindWindows" xml:space="preserve">
+    <value>Behind other windows</value>
+  </data>
+  <data name="Settings_WidgetNormal" xml:space="preserve">
+    <value>Normal window</value>
+  </data>
+  <data name="Settings_WidgetLayout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="Settings_WidgetLayoutFull" xml:space="preserve">
+    <value>Full, with history</value>
+  </data>
+  <data name="Settings_WidgetLayoutCompact" xml:space="preserve">
+    <value>Compact, one line</value>
+  </data>
+  <data name="Settings_WidgetOpacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="Settings_Percent60" xml:space="preserve">
+    <value>60 %</value>
+  </data>
+  <data name="Settings_Percent75" xml:space="preserve">
+    <value>75 %</value>
+  </data>
+  <data name="Settings_Percent90" xml:space="preserve">
+    <value>90 %</value>
+  </data>
+  <data name="Settings_Percent100" xml:space="preserve">
+    <value>100 %</value>
+  </data>
+  <data name="Settings_WidgetLocked" xml:space="preserve">
+    <value>Lock position</value>
+  </data>
+  <data name="Settings_WidgetLockedDescription" xml:space="preserve">
+    <value>The widget cannot be dragged.</value>
+  </data>
+  <data name="Settings_WidgetClickThrough" xml:space="preserve">
+    <value>Let clicks pass through</value>
+  </data>
+  <data name="Settings_WidgetClickThroughDescription" xml:space="preserve">
+    <value>Clicks reach whatever is under the widget, so it never gets in the way of a terminal or a game. The widget itself can then only be reached from here or from the notification area menu.</value>
+  </data>
+  <data name="Settings_WidgetShowsTools" xml:space="preserve">
+    <value>Show running developer tools and agents</value>
+  </data>
+  <data name="Settings_WidgetShowsToolsDescription" xml:space="preserve">
+    <value>Up to four applications of the categories AI agent, IDE, editor, container, virtual machine and runtime, by CPU.</value>
+  </data>
+  <data name="Settings_WidgetShowsStorage" xml:space="preserve">
+    <value>Show the free space on the system drive</value>
+  </data>
+  <data name="Settings_WidgetResetPosition" xml:space="preserve">
+    <value>Reset position</value>
+  </data>
+  <data name="Settings_WidgetResetPositionDescription" xml:space="preserve">
+    <value>Puts the widget back in the top-right corner of the primary screen.</value>
+  </data>
+  <data name="Tray_ShowWidget" xml:space="preserve">
+    <value>Show widget</value>
+  </data>
+  <data name="Widget_Cpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Widget_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Widget_Disk" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="Widget_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Widget_Gpu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Widget_Temperature" xml:space="preserve">
+    <value>CPU temp.</value>
+  </data>
+  <data name="Widget_RunningNow" xml:space="preserve">
+    <value>Running now</value>
+  </data>
+  <data name="Widget_FreeSpace" xml:space="preserve">
+    <value>{0} {1} free</value>
+    <comment>0 = drive letter, 1 = size</comment>
+  </data>
+  <data name="Widget_Compact" xml:space="preserve">
+    <value>CPU {0}   Mem {1}   Disk {2}   Net {3}</value>
+    <comment>The compact layout's single line</comment>
+  </data>
+  <data name="Widget_Open" xml:space="preserve">
+    <value>Open WinClean</value>
+  </data>
+  <data name="Widget_LockPosition" xml:space="preserve">
+    <value>Lock position</value>
+  </data>
+  <data name="Widget_Hide" xml:space="preserve">
+    <value>Hide widget</value>
+  </data>
+  <data name="Widget_Exit" xml:space="preserve">
+    <value>Exit WinClean</value>
+  </data>
 </root>

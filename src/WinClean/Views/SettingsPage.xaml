@@ -95,6 +95,53 @@
 
             <Border Style="{StaticResource Section}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitle}" Text="{x:Static r:Strings.Settings_Widget}" />
+                    <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetEnabled}" Description="{x:Static r:Strings.Settings_WidgetEnabledDescription}">
+                        <CheckBox IsChecked="{Binding WidgetEnabled}" AutomationProperties.Name="{x:Static r:Strings.Settings_WidgetEnabled}" />
+                    </controls:SettingRow>
+                    <StackPanel IsEnabled="{Binding WidgetEnabled}">
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetPlacement}" Description="{x:Static r:Strings.Settings_WidgetPlacementDescription}">
+                            <ComboBox Style="{StaticResource Choice}" SelectedIndex="{Binding WidgetPlacementIndex}">
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_WidgetAlwaysOnTop}" />
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_WidgetBehindWindows}" />
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_WidgetNormal}" />
+                            </ComboBox>
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetLayout}">
+                            <ComboBox Style="{StaticResource Choice}" SelectedIndex="{Binding WidgetLayoutIndex}">
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_WidgetLayoutFull}" />
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_WidgetLayoutCompact}" />
+                            </ComboBox>
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetOpacity}">
+                            <ComboBox Style="{StaticResource Choice}" SelectedIndex="{Binding WidgetOpacityIndex}">
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_Percent60}" />
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_Percent75}" />
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_Percent90}" />
+                                <ComboBoxItem Content="{x:Static r:Strings.Settings_Percent100}" />
+                            </ComboBox>
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetShowsTools}" Description="{x:Static r:Strings.Settings_WidgetShowsToolsDescription}">
+                            <CheckBox IsChecked="{Binding WidgetShowsTools}" AutomationProperties.Name="{x:Static r:Strings.Settings_WidgetShowsTools}" />
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetShowsStorage}">
+                            <CheckBox IsChecked="{Binding WidgetShowsStorage}" AutomationProperties.Name="{x:Static r:Strings.Settings_WidgetShowsStorage}" />
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetLocked}" Description="{x:Static r:Strings.Settings_WidgetLockedDescription}">
+                            <CheckBox IsChecked="{Binding WidgetLocked}" AutomationProperties.Name="{x:Static r:Strings.Settings_WidgetLocked}" />
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetClickThrough}" Description="{x:Static r:Strings.Settings_WidgetClickThroughDescription}">
+                            <CheckBox IsChecked="{Binding WidgetClickThrough}" AutomationProperties.Name="{x:Static r:Strings.Settings_WidgetClickThrough}" />
+                        </controls:SettingRow>
+                        <controls:SettingRow Title="{x:Static r:Strings.Settings_WidgetResetPosition}" Description="{x:Static r:Strings.Settings_WidgetResetPositionDescription}">
+                            <Button Content="{x:Static r:Strings.Settings_WidgetResetPosition}" Command="{Binding ResetWidgetPositionCommand}" />
+                        </controls:SettingRow>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Section}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitle}" Text="{x:Static r:Strings.Settings_Startup}" />
                     <controls:SettingRow Title="{x:Static r:Strings.Settings_StartWithWindows}" Description="{x:Static r:Strings.Settings_StartWithWindowsDescription}">
                         <CheckBox IsChecked="{Binding StartWithWindows}" AutomationProperties.Name="{x:Static r:Strings.Settings_StartWithWindows}" />

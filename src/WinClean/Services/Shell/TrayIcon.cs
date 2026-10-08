@@ -47,6 +47,8 @@ public sealed class TrayIcon : IDisposable
 
     private ContextMenu? _menu;
 
+    private MenuItem? _widgetItem;
+
     public TrayIcon(SettingsStore settings, MonitoringScheduler scheduler, ILogger<TrayIcon> logger)
     {
         _settings = settings;
@@ -72,7 +74,15 @@ public sealed class TrayIcon : IDisposable
         _window = null;
     }
 
-    private void OnSettingsChanged(object? sender, AppSettings settings) => Apply();
+    private void OnSettingsChanged(object? sender, AppSettings settings)
+    {
+        if (_widgetItem is not null)
+        {
+            _widgetItem.IsChecked = settings.Widget.Enabled;
+        }
+
+        Apply();
+    }
 
     private void OnSample(object? sender, SystemSample sample)
     {
@@ -351,6 +361,9 @@ public sealed class TrayIcon : IDisposable
         menu.Items.Add(Item(Strings.Nav_Processes, () => OpenRequested?.Invoke(this, PageKeys.Processes)));
         menu.Items.Add(Item(Strings.Nav_Cleanup, () => OpenRequested?.Invoke(this, PageKeys.Cleanup)));
         menu.Items.Add(new Separator());
+        _widgetItem = new MenuItem { Header = Strings.Tray_ShowWidget, IsCheckable = true, IsChecked = _settings.Current.Widget.Enabled };
+        _widgetItem.Click += (_, _) => _settings.Update(current => current with { Widget = current.Widget with { Enabled = !current.Widget.Enabled } });
+        menu.Items.Add(_widgetItem);
         menu.Items.Add(Item(Strings.Nav_Settings, () => OpenRequested?.Invoke(this, PageKeys.Settings)));
         menu.Items.Add(new Separator());
         menu.Items.Add(Item(Strings.Tray_Exit, () => ExitRequested?.Invoke(this, EventArgs.Empty)));

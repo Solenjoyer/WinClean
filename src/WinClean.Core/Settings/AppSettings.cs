@@ -41,5 +41,7 @@ public sealed record AppSettings
 
     public CleanupSettings Cleanup { get; set; } = new();
 
+    public WidgetSettings Widget { get; set; } = new();
+
     public WindowPlacement? Window { get; set; }
 }

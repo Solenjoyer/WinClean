@@ -21,6 +21,9 @@ public sealed record StartupOptions
 
     public int? ReplacePid { get; init; }
 
+    /// <summary>Opens the desktop widget without the main window, and turns the widget on in the settings.</summary>
+    public bool Widget { get; init; }
+
     public static StartupOptions Parse(IReadOnlyList<string> args)
     {
         ArgumentNullException.ThrowIfNull(args);
@@ -70,6 +73,9 @@ public sealed record StartupOptions
                     break;
                 case "--replace-pid":
                     options = options with { ReplacePid = int.TryParse(TakeValue(), out var pid) ? pid : null };
+                    break;
+                case "--widget":
+                    options = options with { Widget = true };
                     break;
                 default:
                     // Unknown switches are ignored on purpose: an old shortcut must not stop the app from starting.

@@ -25,6 +25,8 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     private static readonly int[] OldDownloadDays = [30, 90, 180, 365];
 
+    private static readonly int[] WidgetOpacities = [60, 75, 90, 100];
+
     private readonly SettingsStore _settings;
 
     private readonly MonitoringScheduler _scheduler;
@@ -106,6 +108,30 @@ public sealed partial class SettingsViewModel : ObservableObject
     public partial bool CloseToTray { get; set; }
 
     [ObservableProperty]
+    public partial bool WidgetEnabled { get; set; }
+
+    [ObservableProperty]
+    public partial int WidgetPlacementIndex { get; set; }
+
+    [ObservableProperty]
+    public partial int WidgetLayoutIndex { get; set; }
+
+    [ObservableProperty]
+    public partial int WidgetOpacityIndex { get; set; }
+
+    [ObservableProperty]
+    public partial bool WidgetLocked { get; set; }
+
+    [ObservableProperty]
+    public partial bool WidgetClickThrough { get; set; }
+
+    [ObservableProperty]
+    public partial bool WidgetShowsTools { get; set; }
+
+    [ObservableProperty]
+    public partial bool WidgetShowsStorage { get; set; }
+
+    [ObservableProperty]
     public partial bool StartWithWindows { get; set; }
 
     [ObservableProperty]
@@ -150,6 +176,22 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     partial void OnCloseToTrayChanged(bool value) => Save(current => current with { Tray = current.Tray with { CloseToTray = value } });
 
+    partial void OnWidgetEnabledChanged(bool value) => Save(current => current with { Widget = current.Widget with { Enabled = value } });
+
+    partial void OnWidgetPlacementIndexChanged(int value) => Save(current => current with { Widget = current.Widget with { Placement = (WidgetPlacement)value } });
+
+    partial void OnWidgetLayoutIndexChanged(int value) => Save(current => current with { Widget = current.Widget with { Layout = (WidgetLayout)value } });
+
+    partial void OnWidgetOpacityIndexChanged(int value) => Save(current => current with { Widget = current.Widget with { Opacity = WidgetOpacities[Math.Clamp(value, 0, WidgetOpacities.Length - 1)] } });
+
+    partial void OnWidgetLockedChanged(bool value) => Save(current => current with { Widget = current.Widget with { Locked = value } });
+
+    partial void OnWidgetClickThroughChanged(bool value) => Save(current => current with { Widget = current.Widget with { ClickThrough = value } });
+
+    partial void OnWidgetShowsToolsChanged(bool value) => Save(current => current with { Widget = current.Widget with { ShowsTools = value } });
+
+    partial void OnWidgetShowsStorageChanged(bool value) => Save(current => current with { Widget = current.Widget with { ShowsStorage = value } });
+
     partial void OnStartWithWindowsChanged(bool value)
     {
         Save(current => current with { StartWithWindows = value });
@@ -185,6 +227,9 @@ public sealed partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private void RestartAsAdministrator() => _elevation.RestartElevated(PageKeys.Settings);
 
+    [RelayCommand]
+    private void ResetWidgetPosition() => _settings.Update(current => current with { Widget = current.Widget with { Left = null, Top = null } });
+
     private void LoadFrom(AppSettings current)
     {
         if (_loading)
@@ -208,6 +253,14 @@ public sealed partial class SettingsViewModel : ObservableObject
             TrayShowMemory = current.Tray.ShowMemory;
             TrayShowDisk = current.Tray.ShowDisk;
             CloseToTray = current.Tray.CloseToTray;
+            WidgetEnabled = current.Widget.Enabled;
+            WidgetPlacementIndex = (int)current.Widget.Placement;
+            WidgetLayoutIndex = (int)current.Widget.Layout;
+            WidgetOpacityIndex = Math.Max(0, Array.IndexOf(WidgetOpacities, current.Widget.Opacity));
+            WidgetLocked = current.Widget.Locked;
+            WidgetClickThrough = current.Widget.ClickThrough;
+            WidgetShowsTools = current.Widget.ShowsTools;
+            WidgetShowsStorage = current.Widget.ShowsStorage;
             StartWithWindows = StartupRegistration.IsEnabled();
             StartMinimized = current.StartMinimized;
             TemporaryAgeIndex = Math.Max(0, Array.IndexOf(TemporaryAges, current.Cleanup.TemporaryFileMinimumAgeHours));

@@ -71,9 +71,10 @@ public partial class MainWindow : Window, IDialogHost
 
         SavePlacement();
 
-        var tray = _settings.Current.Tray;
+        var current = _settings.Current;
+        var keepsRunning = (current.Tray.Enabled && current.Tray.CloseToTray) || current.Widget.Enabled;
 
-        if (tray.Enabled && tray.CloseToTray && !((App)Application.Current).IsExiting)
+        if (keepsRunning && !((App)Application.Current).IsExiting)
         {
             e.Cancel = true;
             Hide();

@@ -1224,6 +1224,18 @@ public static class Strings
     /// <summary>"Source code"</summary>
     public static string Settings_OpenRepository => ResourceManager.GetString("Settings_OpenRepository", Culture)!;
 
+    /// <summary>"100 %"</summary>
+    public static string Settings_Percent100 => ResourceManager.GetString("Settings_Percent100", Culture)!;
+
+    /// <summary>"60 %"</summary>
+    public static string Settings_Percent60 => ResourceManager.GetString("Settings_Percent60", Culture)!;
+
+    /// <summary>"75 %"</summary>
+    public static string Settings_Percent75 => ResourceManager.GetString("Settings_Percent75", Culture)!;
+
+    /// <summary>"90 %"</summary>
+    public static string Settings_Percent90 => ResourceManager.GetString("Settings_Percent90", Culture)!;
+
     /// <summary>"No account, no telemetry, no analytics, no crash upload and no update check. WinClean never opens a network connection on its own; links and the Windows Update check only run when you click them."</summary>
     public static string Settings_Privacy => ResourceManager.GetString("Settings_Privacy", Culture)!;
 
@@ -1337,6 +1349,69 @@ public static class Strings
 
     /// <summary>"{0} {1}" (Name and version)</summary>
     public static string Settings_VersionLine => ResourceManager.GetString("Settings_VersionLine", Culture)!;
+
+    /// <summary>"Desktop widget"</summary>
+    public static string Settings_Widget => ResourceManager.GetString("Settings_Widget", Culture)!;
+
+    /// <summary>"Always on top"</summary>
+    public static string Settings_WidgetAlwaysOnTop => ResourceManager.GetString("Settings_WidgetAlwaysOnTop", Culture)!;
+
+    /// <summary>"Behind other windows"</summary>
+    public static string Settings_WidgetBehindWindows => ResourceManager.GetString("Settings_WidgetBehindWindows", Culture)!;
+
+    /// <summary>"Let clicks pass through"</summary>
+    public static string Settings_WidgetClickThrough => ResourceManager.GetString("Settings_WidgetClickThrough", Culture)!;
+
+    /// <summary>"Clicks reach whatever is under the widget, so it never gets in the way of a terminal or a game. The widget itself can then only be reached from here or from the notification area menu."</summary>
+    public static string Settings_WidgetClickThroughDescription => ResourceManager.GetString("Settings_WidgetClickThroughDescription", Culture)!;
+
+    /// <summary>"Show the widget"</summary>
+    public static string Settings_WidgetEnabled => ResourceManager.GetString("Settings_WidgetEnabled", Culture)!;
+
+    /// <summary>"A small window with live CPU, memory, disk and network figures and the developer tools running right now. While it is shown, closing the main window keeps WinClean running."</summary>
+    public static string Settings_WidgetEnabledDescription => ResourceManager.GetString("Settings_WidgetEnabledDescription", Culture)!;
+
+    /// <summary>"Layout"</summary>
+    public static string Settings_WidgetLayout => ResourceManager.GetString("Settings_WidgetLayout", Culture)!;
+
+    /// <summary>"Compact, one line"</summary>
+    public static string Settings_WidgetLayoutCompact => ResourceManager.GetString("Settings_WidgetLayoutCompact", Culture)!;
+
+    /// <summary>"Full, with history"</summary>
+    public static string Settings_WidgetLayoutFull => ResourceManager.GetString("Settings_WidgetLayoutFull", Culture)!;
+
+    /// <summary>"Lock position"</summary>
+    public static string Settings_WidgetLocked => ResourceManager.GetString("Settings_WidgetLocked", Culture)!;
+
+    /// <summary>"The widget cannot be dragged."</summary>
+    public static string Settings_WidgetLockedDescription => ResourceManager.GetString("Settings_WidgetLockedDescription", Culture)!;
+
+    /// <summary>"Normal window"</summary>
+    public static string Settings_WidgetNormal => ResourceManager.GetString("Settings_WidgetNormal", Culture)!;
+
+    /// <summary>"Opacity"</summary>
+    public static string Settings_WidgetOpacity => ResourceManager.GetString("Settings_WidgetOpacity", Culture)!;
+
+    /// <summary>"Placement"</summary>
+    public static string Settings_WidgetPlacement => ResourceManager.GetString("Settings_WidgetPlacement", Culture)!;
+
+    /// <summary>"Behind other windows keeps the widget above the wallpaper and under everything else; Show desktop hides it until the desktop is toggled back."</summary>
+    public static string Settings_WidgetPlacementDescription => ResourceManager.GetString("Settings_WidgetPlacementDescription", Culture)!;
+
+    /// <summary>"Reset position"</summary>
+    public static string Settings_WidgetResetPosition => ResourceManager.GetString("Settings_WidgetResetPosition", Culture)!;
+
+    /// <summary>"Puts the widget back in the top-right corner of the primary screen."</summary>
+    public static string Settings_WidgetResetPositionDescription => ResourceManager.GetString("Settings_WidgetResetPositionDescription", Culture)!;
+
+    /// <summary>"Show the free space on the system drive"</summary>
+    public static string Settings_WidgetShowsStorage => ResourceManager.GetString("Settings_WidgetShowsStorage", Culture)!;
+
+    /// <summary>"Show running developer tools and agents"</summary>
+    public static string Settings_WidgetShowsTools => ResourceManager.GetString("Settings_WidgetShowsTools", Culture)!;
+
+    /// <summary>"Up to four applications of the categories AI agent, IDE, editor, container, virtual machine and runtime, by CPU."</summary>
+    public static string Settings_WidgetShowsToolsDescription => ResourceManager.GetString("Settings_WidgetShowsToolsDescription", Culture)!;
 
     /// <summary>"WinClean is using {0} of memory."</summary>
     public static string Settings_WorkingSet => ResourceManager.GetString("Settings_WorkingSet", Culture)!;
@@ -1496,4 +1571,46 @@ public static class Strings
 
     /// <summary>"Open WinClean"</summary>
     public static string Tray_Open => ResourceManager.GetString("Tray_Open", Culture)!;
+
+    /// <summary>"Show widget"</summary>
+    public static string Tray_ShowWidget => ResourceManager.GetString("Tray_ShowWidget", Culture)!;
+
+    /// <summary>"CPU {0}   Mem {1}   Disk {2}   Net {3}" (The compact layout&apos;s single line)</summary>
+    public static string Widget_Compact => ResourceManager.GetString("Widget_Compact", Culture)!;
+
+    /// <summary>"CPU"</summary>
+    public static string Widget_Cpu => ResourceManager.GetString("Widget_Cpu", Culture)!;
+
+    /// <summary>"Disk"</summary>
+    public static string Widget_Disk => ResourceManager.GetString("Widget_Disk", Culture)!;
+
+    /// <summary>"Exit WinClean"</summary>
+    public static string Widget_Exit => ResourceManager.GetString("Widget_Exit", Culture)!;
+
+    /// <summary>"{0} {1} free" (0 = drive letter, 1 = size)</summary>
+    public static string Widget_FreeSpace => ResourceManager.GetString("Widget_FreeSpace", Culture)!;
+
+    /// <summary>"GPU"</summary>
+    public static string Widget_Gpu => ResourceManager.GetString("Widget_Gpu", Culture)!;
+
+    /// <summary>"Hide widget"</summary>
+    public static string Widget_Hide => ResourceManager.GetString("Widget_Hide", Culture)!;
+
+    /// <summary>"Lock position"</summary>
+    public static string Widget_LockPosition => ResourceManager.GetString("Widget_LockPosition", Culture)!;
+
+    /// <summary>"Memory"</summary>
+    public static string Widget_Memory => ResourceManager.GetString("Widget_Memory", Culture)!;
+
+    /// <summary>"Network"</summary>
+    public static string Widget_Network => ResourceManager.GetString("Widget_Network", Culture)!;
+
+    /// <summary>"Open WinClean"</summary>
+    public static string Widget_Open => ResourceManager.GetString("Widget_Open", Culture)!;
+
+    /// <summary>"Running now"</summary>
+    public static string Widget_RunningNow => ResourceManager.GetString("Widget_RunningNow", Culture)!;
+
+    /// <summary>"CPU temp."</summary>
+    public static string Widget_Temperature => ResourceManager.GetString("Widget_Temperature", Culture)!;
 }

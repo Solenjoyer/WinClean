@@ -15,6 +15,8 @@ public sealed class MonitoringCoordinator : IDisposable
 
     private bool _windowVisible;
 
+    private bool _widgetVisible;
+
     public MonitoringCoordinator(MonitoringScheduler scheduler, ShellViewModel shell, SettingsStore settings)
     {
         _scheduler = scheduler;
@@ -23,6 +25,9 @@ public sealed class MonitoringCoordinator : IDisposable
 
         _shell.PropertyChanged += OnShellChanged;
         _settings.Changed += OnSettingsChanged;
+
+        // A start minimised to the notification area opens no window, so nothing else would start the sampler.
+        Apply();
     }
 
     /// <summary>True while the main window is shown and not minimised.</summary>
@@ -39,10 +44,43 @@ public sealed class MonitoringCoordinator : IDisposable
         }
     }
 
+    /// <summary>True while the desktop widget is shown; it needs metrics, and processes when it lists the running tools.</summary>
+    public bool WidgetVisible
+    {
+        get => _widgetVisible;
+        set
+        {
+            if (_widgetVisible != value)
+            {
+                _widgetVisible = value;
+                Apply();
+            }
+        }
+    }
+
     public void Dispose()
     {
         _shell.PropertyChanged -= OnShellChanged;
         _settings.Changed -= OnSettingsChanged;
+    }
+
+    private static MonitoringDemand Merge(MonitoringDemand first, MonitoringDemand second)
+    {
+        if (!first.Any)
+        {
+            return second;
+        }
+
+        if (!second.Any)
+        {
+            return first;
+        }
+
+        return new MonitoringDemand(
+            first.Metrics || second.Metrics,
+            first.Detailed || second.Detailed,
+            first.Processes || second.Processes,
+            Math.Min(first.IntervalSeconds, second.IntervalSeconds));
     }
 
     private void OnShellChanged(object? sender, PropertyChangedEventArgs e)
@@ -69,18 +107,26 @@ public sealed class MonitoringCoordinator : IDisposable
 
     private MonitoringDemand Demand()
     {
-        var interval = _settings.Current.RefreshIntervalSeconds;
+        var settings = _settings.Current;
+        var interval = settings.RefreshIntervalSeconds;
+        var background = Math.Max(interval, 2);
+        var widget = _widgetVisible
+            ? new MonitoringDemand(true, settings.Widget.Layout == WidgetLayout.Full, settings.Widget.ShowsTools, background)
+            : MonitoringDemand.None;
 
         if (!_windowVisible)
         {
-            return _settings.Current.Tray.Enabled ? new MonitoringDemand(true, false, false, Math.Max(interval, 2)) : MonitoringDemand.None;
+            var tray = settings.Tray.Enabled ? new MonitoringDemand(true, false, false, background) : MonitoringDemand.None;
+            return Merge(tray, widget);
         }
 
-        return _shell.SelectedItem.Key switch
+        var page = _shell.SelectedItem.Key switch
         {
             PageKeys.Overview => new MonitoringDemand(true, true, true, interval),
             PageKeys.Processes => new MonitoringDemand(true, true, true, interval),
             _ => new MonitoringDemand(true, false, false, interval),
         };
+
+        return Merge(page, widget);
     }
 }

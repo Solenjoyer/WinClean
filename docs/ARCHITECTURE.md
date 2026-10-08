@@ -21,7 +21,7 @@ C# 14 on .NET 10 (LTS), WPF with the built-in Fluent theme, CommunityToolkit.Mvv
 ## Threading
 
 - One sampler thread ("WinClean.Sampler", below-normal priority) owns every cheap read. Each tick builds one immutable `SystemSample` that reaches the UI thread coalesced: a sample the UI has not consumed yet is replaced, never queued.
-- What is sampled follows what is on screen (`MonitoringDemand`): metrics every tick, GPU and frequency every two seconds on pages that show them, processes only on the Overview and Processes pages, nothing at all when the window is hidden and the notification area icon is off. Resuming from sleep re-baselines every rate instead of showing a spike.
+- What is sampled follows what is on screen (`MonitoringDemand`): metrics every tick, GPU and frequency every two seconds on pages that show them, processes only on the Overview and Processes pages and while the desktop widget lists the running tools, nothing at all when the window is hidden and neither the notification area icon nor the widget is shown. Resuming from sleep re-baselines every rate instead of showing a spike.
 - Slow per-process facts (path, description, command line, owner, icon) are read on a lowest-priority STA thread and merged into the next tick.
 - Sensors run on their own thread so a slow hardware library cannot stall sampling.
 - Scans, discovery and cleanup run on worker threads with cancellation and progress; the UI thread only receives results.

@@ -13,4 +13,8 @@
     <SolidColorBrush x:Key="GpuSeriesFillBrush" Color="#26F0A060" />
     <SolidColorBrush x:Key="NetworkSeriesFillBrush" Color="#265CC9DB" />
 
+    <!-- The widget is a layered window, so its surface is nearly opaque to keep the text crisp. -->
+    <SolidColorBrush x:Key="WidgetBackgroundBrush" Color="#F21C2230" />
+    <SolidColorBrush x:Key="WidgetStrokeBrush" Color="#33FFFFFF" />
+
 </ResourceDictionary>

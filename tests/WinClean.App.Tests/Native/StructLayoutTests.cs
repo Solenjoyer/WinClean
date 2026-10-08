@@ -33,6 +33,7 @@ public class StructLayoutTests
         Assert.Equal(284, Marshal.SizeOf<NtDll.OSVERSIONINFOEXW>());
         Assert.Equal(840, Marshal.SizeOf<User32.DISPLAY_DEVICEW>());
         Assert.Equal(220, Marshal.SizeOf<User32.DEVMODEW>());
+        Assert.Equal(40, Marshal.SizeOf<User32.WINDOWPOS>());
         Assert.Equal(16, Marshal.SizeOf<Tbs.TPM_DEVICE_INFO>());
         Assert.Equal(20, Marshal.SizeOf<CfgMgr32.DEVPROPKEY>());
         Assert.Equal(16, Marshal.SizeOf<Pdh.PDH_FMT_COUNTERVALUE>());

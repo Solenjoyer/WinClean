@@ -7,7 +7,7 @@ public class StartupOptionsTests
     [Fact]
     public void Parse_ReadsEverySwitchInEitherForm()
     {
-        var options = StartupOptions.Parse(["--minimized", "--page=cleanup", "--self-check", "--report", "out.txt", "--elevated", "--replace-pid", "4242", "--unknown"]);
+        var options = StartupOptions.Parse(["--minimized", "--page=cleanup", "--self-check", "--report", "out.txt", "--elevated", "--replace-pid", "4242", "--widget", "--unknown"]);
 
         Assert.True(options.StartMinimized);
         Assert.Equal("cleanup", options.Page);
@@ -15,6 +15,7 @@ public class StartupOptionsTests
         Assert.Equal("out.txt", options.ReportPath);
         Assert.True(options.Elevated);
         Assert.Equal(4242, options.ReplacePid);
+        Assert.True(options.Widget);
         Assert.False(options.IncludeSensors);
     }
 
@@ -26,5 +27,6 @@ public class StartupOptionsTests
         Assert.False(options.StartMinimized);
         Assert.Null(options.Page);
         Assert.False(options.SelfCheck);
+        Assert.False(options.Widget);
     }
 }
