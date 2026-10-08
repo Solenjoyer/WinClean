@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
+import {Glyph} from '../components/Glyph';
 import {Logo} from '../components/Logo';
 import {fadeIn, lively, rise, smooth} from '../motion';
 import {colors, fonts} from '../theme';
@@ -18,23 +19,10 @@ export const Outro: React.FC = () => {
       <div style={{transform: `scale(${0.5 + 0.5 * logo})`, opacity: Math.min(1, logo * 1.5)}}>
         <Logo size={170} ring={1} dot={1} glow={glow} />
       </div>
-      <div
-        style={{
-          marginTop: 34,
-          fontFamily: fonts.display,
-          fontSize: 96,
-          fontWeight: 600,
-          letterSpacing: '-0.03em',
-          color: colors.text,
-          opacity: wordmark,
-          transform: `translateY(${(1 - wordmark) * 24}px)`,
-        }}
-      >
+      <div style={{marginTop: 34, fontFamily: fonts.display, fontSize: 96, fontWeight: 600, letterSpacing: '-0.03em', color: colors.text, opacity: wordmark, transform: `translateY(${(1 - wordmark) * 24}px)`}}>
         WinClean
       </div>
-      <div style={{marginTop: 8, fontSize: 34, color: colors.secondary, opacity: line, transform: `translateY(${(1 - line) * 16}px)`}}>
-        Free and open source. MIT licence.
-      </div>
+      <div style={{marginTop: 8, fontSize: 34, color: colors.secondary, opacity: line, transform: `translateY(${(1 - line) * 16}px)`}}>Free and open source. MIT licence.</div>
       <div
         style={{
           marginTop: 40,
@@ -53,8 +41,9 @@ export const Outro: React.FC = () => {
       >
         github.com/Solenjoyer/WinClean
       </div>
-      <div style={{marginTop: 26, fontSize: 24, color: colors.tertiary, opacity: fadeIn(frame, 62, 12)}}>
-        Windows 10 and 11 · x64 and ARM64 · portable or installer
+      <div style={{marginTop: 28, display: 'flex', alignItems: 'center', gap: 12, fontSize: 24, color: colors.tertiary, opacity: fadeIn(frame, 62, 12)}}>
+        <Glyph kind="windows" color={colors.tertiary} size={22} />
+        For Windows 10 and 11 · x64 and ARM64 · portable or installer
       </div>
     </AbsoluteFill>
   );

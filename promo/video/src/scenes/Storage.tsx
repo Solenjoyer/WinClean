@@ -1,19 +1,22 @@
 import React from 'react';
 import {useCurrentFrame, useVideoConfig} from 'remotion';
+import {PageHeader} from '../components/AppWindow';
 import {Bar} from '../components/Bar';
 import {Card} from '../components/Card';
 import {Glyph} from '../components/Glyph';
-import {Headline} from '../components/Headline';
+import {card, cardTitle} from '../components/Page';
 import {GB, formatBytes} from '../format';
 import {countUp, fadeIn, lively, rise, smooth} from '../motion';
 import {colors, fonts, numeric} from '../theme';
 
 const folders = [
-  {path: 'C:\\Users\\dev\\source', bytes: 128 * GB},
-  {path: 'C:\\Users\\dev\\AppData\\Local', bytes: 71.4 * GB},
-  {path: 'C:\\Program Files', bytes: 46.8 * GB},
-  {path: 'C:\\Windows', bytes: 31.2 * GB},
-  {path: 'C:\\Users\\dev\\Downloads', bytes: 18.7 * GB},
+  {name: 'Users\\dev\\source', bytes: 128 * GB, files: '412,800 files'},
+  {name: 'Users\\dev\\AppData\\Local', bytes: 71.4 * GB, files: '398,120 files'},
+  {name: 'Program Files', bytes: 46.8 * GB, files: '186,400 files'},
+  {name: 'Windows', bytes: 31.2 * GB, files: '164,900 files'},
+  {name: 'Users\\dev\\Downloads', bytes: 18.7 * GB, files: '1,204 files'},
+  {name: 'ProgramData', bytes: 12.3 * GB, files: '48,200 files'},
+  {name: 'Users\\dev\\Videos', bytes: 9.6 * GB, files: '86 files'},
 ];
 
 const developer = [
@@ -25,87 +28,105 @@ const developer = [
   {name: 'npm cache', count: '', bytes: 3.1 * GB, note: ''},
 ];
 
+export const RISER_AT = 20;
+export const BARS_FROM = 60;
+export const BAR_EVERY = 6;
+export const DEV_FROM = 70;
+
 export const Storage: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const used = countUp(frame, 24, 50, 519 * GB);
-  const total = 931 * GB;
+  const used = countUp(frame, 10, 45, 519 * GB);
 
   return (
     <>
-      <Headline eyebrow="Storage" segments={[{text: 'What is'}, {text: 'taking up space?', color: colors.disk}]} delay={4} />
+      <PageHeader title="Storage" right="C: scanned 2 min ago · 1,284,204 files" />
 
-      <Card delay={14} style={{left: 120, top: 290, width: 1680, height: 112, padding: '24px 28px'}}>
-        <div style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-          <div style={{fontFamily: fonts.display, fontSize: 30, fontWeight: 600, color: colors.text}}>
-            C: <span style={{color: colors.secondary, fontWeight: 400}}>Windows · NVMe SSD</span>
+      {[
+        {letter: 'C:', label: 'Windows · NVMe SSD', total: 931 * GB, usedBytes: used},
+        {letter: 'D:', label: 'Projects · SATA SSD', total: 1863 * GB, usedBytes: 653 * GB * countUp(frame, 14, 45, 1)},
+      ].map((drive, i) => (
+        <Card key={drive.letter} delay={6 + i * 4} style={{...card, left: 32 + i * 440, top: 86, width: 420, height: 112}}>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'baseline'}}>
+            <div style={{fontFamily: fonts.display, fontSize: 18, fontWeight: 600, color: colors.text}}>
+              {drive.letter} <span style={{fontSize: 14, fontWeight: 400, color: colors.secondary}}>{drive.label}</span>
+            </div>
+            <div style={{fontSize: 14, color: colors.secondary, ...numeric}}>
+              {formatBytes(drive.total - drive.usedBytes)} free of {formatBytes(drive.total)}
+            </div>
           </div>
-          <div style={{fontSize: 26, color: colors.secondary, ...numeric}}>
-            {formatBytes(total - used)} free of {formatBytes(total)}
+          <div style={{marginTop: 14}}>
+            <Bar fraction={drive.usedBytes / drive.total} color={i === 0 ? colors.disk : 'rgba(243, 245, 249, 0.55)'} height={8} />
           </div>
-        </div>
-        <div style={{marginTop: 18}}>
-          <Bar fraction={used / total} color={colors.disk} height={12} />
-        </div>
-      </Card>
+          <div style={{position: 'absolute', right: 20, bottom: 14, fontSize: 13, color: colors.accent}}>Scan</div>
+        </Card>
+      ))}
 
-      <Card delay={28} style={{left: 120, top: 430, width: 1000, height: 520}}>
-        <div style={{fontSize: 22, fontWeight: 500, color: colors.secondary}}>Largest folders</div>
-        <div style={{marginTop: 22, display: 'flex', flexDirection: 'column', gap: 20}}>
-          {folders.map((folder, i) => {
-            const grow = rise(frame, fps, 58 + i * 6, smooth);
-            const show = fadeIn(frame, 54 + i * 6, 8);
-            return (
-              <div key={folder.path} style={{opacity: show, transform: `translateX(${(1 - show) * -16}px)`}}>
-                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 23, color: colors.text, ...numeric}}>
-                  <span style={{display: 'flex', alignItems: 'center', gap: 12}}>
-                    <Glyph kind="folder" color={colors.tertiary} size={22} />
-                    {folder.path}
-                  </span>
-                  <span style={{color: colors.secondary}}>{formatBytes(folder.bytes * Math.max(0.01, grow))}</span>
-                </div>
-                <div style={{marginTop: 10}}>
-                  <Bar fraction={(folder.bytes / (128 * GB)) * grow} color="rgba(243, 245, 249, 0.55)" />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </Card>
-
-      <Card delay={36} style={{left: 1144, top: 430, width: 656, height: 520}}>
+      <Card delay={16} style={{...card, left: 32, top: 220, width: 1000, height: 740}}>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <div style={{fontSize: 22, fontWeight: 500, color: colors.secondary}}>Developer storage</div>
-          <div style={{fontSize: 18, color: colors.disk, ...numeric, opacity: fadeIn(frame, 110, 10)}}>95.2 GB</div>
+          <div style={cardTitle}>Largest folders</div>
+          <div style={{fontSize: 13, color: colors.tertiary, ...numeric}}>C:\ · 519 GB used</div>
         </div>
-        <div style={{marginTop: 18, display: 'flex', flexDirection: 'column'}}>
-          {developer.map((item, i) => {
-            const show = rise(frame, fps, 70 + i * 6, lively);
+        <div style={{marginTop: 16, display: 'flex', flexDirection: 'column', gap: 14}}>
+          {folders.map((folder, i) => {
+            const grow = rise(frame, fps, BARS_FROM + i * BAR_EVERY, smooth);
+            const show = fadeIn(frame, BARS_FROM - 4 + i * BAR_EVERY, 8);
             return (
-              <div
-                key={item.name}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  height: 66,
-                  borderBottom: i < developer.length - 1 ? `1px solid ${colors.stroke}` : 'none',
-                  opacity: Math.min(1, show * 1.5),
-                  transform: `translateY(${(1 - show) * 14}px)`,
-                }}
-              >
-                <div>
-                  <div style={{fontSize: 23, color: colors.text}}>
-                    {item.name}
-                    {item.count ? <span style={{marginLeft: 12, fontSize: 18, color: colors.tertiary}}>{item.count}</span> : null}
-                  </div>
-                  {item.note ? <div style={{marginTop: 3, fontSize: 17, color: colors.caution}}>{item.note}</div> : null}
+              <div key={folder.name} style={{opacity: show, transform: `translateX(${(1 - show) * -12}px)`}}>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 15, color: colors.text, ...numeric}}>
+                  <span style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                    <Glyph kind="folder" color={colors.tertiary} size={16} />
+                    {folder.name}
+                    <span style={{fontSize: 12, color: colors.tertiary}}>{folder.files}</span>
+                  </span>
+                  <span style={{display: 'flex', alignItems: 'center', gap: 10, color: colors.secondary}}>
+                    {formatBytes(folder.bytes * Math.max(0.01, grow))}
+                    <Glyph kind="chevron" color={colors.tertiary} size={14} />
+                  </span>
                 </div>
-                <div style={{fontSize: 23, color: colors.secondary, ...numeric}}>{formatBytes(item.bytes)}</div>
+                <div style={{marginTop: 7}}>
+                  <Bar fraction={(folder.bytes / (128 * GB)) * grow} color="rgba(243, 245, 249, 0.5)" height={6} />
+                </div>
               </div>
             );
           })}
         </div>
+      </Card>
+
+      <div style={{position: 'absolute', left: 1052, top: 220, display: 'flex', gap: 4, opacity: fadeIn(frame, 22, 8)}}>
+        {['Largest files', 'File types', 'Applications', 'Developer storage'].map((tab, i) => (
+          <div key={tab} style={{padding: '8px 14px', borderRadius: 6, fontSize: 14, color: i === 3 ? colors.text : colors.secondary, fontWeight: i === 3 ? 600 : 400, background: i === 3 ? 'rgba(255,255,255,0.07)' : 'transparent'}}>
+            {tab}
+          </div>
+        ))}
+      </div>
+
+      <Card delay={26} style={{...card, left: 1052, top: 266, width: 616, height: 694}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <div style={cardTitle}>Developer storage</div>
+          <div style={{fontSize: 14, color: colors.disk, ...numeric, opacity: fadeIn(frame, DEV_FROM + 40, 10)}}>95.2 GB</div>
+        </div>
+        <div style={{marginTop: 8}}>
+          {developer.map((item, i) => {
+            const show = rise(frame, fps, DEV_FROM + i * 6, lively);
+            return (
+              <div key={item.name} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 64, borderBottom: i < developer.length - 1 ? `1px solid ${colors.stroke}` : 'none', opacity: Math.min(1, show * 1.5), transform: `translateY(${(1 - show) * 10}px)`}}>
+                <div>
+                  <div style={{fontSize: 15, color: colors.text}}>
+                    {item.name}
+                    {item.count ? <span style={{marginLeft: 8, fontSize: 12, color: colors.tertiary}}>{item.count}</span> : null}
+                  </div>
+                  {item.note ? <div style={{marginTop: 2, fontSize: 12, color: colors.caution}}>{item.note}</div> : null}
+                </div>
+                <div style={{display: 'flex', alignItems: 'center', gap: 14, fontSize: 15, color: colors.secondary, ...numeric}}>
+                  {formatBytes(item.bytes)}
+                  <span style={{fontSize: 12, color: colors.accent}}>Add to cleanup</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{position: 'absolute', left: 20, bottom: 18, fontSize: 13, color: colors.tertiary}}>Marker files decide: package.json next to node_modules, pyvenv.cfg inside .venv.</div>
       </Card>
     </>
   );

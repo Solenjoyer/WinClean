@@ -8,10 +8,11 @@ type Props = {
   width: number;
   height: number;
   id: string;
+  compact?: boolean;
 };
 
 // Smooth path through the revealed points, with a soft area fill and a glowing stroke.
-export const Sparkline: React.FC<Props> = ({values, progress, color, width, height, id}) => {
+export const Sparkline: React.FC<Props> = ({values, progress, color, width, height, id, compact = false}) => {
   const visible = Math.max(2, Math.floor(values.length * Math.min(1, progress)));
   const step = width / (values.length - 1);
   const points = values.slice(0, visible).map((value, i) => ({
@@ -39,10 +40,10 @@ export const Sparkline: React.FC<Props> = ({values, progress, color, width, heig
         </linearGradient>
       </defs>
       <path d={area} fill={`url(#${id}-fill)`} />
-      <path d={path} fill="none" stroke={color} strokeWidth={10} strokeOpacity={0.18} strokeLinecap="round" />
-      <path d={path} fill="none" stroke={color} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx={last.x} cy={last.y} r={9 * pulse} fill={color} fillOpacity={0.25} />
-      <circle cx={last.x} cy={last.y} r={4.5} fill={colors.text} />
+      {compact ? null : <path d={path} fill="none" stroke={color} strokeWidth={10} strokeOpacity={0.18} strokeLinecap="round" />}
+      <path d={path} fill="none" stroke={color} strokeWidth={compact ? 1.5 : 3} strokeLinejoin="round" strokeLinecap="round" />
+      {compact ? null : <circle cx={last.x} cy={last.y} r={9 * pulse} fill={color} fillOpacity={0.25} />}
+      <circle cx={last.x} cy={last.y} r={compact ? 2 : 4.5} fill={colors.text} />
     </svg>
   );
 };

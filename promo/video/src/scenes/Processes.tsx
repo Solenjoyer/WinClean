@@ -1,11 +1,13 @@
 import React from 'react';
-import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
+import {useCurrentFrame, useVideoConfig} from 'remotion';
+import {PageHeader} from '../components/AppWindow';
 import {Card} from '../components/Card';
 import {Glyph} from '../components/Glyph';
-import {Headline} from '../components/Headline';
+import {card} from '../components/Page';
+import {CONTENT} from '../layout';
 import {GB, MB, formatBytes} from '../format';
 import {fadeIn, lively, rise, smooth} from '../motion';
-import {colors, fonts, numeric} from '../theme';
+import {colors, numeric} from '../theme';
 
 type Group = {
   name: string;
@@ -30,7 +32,8 @@ const groups: Group[] = [
     bytes: 1.18 * GB,
     children: [
       {name: 'node.exe', detail: '@anthropic-ai\\claude-code\\cli.js', cpu: 9.6, bytes: 812 * MB},
-      {name: 'python.exe', detail: 'MCP server', cpu: 1.4, bytes: 142 * MB},
+      {name: 'node.exe', detail: 'MCP server', cpu: 0.6, bytes: 226 * MB},
+      {name: 'python.exe', detail: 'MCP server', cpu: 0.8, bytes: 142 * MB},
       {name: 'git.exe', detail: 'status --porcelain', cpu: 0.6, bytes: 21 * MB},
       {name: 'cmd.exe', detail: '', cpu: 0.2, bytes: 9.4 * MB},
     ],
@@ -38,101 +41,96 @@ const groups: Group[] = [
   {name: 'Visual Studio Code', category: 'Editor', tint: '#3B9BE0', processes: 9, cpu: 1.1, bytes: 1.02 * GB},
   {name: 'WSL virtual machine', category: 'Virtual machine', tint: '#E95420', processes: 1, cpu: 0.4, bytes: 896 * MB},
   {name: 'Node.js', category: 'Runtime', tint: '#5FA04E', processes: 2, cpu: 0.9, bytes: 612 * MB},
+  {name: 'Microsoft Edge', category: 'Browser', tint: '#3AA7D8', processes: 6, cpu: 0.8, bytes: 540 * MB},
+  {name: 'Windows Terminal', category: 'Terminal', tint: '#8A8A8A', processes: 2, cpu: 0.3, bytes: 148 * MB},
+  {name: 'PowerShell', category: 'Shell', tint: '#5391FE', processes: 1, cpu: 0.1, bytes: 96 * MB},
 ];
 
-const recognised = ['Claude Code', 'Codex', 'Cursor', 'VS Code', 'Visual Studio', 'JetBrains', 'Docker', 'WSL', 'Node', 'Python', 'Git'];
+const columns: React.CSSProperties = {display: 'grid', gridTemplateColumns: '1fr 90px 110px 200px 110px', alignItems: 'center'};
+const rowHeight = 44;
 
-const columns: React.CSSProperties = {display: 'grid', gridTemplateColumns: '1fr 150px 100px 130px 230px', alignItems: 'center'};
-const rowHeight = 46;
-const expandAt = 80;
+export const TABLE = {x: 32, y: 140, w: 1636, h: 760};
+export const EXPAND_AT = 110;
+export const ROWS_FROM = 20;
+export const ROW_EVERY = 5;
+
+const firstRowY = TABLE.y + 16 + 36 + 8;
+const claudeIndex = 3;
+
+// Where the pointer must click to expand the Claude Code group, in frame pixels.
+export const CHEVRON = {x: CONTENT.x + TABLE.x + 20 + 10, y: CONTENT.y + firstRowY + claudeIndex * rowHeight + rowHeight / 2};
 
 export const Processes: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const expand = rise(frame, fps, expandAt, smooth);
+  const expand = rise(frame, fps, EXPAND_AT, smooth);
   const maxBytes = groups[0].bytes;
-
-  let rowIndex = 0;
 
   return (
     <>
-      <Headline
-        eyebrow="Processes"
-        segments={[{text: 'Every process,'}, {text: 'grouped by application.', color: colors.accent}]}
-        delay={4}
-      />
+      <PageHeader title="Processes" right="212 processes · 37 groups" />
 
-      <Card delay={18} style={{left: 120, top: 300, width: 1680, height: 586, padding: '20px 28px'}}>
-        <div style={{...columns, fontSize: 17, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: colors.tertiary, height: 36}}>
+      <div style={{position: 'absolute', left: 32, top: 86, display: 'flex', alignItems: 'center', gap: 12, opacity: fadeIn(frame, 6, 8)}}>
+        <div style={{width: 320, height: 34, borderRadius: 6, border: `1px solid ${colors.stroke}`, background: 'rgba(255,255,255,0.04)', display: 'flex', alignItems: 'center', gap: 8, paddingLeft: 10, fontSize: 14, color: colors.tertiary}}>
+          <Glyph kind="search" color={colors.tertiary} size={15} />
+          Search
+        </div>
+        <Toggle label="Group by application" on />
+        <Toggle label="Show system processes" on={false} />
+        <div style={{marginLeft: 'auto'}} />
+      </div>
+
+      <Card delay={12} style={{...card, left: TABLE.x, top: TABLE.y, width: TABLE.w, height: TABLE.h, padding: '16px 20px'}}>
+        <div style={{...columns, fontSize: 12, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: colors.tertiary, height: 36}}>
           <div>Name</div>
-          <div>Status</div>
           <div style={{textAlign: 'right'}}>PID</div>
           <div style={{textAlign: 'right'}}>CPU</div>
           <div style={{textAlign: 'right'}}>Memory</div>
+          <div style={{textAlign: 'right'}}>I/O</div>
         </div>
-        <div style={{height: 1, background: colors.stroke, margin: '4px 0 6px'}} />
+        <div style={{height: 1, background: colors.stroke, margin: '0 0 7px'}} />
 
         {groups.map((group, i) => {
-          const delay = 30 + i * 5;
-          const show = rise(frame, fps, delay, lively);
+          const show = rise(frame, fps, ROWS_FROM + i * ROW_EVERY, lively);
           const expanded = Boolean(group.children);
           const childrenHeight = expanded ? (group.children?.length ?? 0) * rowHeight * expand : 0;
-          const index = rowIndex;
-          rowIndex += 1;
           const liveCpu = group.cpu * (1 + 0.08 * Math.sin(frame / 6 + i));
           return (
-            <div key={group.name} style={{opacity: Math.min(1, show * 1.5), transform: `translateX(${(1 - show) * -24}px)`}}>
-              <div style={{...columns, height: rowHeight, fontSize: 22, color: colors.text}}>
-                <div style={{display: 'flex', alignItems: 'center', gap: 14}}>
-                  <Glyph kind="chevron" color={colors.tertiary} size={20} rotate={expanded ? 90 * expand : 0} />
-                  <div
-                    style={{
-                      width: 26,
-                      height: 26,
-                      borderRadius: 7,
-                      background: group.tint,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: 15,
-                      fontWeight: 700,
-                      color: '#08121f',
-                    }}
-                  >
-                    {group.name[0]}
-                  </div>
+            <div key={group.name} style={{opacity: Math.min(1, show * 1.5), transform: `translateX(${(1 - show) * -16}px)`}}>
+              <div style={{...columns, height: rowHeight, fontSize: 15, color: colors.text}}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                  <Glyph kind="chevron" color={colors.tertiary} size={16} rotate={expanded ? 90 * expand : 0} />
+                  <div style={{width: 20, height: 20, borderRadius: 5, background: group.tint, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#08121f'}}>{group.name[0]}</div>
                   <span style={{fontWeight: 600}}>{group.name}</span>
-                  <span style={{fontSize: 16, padding: '3px 9px', borderRadius: 6, border: `1px solid ${colors.stroke}`, color: colors.secondary}}>
-                    {group.category}
-                  </span>
-                  <span style={{fontSize: 18, color: colors.tertiary}}>
+                  <span style={{fontSize: 12, padding: '2px 7px', borderRadius: 5, border: `1px solid ${colors.stroke}`, color: colors.secondary}}>{group.category}</span>
+                  <span style={{fontSize: 13, color: colors.tertiary}}>
                     {group.processes} {group.processes === 1 ? 'process' : 'processes'}
                   </span>
                 </div>
-                <div style={{fontSize: 18, color: colors.tertiary}}>{group.name === 'Google Chrome' ? '' : ''}</div>
-                <div style={{textAlign: 'right', color: colors.tertiary, ...numeric}}>{index === 0 ? '' : ''}</div>
+                <div />
                 <div style={{textAlign: 'right', ...numeric}}>{liveCpu.toFixed(1)}%</div>
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 14, ...numeric}}>
-                  <div style={{width: 90, height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.08)', overflow: 'hidden'}}>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 10, ...numeric}}>
+                  <div style={{width: 70, height: 5, borderRadius: 3, background: 'rgba(255,255,255,0.08)', overflow: 'hidden'}}>
                     <div style={{width: `${(group.bytes / maxBytes) * 100 * show}%`, height: '100%', background: colors.memory}} />
                   </div>
                   <span>{formatBytes(group.bytes)}</span>
                 </div>
+                <div style={{textAlign: 'right', color: colors.tertiary, ...numeric}}>{i === 3 ? '2.1 MB/s' : i === 0 ? '640 KB/s' : ''}</div>
               </div>
               {group.children ? (
                 <div style={{height: childrenHeight, overflow: 'hidden'}}>
                   {group.children.map((child, j) => {
-                    const childShow = fadeIn(frame, expandAt + 4 + j * 3, 8);
+                    const childShow = fadeIn(frame, EXPAND_AT + 4 + j * 3, 8);
                     return (
-                      <div key={child.name} style={{...columns, height: rowHeight, fontSize: 20, color: colors.secondary, opacity: childShow}}>
-                        <div style={{display: 'flex', alignItems: 'center', gap: 14, paddingLeft: 66}}>
+                      <div key={`${child.name}-${j}`} style={{...columns, height: rowHeight, fontSize: 14, color: colors.secondary, opacity: childShow}}>
+                        <div style={{display: 'flex', alignItems: 'center', gap: 10, paddingLeft: 56}}>
                           <span style={{color: colors.text}}>{child.name}</span>
-                          <span style={{fontSize: 17, color: colors.tertiary, fontFamily: 'Consolas, "DejaVu Sans Mono", monospace'}}>{child.detail}</span>
+                          <span style={{fontSize: 12, color: colors.tertiary, fontFamily: 'Consolas, "DejaVu Sans Mono", monospace'}}>{child.detail}</span>
                         </div>
-                        <div />
                         <div style={{textAlign: 'right', color: colors.tertiary, ...numeric}}>{18204 + j * 412}</div>
                         <div style={{textAlign: 'right', ...numeric}}>{child.cpu.toFixed(1)}%</div>
                         <div style={{textAlign: 'right', ...numeric}}>{formatBytes(child.bytes)}</div>
+                        <div style={{textAlign: 'right', color: colors.tertiary, ...numeric}}>{j === 0 ? '2.1 MB/s' : ''}</div>
                       </div>
                     );
                   })}
@@ -142,45 +140,15 @@ export const Processes: React.FC = () => {
           );
         })}
       </Card>
-
-      <div style={{position: 'absolute', left: 120, top: 924, display: 'flex', alignItems: 'center', gap: 12}}>
-        <span
-          style={{
-            fontFamily: fonts.text,
-            fontSize: 21,
-            color: colors.secondary,
-            marginRight: 10,
-            opacity: fadeIn(frame, 120, 10),
-          }}
-        >
-          Recognised out of the box
-        </span>
-        {recognised.map((name, i) => {
-          const show = rise(frame, fps, 128 + i * 4, lively);
-          return (
-            <span
-              key={name}
-              style={{
-                padding: '9px 16px',
-                borderRadius: 999,
-                border: `1px solid ${colors.stroke}`,
-                background: colors.surfaceRaised,
-                fontSize: 21,
-                fontWeight: 500,
-                color: colors.text,
-                opacity: Math.min(1, show * 1.5),
-                transform: `scale(${0.6 + 0.4 * show})`,
-              }}
-            >
-              {name}
-            </span>
-          );
-        })}
-      </div>
-
-      <div style={{position: 'absolute', right: 120, top: 100, fontSize: 21, color: colors.tertiary, opacity: fadeIn(frame, 40, 12)}}>
-        {`Updated ${interpolate(frame, [0, 210], [0, 7], {extrapolateRight: 'clamp'}).toFixed(0)} s ago`}
-      </div>
     </>
   );
 };
+
+const Toggle: React.FC<{label: string; on: boolean}> = ({label, on}) => (
+  <div style={{display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: colors.text}}>
+    <div style={{width: 36, height: 18, borderRadius: 9, background: on ? colors.accent : 'transparent', border: `1px solid ${on ? colors.accent : 'rgba(255,255,255,0.4)'}`, position: 'relative'}}>
+      <div style={{position: 'absolute', top: 3, left: on ? 20 : 3, width: 12, height: 12, borderRadius: 6, background: on ? '#08121f' : colors.text}} />
+    </div>
+    {label}
+  </div>
+);

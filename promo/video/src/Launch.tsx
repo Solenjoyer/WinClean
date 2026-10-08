@@ -1,39 +1,24 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, Sequence} from 'remotion';
 import {Background} from './components/Background';
 import {Scene} from './components/Scene';
-import {Cleanup} from './scenes/Cleanup';
-import {Health} from './scenes/Health';
 import {Intro} from './scenes/Intro';
-import {Monitor} from './scenes/Monitor';
 import {Outro} from './scenes/Outro';
-import {Processes} from './scenes/Processes';
-import {Storage} from './scenes/Storage';
 import {Soundtrack} from './Soundtrack';
+import {DesktopStage} from './Stage';
 import {colors, fonts} from './theme';
+import {INTRO, OUTRO, STAGE, STAGE_FROM} from './timeline';
 
 export const Launch: React.FC = () => (
   <AbsoluteFill style={{fontFamily: fonts.text, color: colors.text, overflow: 'hidden'}}>
     <Background />
-    <Scene name="intro">
+    <Scene from={INTRO.from} duration={INTRO.duration} name="intro">
       <Intro />
     </Scene>
-    <Scene name="monitor">
-      <Monitor />
-    </Scene>
-    <Scene name="processes">
-      <Processes />
-    </Scene>
-    <Scene name="storage">
-      <Storage />
-    </Scene>
-    <Scene name="cleanup">
-      <Cleanup />
-    </Scene>
-    <Scene name="health">
-      <Health />
-    </Scene>
-    <Scene name="outro">
+    <Sequence from={STAGE_FROM} durationInFrames={STAGE.end} name="desktop">
+      <DesktopStage />
+    </Sequence>
+    <Scene from={OUTRO.from} duration={OUTRO.duration} name="outro">
       <Outro />
     </Scene>
     <Soundtrack />

@@ -19,6 +19,11 @@ export const colors = {
   success: '#6CCB5F',
   caution: '#F7C948',
   critical: '#FF99A4',
+  // The application window, tinted like Mica over the wallpaper.
+  chrome: '#151A25',
+  rail: '#171D29',
+  content: '#1C2232',
+  taskbar: 'rgba(22, 27, 38, 0.9)',
 };
 
 export const fonts = {
