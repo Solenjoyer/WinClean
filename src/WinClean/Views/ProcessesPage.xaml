@@ -1,0 +1,419 @@
+<UserControl x:Class="WinClean.Views.ProcessesPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:WinClean.Controls"
+             xmlns:converters="clr-namespace:WinClean.Converters"
+             xmlns:r="clr-namespace:WinClean.Resources"
+             xmlns:vm="clr-namespace:WinClean.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:ProcessesViewModel}"
+             PreviewKeyDown="OnPreviewKeyDown">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+        <KeyBinding Key="P" Modifiers="Control" Command="{Binding TogglePauseCommand}" />
+    </UserControl.InputBindings>
+
+    <UserControl.Resources>
+        <converters:SortGlyphConverter x:Key="SortGlyph" />
+
+        <!-- Rows keep the theme's look and only get the table's height and an accessible name. -->
+        <Style x:Key="ProcessRowStyle" TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}" />
+        </Style>
+
+        <Style x:Key="ColumnHeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource CaptionText}" Text="{Binding}" VerticalAlignment="Center" />
+                            <TextBlock Style="{StaticResource GlyphText}"
+                                       FontSize="8"
+                                       Margin="4,0,0,0"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource SortGlyph}">
+                                        <Binding Path="Tag" RelativeSource="{RelativeSource AncestorType=GridViewColumnHeader}" />
+                                        <Binding Path="DataContext.SortColumn" RelativeSource="{RelativeSource AncestorType=ListView}" />
+                                        <Binding Path="DataContext.SortDescending" RelativeSource="{RelativeSource AncestorType=ListView}" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NumericColumnHeaderStyle" TargetType="GridViewColumnHeader" BasedOn="{StaticResource ColumnHeaderStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+
+        <DataTemplate x:Key="NameCell" DataType="{x:Type vm:ProcessRow}">
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChild}" Value="True">
+                                <Setter Property="Margin" Value="24,0,0,0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource RowChevron}"
+                        Command="{Binding DataContext.ToggleExpandCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                        CommandParameter="{Binding}"
+                        Visibility="{Binding IsGroup, Converter={StaticResource BoolToVisibility}}"
+                        AutomationProperties.Name="{x:Static r:Strings.Processes_ToggleGroup}" />
+                <Image Grid.Column="1"
+                       Source="{Binding Icon}"
+                       Width="16"
+                       Height="16"
+                       Margin="4,0,8,0"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapScalingMode="HighQuality" />
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource BodyText}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsGroup}" Value="True">
+                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <Border Style="{StaticResource Badge}"
+                            Margin="8,0,0,0"
+                            Visibility="{Binding Badge, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}">
+                        <TextBlock Style="{StaticResource CaptionText}" Text="{Binding Badge}" />
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="StatusCell" DataType="{x:Type vm:ProcessRow}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0">
+                <Ellipse Width="8" Height="8" Margin="0,0,6,0" VerticalAlignment="Center">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Suspended">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Fill" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="NotResponding">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Fill" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <TextBlock Style="{StaticResource BodyText}" Text="{Binding StatusText}" VerticalAlignment="Center" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PidCell" DataType="{x:Type vm:ProcessRow}">
+            <TextBlock Style="{StaticResource NumericText}" Text="{Binding PidText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+        </DataTemplate>
+        <DataTemplate x:Key="CpuCell" DataType="{x:Type vm:ProcessRow}">
+            <TextBlock Style="{StaticResource NumericText}" Text="{Binding CpuText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+        </DataTemplate>
+        <DataTemplate x:Key="MemoryCell" DataType="{x:Type vm:ProcessRow}">
+            <TextBlock Style="{StaticResource NumericText}" Text="{Binding MemoryText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+        </DataTemplate>
+        <DataTemplate x:Key="IoCell" DataType="{x:Type vm:ProcessRow}">
+            <TextBlock Style="{StaticResource NumericText}" Text="{Binding IoText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+        </DataTemplate>
+        <DataTemplate x:Key="GpuCell" DataType="{x:Type vm:ProcessRow}">
+            <TextBlock Style="{StaticResource NumericText}" Text="{Binding GpuText}" Margin="0,0,8,0" VerticalAlignment="Center" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="FactTemplate" DataType="{x:Type vm:FactItem}">
+            <Grid Margin="0,3" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Label}" />
+                <TextBlock Grid.Column="1" Style="{StaticResource BodyText}" Text="{Binding Value}" TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="SelectableText" TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="MinHeight" Value="0" />
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel Margin="24,0,24,24">
+        <Grid DockPanel.Dock="Top" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <controls:SearchBox x:Name="Search"
+                                Width="280"
+                                Text="{Binding SearchText, Mode=TwoWay}"
+                                Placeholder="{x:Static r:Strings.Processes_SearchPlaceholder}" />
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0">
+                <ToggleButton Content="{x:Static r:Strings.Processes_GroupByApplication}"
+                              IsChecked="{Binding GroupByApplication}" />
+                <ToggleButton Content="{x:Static r:Strings.Processes_ShowSystem}"
+                              IsChecked="{Binding ShowSystemProcesses}"
+                              Margin="8,0,0,0" />
+            </StackPanel>
+
+            <TextBlock Grid.Column="2"
+                       Style="{StaticResource SecondaryText}"
+                       Text="{Binding Summary}"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="12,0" />
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <Button Content="{x:Static r:Strings.Processes_EndProcess}"
+                        Command="{Binding EndProcessCommand}" />
+                <ToggleButton IsChecked="{Binding IsPaused}"
+                              ToolTip="{Binding PauseLabel}"
+                              AutomationProperties.Name="{Binding PauseLabel}"
+                              Width="36"
+                              Padding="0"
+                              Margin="8,0,0,0">
+                    <TextBlock FontSize="14">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource GlyphText}">
+                                <Setter Property="Text" Value="{x:Static vm:Glyphs.Pause}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPaused}" Value="True">
+                                        <Setter Property="Text" Value="{x:Static vm:Glyphs.Play}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </ToggleButton>
+                <Button Command="{Binding RefreshCommand}"
+                        ToolTip="{x:Static r:Strings.Common_Refresh}"
+                        AutomationProperties.Name="{x:Static r:Strings.Common_Refresh}"
+                        Width="36"
+                        Padding="0"
+                        Margin="8,0,0,0">
+                    <TextBlock Style="{StaticResource GlyphText}" FontSize="14" Text="{x:Static vm:Glyphs.Refresh}" />
+                </Button>
+                <ToggleButton IsChecked="{Binding IsDetailsOpen}"
+                              ToolTip="{x:Static r:Strings.Processes_OpenDetails}"
+                              AutomationProperties.Name="{x:Static r:Strings.Processes_OpenDetails}"
+                              Width="36"
+                              Padding="0"
+                              Margin="8,0,0,0">
+                    <TextBlock Style="{StaticResource GlyphText}" FontSize="14" Text="{x:Static vm:Glyphs.OpenPane}" />
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
+
+        <controls:InfoBanner DockPanel.Dock="Top"
+                             Text="{Binding Notice}"
+                             Severity="Warning"
+                             DismissCommand="{Binding DismissNoticeCommand}"
+                             Margin="0,0,0,12"
+                             Visibility="{Binding Notice, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ListView x:Name="Table"
+                      ItemsSource="{Binding Rows}"
+                      SelectedItem="{Binding SelectedRow, Mode=TwoWay}"
+                      ItemContainerStyle="{StaticResource ProcessRowStyle}"
+                      SelectionMode="Single"
+                      VirtualizingPanel.IsVirtualizing="True"
+                      VirtualizingPanel.VirtualizationMode="Recycling"
+                      VirtualizingPanel.ScrollUnit="Pixel"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      GridViewColumnHeader.Click="OnHeaderClick"
+                      PreviewMouseDown="OnTablePreviewMouseDown"
+                      PreviewMouseUp="OnTablePreviewMouseUp"
+                      MouseLeave="OnTableMouseLeave"
+                      MouseDoubleClick="OnTableDoubleClick"
+                      ContextMenuOpening="OnContextMenuOpening"
+                      PreviewKeyDown="OnTableKeyDown"
+                      SizeChanged="OnTableSizeChanged"
+                      AutomationProperties.Name="{x:Static r:Strings.Nav_Processes}">
+                <ListView.InputBindings>
+                    <KeyBinding Key="Delete" Command="{Binding EndProcessCommand}" />
+                    <KeyBinding Key="Delete" Modifiers="Shift" Command="{Binding EndProcessTreeCommand}" />
+                    <KeyBinding Key="Return" Modifiers="Alt" Command="{Binding ToggleDetailsCommand}" />
+                    <KeyBinding Key="C" Modifiers="Control" Command="{Binding CopyRowCommand}" />
+                    <KeyBinding Key="C" Modifiers="Control+Shift" Command="{Binding CopyPathCommand}" />
+                </ListView.InputBindings>
+                <ListView.ContextMenu>
+                    <ContextMenu Closed="OnContextMenuClosed">
+                        <MenuItem Header="{x:Static r:Strings.Processes_EndProcess}" Command="{Binding EndProcessCommand}" InputGestureText="Del" />
+                        <MenuItem Header="{x:Static r:Strings.Processes_EndProcessTree}" Command="{Binding EndProcessTreeCommand}" InputGestureText="Shift+Del" />
+                        <MenuItem Header="{Binding SuspendLabel}" Command="{Binding SuspendOrResumeCommand}" />
+                        <Separator />
+                        <MenuItem Header="{x:Static r:Strings.Common_OpenLocation}" Command="{Binding OpenLocationCommand}" />
+                        <MenuItem Header="{x:Static r:Strings.Common_CopyPath}" Command="{Binding CopyPathCommand}" InputGestureText="Ctrl+Shift+C" />
+                        <MenuItem Header="{x:Static r:Strings.Common_Copy}" Command="{Binding CopyRowCommand}" InputGestureText="Ctrl+C" />
+                        <MenuItem Header="{x:Static r:Strings.Common_Properties}" Command="{Binding PropertiesCommand}" />
+                        <Separator />
+                        <MenuItem Header="{x:Static r:Strings.Processes_Details}" Command="{Binding ToggleDetailsCommand}" InputGestureText="Alt+Enter" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="NameColumn" Width="360" CellTemplate="{StaticResource NameCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnName}" Tag="Name" Style="{StaticResource ColumnHeaderStyle}" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="130" CellTemplate="{StaticResource StatusCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnStatus}" Tag="Status" Style="{StaticResource ColumnHeaderStyle}" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="76" CellTemplate="{StaticResource PidCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnPid}" Tag="Pid" Style="{StaticResource NumericColumnHeaderStyle}" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="76" CellTemplate="{StaticResource CpuCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnCpu}" Tag="Cpu" Style="{StaticResource NumericColumnHeaderStyle}" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" CellTemplate="{StaticResource MemoryCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnMemory}" Tag="Memory" Style="{StaticResource NumericColumnHeaderStyle}" ToolTip="{x:Static r:Strings.Processes_MemoryTooltip}" />
+                        </GridViewColumn>
+                        <GridViewColumn Width="100" CellTemplate="{StaticResource IoCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnIo}" Tag="Io" Style="{StaticResource NumericColumnHeaderStyle}" ToolTip="{x:Static r:Strings.Processes_IoTooltip}" />
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GpuColumn" Width="68" CellTemplate="{StaticResource GpuCell}">
+                            <GridViewColumnHeader Content="{x:Static r:Strings.Processes_ColumnGpu}" Tag="Gpu" Style="{StaticResource NumericColumnHeaderStyle}" />
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Border Grid.Column="1"
+                    Style="{StaticResource Card}"
+                    Width="340"
+                    Margin="12,0,0,0"
+                    Padding="0"
+                    DataContext="{Binding Details}"
+                    Visibility="{Binding DataContext.IsDetailsOpen, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Bottom"
+                                Orientation="Horizontal"
+                                Margin="16,12,16,16"
+                                Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
+                        <Button Content="{x:Static r:Strings.Processes_EndProcess}"
+                                Command="{Binding DataContext.EndProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                        <Button Content="{x:Static r:Strings.Processes_EndProcessTree}"
+                                Command="{Binding DataContext.EndProcessTreeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Margin="8,0,0,0" />
+                        <Button Content="{Binding SuspendLabel}"
+                                Command="{Binding DataContext.SuspendOrResumeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Margin="8,0,0,0" />
+                    </StackPanel>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16,16,16,0">
+                        <Grid>
+                            <TextBlock Style="{StaticResource SecondaryText}"
+                                       Text="{x:Static r:Strings.Processes_NoSelection}"
+                                       TextWrapping="Wrap"
+                                       Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}, ConverterParameter=Invert}" />
+
+                            <StackPanel Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
+                                <DockPanel>
+                                    <Image DockPanel.Dock="Left"
+                                           Source="{Binding Icon}"
+                                           Width="32"
+                                           Height="32"
+                                           Margin="0,0,12,0"
+                                           VerticalAlignment="Top"
+                                           RenderOptions.BitmapScalingMode="HighQuality" />
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource BodyStrongText}" Text="{Binding Name}" TextWrapping="Wrap" />
+                                        <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Subtitle}" TextWrapping="Wrap"
+                                                   Visibility="{Binding Subtitle, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}" />
+                                    </StackPanel>
+                                </DockPanel>
+
+                                <DockPanel Margin="0,12,0,0"
+                                           Visibility="{Binding Protection, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}">
+                                    <TextBlock DockPanel.Dock="Left"
+                                               Style="{StaticResource GlyphText}"
+                                               Text="{x:Static vm:Glyphs.Info}"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                               VerticalAlignment="Top"
+                                               Margin="0,2,8,0" />
+                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{Binding Protection}" TextWrapping="Wrap" />
+                                </DockPanel>
+
+                                <ItemsControl ItemsSource="{Binding Facts}"
+                                              ItemTemplate="{StaticResource FactTemplate}"
+                                              Margin="0,12,0,0"
+                                              Focusable="False" />
+
+                                <StackPanel Margin="0,12,0,0"
+                                            Visibility="{Binding Path, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}">
+                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Details_Path}" />
+                                    <TextBox Style="{StaticResource SelectableText}" Text="{Binding Path, Mode=OneWay}" Margin="0,2,0,0" />
+                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                        <Button Content="{x:Static r:Strings.Common_OpenLocation}"
+                                                Command="{Binding DataContext.OpenLocationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                        <Button Content="{x:Static r:Strings.Common_CopyPath}"
+                                                Command="{Binding DataContext.CopyPathCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                Margin="8,0,0,0" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Margin="0,12,0,0"
+                                            Visibility="{Binding CommandLine, Converter={StaticResource EmptyToVisible}, ConverterParameter=Invert}">
+                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Details_CommandLine}" />
+                                    <TextBox Style="{StaticResource SelectableText}" Text="{Binding CommandLine, Mode=OneWay}" Margin="0,2,0,0" />
+                                </StackPanel>
+
+                                <StackPanel Margin="0,12,0,12"
+                                            Visibility="{Binding HasWindows, Converter={StaticResource BoolToVisibility}}">
+                                    <TextBlock Style="{StaticResource SecondaryText}" Text="{x:Static r:Strings.Details_Windows}" />
+                                    <ItemsControl ItemsSource="{Binding WindowTitles}" Margin="0,2,0,0" Focusable="False">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource BodyText}" Text="{Binding}" TextWrapping="Wrap" Margin="0,1" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </DockPanel>
+</UserControl>

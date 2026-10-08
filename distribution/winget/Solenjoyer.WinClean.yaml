@@ -1,0 +1,6 @@
+# Version manifest template for microsoft/winget-pkgs. Replace VERSION before submitting.
+PackageIdentifier: Solenjoyer.WinClean
+PackageVersion: VERSION
+DefaultLocale: en-US
+ManifestType: version
+ManifestVersion: 1.6.0

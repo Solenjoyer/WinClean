@@ -1,0 +1,1675 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    User-facing text. Keys are Section_Name; the generated WinClean.Resources.Strings class exposes them,
+    and XAML references them with x:Static. Keep sentences short and factual.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>WinClean</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>Not available</value>
+    <comment>Shown wherever a value cannot be read on this machine.</comment>
+  </data>
+  <data name="Nav_Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Nav_Processes" xml:space="preserve">
+    <value>Processes</value>
+  </data>
+  <data name="Nav_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Nav_Cleanup" xml:space="preserve">
+    <value>Cleanup</value>
+  </data>
+  <data name="Nav_Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
+  <data name="Nav_Hardware" xml:space="preserve">
+    <value>Hardware</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Nav_Collapse" xml:space="preserve">
+    <value>Collapse navigation</value>
+  </data>
+  <data name="Nav_Expand" xml:space="preserve">
+    <value>Expand navigation</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Common_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Common_Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Common_OpenLocation" xml:space="preserve">
+    <value>Open file location</value>
+  </data>
+  <data name="Common_CopyPath" xml:space="preserve">
+    <value>Copy path</value>
+  </data>
+  <data name="Page_NothingYet" xml:space="preserve">
+    <value>Nothing to show yet.</value>
+    <comment>Placeholder while a page has no data.</comment>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Unexpected error</value>
+  </data>
+  <data name="Error_Heading" xml:space="preserve">
+    <value>WinClean ran into a problem.</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>The details were saved to {0}. You can keep using WinClean. If this happens again, please report it with the details attached.</value>
+    <comment>{0} is the report file path.</comment>
+  </data>
+  <data name="Error_MessageNoFile" xml:space="preserve">
+    <value>The details could not be saved to the log folder. You can keep using WinClean. If this happens again, please report it with the details below.</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>Copy details</value>
+  </data>
+  <data name="Error_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Error_Report" xml:space="preserve">
+    <value>Report on GitHub</value>
+    <comment>Opens the browser; the only network action here.</comment>
+  </data>
+  <data name="Overview_Cpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Overview_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Overview_Disk" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="Overview_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Overview_Gpu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Overview_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Overview_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Overview_Processors" xml:space="preserve">
+    <value>{0} processors</value>
+  </data>
+  <data name="Overview_FrequencyAndProcessors" xml:space="preserve">
+    <value>{0} GHz, {1} processors</value>
+  </data>
+  <data name="Overview_OfTotalAvailable" xml:space="preserve">
+    <value>of {0}, {1} available</value>
+    <comment>Memory caption: of 32 GB, 13.8 GB available</comment>
+  </data>
+  <data name="Overview_FreeOfTotal" xml:space="preserve">
+    <value>{0} free of {1}</value>
+  </data>
+  <data name="Overview_ReadWrite" xml:space="preserve">
+    <value>{0} read, {1} write</value>
+  </data>
+  <data name="Overview_DownUp" xml:space="preserve">
+    <value>{0} down, {1} up</value>
+  </data>
+  <data name="Overview_DedicatedMemoryInUse" xml:space="preserve">
+    <value>{0} dedicated memory in use</value>
+  </data>
+  <data name="Overview_GpuUnavailable" xml:space="preserve">
+    <value>GPU counters are not available on this system.</value>
+  </data>
+  <data name="Overview_Uptime" xml:space="preserve">
+    <value>Uptime</value>
+  </data>
+  <data name="Overview_Processes" xml:space="preserve">
+    <value>Processes</value>
+  </data>
+  <data name="Overview_ProcessesThreadsHandles" xml:space="preserve">
+    <value>{0} processes, {1} threads, {2} handles</value>
+  </data>
+  <data name="Overview_Commit" xml:space="preserve">
+    <value>Committed memory</value>
+  </data>
+  <data name="Overview_CommitOfLimit" xml:space="preserve">
+    <value>{0} of {1}</value>
+  </data>
+  <data name="Overview_Battery" xml:space="preserve">
+    <value>Battery</value>
+  </data>
+  <data name="Overview_BatteryCharging" xml:space="preserve">
+    <value>{0}, charging</value>
+  </data>
+  <data name="Overview_BatteryPluggedIn" xml:space="preserve">
+    <value>{0}, plugged in</value>
+  </data>
+  <data name="Overview_BatteryRemaining" xml:space="preserve">
+    <value>{0}, about {1} left</value>
+  </data>
+  <data name="Overview_SystemVolume" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Overview_CpuHistory" xml:space="preserve">
+    <value>CPU usage history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_MemoryHistory" xml:space="preserve">
+    <value>Memory usage history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_DiskHistory" xml:space="preserve">
+    <value>Disk activity history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_NetworkHistory" xml:space="preserve">
+    <value>Network activity history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_GpuHistory" xml:space="preserve">
+    <value>GPU usage history</value>
+    <comment>Accessibility name</comment>
+  </data>
+  <data name="Overview_VolumeLabel" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>Volume title: Windows (C:)</comment>
+  </data>
+  <data name="Common_Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Common_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="Processes_SearchPlaceholder" xml:space="preserve">
+    <value>Search by name, PID or path</value>
+  </data>
+  <data name="Processes_GroupByApplication" xml:space="preserve">
+    <value>Group by application</value>
+  </data>
+  <data name="Processes_ShowSystem" xml:space="preserve">
+    <value>Show system processes</value>
+  </data>
+  <data name="Processes_EndProcess" xml:space="preserve">
+    <value>End process</value>
+  </data>
+  <data name="Processes_EndProcessTree" xml:space="preserve">
+    <value>End process tree</value>
+  </data>
+  <data name="Processes_Suspend" xml:space="preserve">
+    <value>Suspend</value>
+  </data>
+  <data name="Processes_Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="Processes_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Processes_Pause" xml:space="preserve">
+    <value>Pause updates</value>
+  </data>
+  <data name="Processes_ResumeUpdates" xml:space="preserve">
+    <value>Resume updates</value>
+  </data>
+  <data name="Processes_Paused" xml:space="preserve">
+    <value>Updates paused</value>
+  </data>
+  <data name="Processes_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Processes_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Processes_ColumnPid" xml:space="preserve">
+    <value>PID</value>
+  </data>
+  <data name="Processes_ColumnCpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Processes_ColumnMemory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Processes_ColumnIo" xml:space="preserve">
+    <value>I/O</value>
+  </data>
+  <data name="Processes_ColumnGpu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Processes_MemoryTooltip" xml:space="preserve">
+    <value>Private working set, the memory only this process uses</value>
+  </data>
+  <data name="Processes_IoTooltip" xml:space="preserve">
+    <value>Bytes read and written through files, pipes and sockets</value>
+  </data>
+  <data name="Processes_StatusSuspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="Processes_StatusNotResponding" xml:space="preserve">
+    <value>Not responding</value>
+  </data>
+  <data name="Processes_MemberCount" xml:space="preserve">
+    <value>{0} processes</value>
+    <comment>Group row badge</comment>
+  </data>
+  <data name="Processes_Summary" xml:space="preserve">
+    <value>{0} processes</value>
+  </data>
+  <data name="Processes_SummaryGrouped" xml:space="preserve">
+    <value>{0} processes, {1} applications</value>
+  </data>
+  <data name="Processes_NoSelection" xml:space="preserve">
+    <value>Select a process to see its details.</value>
+  </data>
+  <data name="Processes_RowAutomation" xml:space="preserve">
+    <value>{0}, {1} memory, {2} CPU</value>
+    <comment>Screen reader name of a row</comment>
+  </data>
+  <data name="Processes_ProtectedSelf" xml:space="preserve">
+    <value>This is WinClean itself. Close the window to end it.</value>
+  </data>
+  <data name="Processes_ProtectedKernel" xml:space="preserve">
+    <value>Protected Windows process. End and suspend are not available because Windows depends on it.</value>
+  </data>
+  <data name="Processes_ProtectedVm" xml:space="preserve">
+    <value>Memory of a virtual machine. Shut the machine down from WSL, Docker Desktop or Hyper-V instead; wsl --shutdown stops WSL.</value>
+  </data>
+  <data name="Processes_ProtectedCritical" xml:space="preserve">
+    <value>Windows marks this process as critical. Ending it would stop Windows.</value>
+  </data>
+  <data name="Processes_ComponentWarning" xml:space="preserve">
+    <value>This is a Windows component. Ending it can make Windows unstable or sign you out.</value>
+  </data>
+  <data name="Processes_SystemAccountWarning" xml:space="preserve">
+    <value>This process runs as a system account. Ending it can stop a Windows service.</value>
+  </data>
+  <data name="Processes_EndTitle" xml:space="preserve">
+    <value>End {0} (PID {1})?</value>
+  </data>
+  <data name="Processes_EndTreeTitle" xml:space="preserve">
+    <value>End {0} and the {1} processes it started?</value>
+  </data>
+  <data name="Processes_EndGroupTitle" xml:space="preserve">
+    <value>End {0} ({1} processes)?</value>
+  </data>
+  <data name="Processes_EndMessage" xml:space="preserve">
+    <value>Unsaved data in this process will be lost.</value>
+  </data>
+  <data name="Processes_EndManyMessage" xml:space="preserve">
+    <value>Unsaved data in these processes will be lost.</value>
+  </data>
+  <data name="Processes_Acknowledge" xml:space="preserve">
+    <value>I understand the risk</value>
+  </data>
+  <data name="Processes_ActionAccessDenied" xml:space="preserve">
+    <value>Access denied. {0} belongs to another account; restart WinClean as administrator to manage it.</value>
+  </data>
+  <data name="Processes_ActionGone" xml:space="preserve">
+    <value>{0} had already exited.</value>
+  </data>
+  <data name="Processes_ActionFailed" xml:space="preserve">
+    <value>{0} could not be changed: {1}</value>
+  </data>
+  <data name="Processes_ActionPartial" xml:space="preserve">
+    <value>{0} of {1} processes could not be ended.</value>
+  </data>
+  <data name="Details_Pid" xml:space="preserve">
+    <value>PID</value>
+  </data>
+  <data name="Details_Parent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Details_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Details_Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="Details_Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="Details_Elevated" xml:space="preserve">
+    <value>Elevated</value>
+  </data>
+  <data name="Details_Session" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="Details_Threads" xml:space="preserve">
+    <value>Threads</value>
+  </data>
+  <data name="Details_Handles" xml:space="preserve">
+    <value>Handles</value>
+  </data>
+  <data name="Details_CpuTime" xml:space="preserve">
+    <value>CPU time</value>
+  </data>
+  <data name="Details_PrivateWorkingSet" xml:space="preserve">
+    <value>Private working set</value>
+  </data>
+  <data name="Details_WorkingSet" xml:space="preserve">
+    <value>Working set</value>
+  </data>
+  <data name="Details_Commit" xml:space="preserve">
+    <value>Commit</value>
+  </data>
+  <data name="Details_GpuMemory" xml:space="preserve">
+    <value>GPU memory</value>
+  </data>
+  <data name="Details_Io" xml:space="preserve">
+    <value>I/O</value>
+  </data>
+  <data name="Details_CommandLine" xml:space="preserve">
+    <value>Command line</value>
+  </data>
+  <data name="Details_Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Details_Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Details_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Details_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Details_AccessDenied" xml:space="preserve">
+    <value>Not available (access denied)</value>
+  </data>
+  <data name="Category_AiAgent" xml:space="preserve">
+    <value>Coding agent</value>
+  </data>
+  <data name="Category_Editor" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Category_Ide" xml:space="preserve">
+    <value>IDE</value>
+  </data>
+  <data name="Category_Container" xml:space="preserve">
+    <value>Containers</value>
+  </data>
+  <data name="Category_VirtualMachine" xml:space="preserve">
+    <value>Virtual machine</value>
+  </data>
+  <data name="Category_Runtime" xml:space="preserve">
+    <value>Runtime</value>
+  </data>
+  <data name="Category_PackageManager" xml:space="preserve">
+    <value>Package manager</value>
+  </data>
+  <data name="Category_VersionControl" xml:space="preserve">
+    <value>Version control</value>
+  </data>
+  <data name="Category_Shell" xml:space="preserve">
+    <value>Shell</value>
+  </data>
+  <data name="Category_Terminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="Category_Browser" xml:space="preserve">
+    <value>Browser</value>
+  </data>
+  <data name="Category_Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Common_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Processes_ToggleGroup" xml:space="preserve">
+    <value>Expand or collapse</value>
+    <comment>Accessibility name of the chevron on a group row</comment>
+  </data>
+  <data name="Processes_OpenDetails" xml:space="preserve">
+    <value>Show details pane</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Open WinClean</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Tray_CpuTip" xml:space="preserve">
+    <value>CPU {0}</value>
+  </data>
+  <data name="Tray_MemoryTip" xml:space="preserve">
+    <value>Memory {0} of {1} ({2})</value>
+  </data>
+  <data name="Tray_DiskTip" xml:space="preserve">
+    <value>{0} {1} free of {2}</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>Follow Windows</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Settings_Monitoring" xml:space="preserve">
+    <value>Monitoring</value>
+  </data>
+  <data name="Settings_RefreshInterval" xml:space="preserve">
+    <value>Refresh interval</value>
+  </data>
+  <data name="Settings_RefreshIntervalDescription" xml:space="preserve">
+    <value>How often the Overview and Processes pages are updated while they are visible.</value>
+  </data>
+  <data name="Settings_Seconds1" xml:space="preserve">
+    <value>1 second</value>
+  </data>
+  <data name="Settings_Seconds2" xml:space="preserve">
+    <value>2 seconds</value>
+  </data>
+  <data name="Settings_Seconds5" xml:space="preserve">
+    <value>5 seconds</value>
+  </data>
+  <data name="Settings_ShowSystemProcesses" xml:space="preserve">
+    <value>Show system processes</value>
+  </data>
+  <data name="Settings_ShowSystemProcessesDescription" xml:space="preserve">
+    <value>Windows services and system processes are listed with everything else.</value>
+  </data>
+  <data name="Settings_GroupByApplication" xml:space="preserve">
+    <value>Group processes by application</value>
+  </data>
+  <data name="Settings_GroupByApplicationDescription" xml:space="preserve">
+    <value>The default for the Processes page; the toggle on the page changes it for the session.</value>
+  </data>
+  <data name="Settings_TemperatureUnit" xml:space="preserve">
+    <value>Temperature unit</value>
+  </data>
+  <data name="Settings_Celsius" xml:space="preserve">
+    <value>Celsius</value>
+  </data>
+  <data name="Settings_Fahrenheit" xml:space="preserve">
+    <value>Fahrenheit</value>
+  </data>
+  <data name="Settings_Sensors" xml:space="preserve">
+    <value>Hardware sensors</value>
+  </data>
+  <data name="Settings_SensorsDescription" xml:space="preserve">
+    <value>Reads CPU, motherboard, GPU and drive temperatures. CPU and motherboard sensors need the PawnIO driver from pawnio.eu and administrator rights; WinClean installs neither.</value>
+  </data>
+  <data name="Settings_Tray" xml:space="preserve">
+    <value>Notification area</value>
+  </data>
+  <data name="Settings_TrayEnabled" xml:space="preserve">
+    <value>Show an icon in the notification area</value>
+  </data>
+  <data name="Settings_TrayEnabledDescription" xml:space="preserve">
+    <value>The icon shows live usage and opens WinClean with a click. Sampling continues in the background at a slower pace.</value>
+  </data>
+  <data name="Settings_TrayStyle" xml:space="preserve">
+    <value>Icon style</value>
+  </data>
+  <data name="Settings_TrayStyleBars" xml:space="preserve">
+    <value>Bars</value>
+  </data>
+  <data name="Settings_TrayStyleNumber" xml:space="preserve">
+    <value>Numbers</value>
+  </data>
+  <data name="Settings_TrayMetrics" xml:space="preserve">
+    <value>Metrics</value>
+  </data>
+  <data name="Settings_TrayCpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Settings_TrayMemory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Settings_TrayDisk" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Settings_CloseToTray" xml:space="preserve">
+    <value>Keep running when the window is closed</value>
+  </data>
+  <data name="Settings_CloseToTrayDescription" xml:space="preserve">
+    <value>Closing the window hides it; Exit in the icon's menu ends WinClean.</value>
+  </data>
+  <data name="Settings_Startup" xml:space="preserve">
+    <value>Startup</value>
+  </data>
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="Settings_StartWithWindowsDescription" xml:space="preserve">
+    <value>Adds WinClean to the Run key of your account; no service and no scheduled task.</value>
+  </data>
+  <data name="Settings_StartMinimized" xml:space="preserve">
+    <value>Start minimized</value>
+  </data>
+  <data name="Settings_StartMinimizedDescription" xml:space="preserve">
+    <value>Only the notification area icon appears at sign-in. Needs the icon to be enabled.</value>
+  </data>
+  <data name="Settings_Cleanup" xml:space="preserve">
+    <value>Cleanup</value>
+  </data>
+  <data name="Settings_CleanupConfirmation" xml:space="preserve">
+    <value>Confirmation before deleting</value>
+  </data>
+  <data name="Settings_CleanupConfirmationDescription" xml:space="preserve">
+    <value>Always on. Every cleanup shows the exact files first and asks before deleting.</value>
+  </data>
+  <data name="Settings_TemporaryAge" xml:space="preserve">
+    <value>Leave temporary files alone for</value>
+  </data>
+  <data name="Settings_TemporaryAgeDescription" xml:space="preserve">
+    <value>Files younger than this stay, so a running installer or build is never disturbed.</value>
+  </data>
+  <data name="Settings_Hours1" xml:space="preserve">
+    <value>1 hour</value>
+  </data>
+  <data name="Settings_Hours6" xml:space="preserve">
+    <value>6 hours</value>
+  </data>
+  <data name="Settings_Hours24" xml:space="preserve">
+    <value>24 hours</value>
+  </data>
+  <data name="Settings_Hours48" xml:space="preserve">
+    <value>48 hours</value>
+  </data>
+  <data name="Settings_StaleDays" xml:space="preserve">
+    <value>Consider developer folders stale after</value>
+  </data>
+  <data name="Settings_StaleDaysDescription" xml:space="preserve">
+    <value>node_modules, build output and virtual environments in projects untouched for this long are offered for cleanup.</value>
+  </data>
+  <data name="Settings_OldDownloadDays" xml:space="preserve">
+    <value>Offer installers in Downloads after</value>
+  </data>
+  <data name="Settings_Days30" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="Settings_Days60" xml:space="preserve">
+    <value>60 days</value>
+  </data>
+  <data name="Settings_Days90" xml:space="preserve">
+    <value>90 days</value>
+  </data>
+  <data name="Settings_Days180" xml:space="preserve">
+    <value>180 days</value>
+  </data>
+  <data name="Settings_Days365" xml:space="preserve">
+    <value>1 year</value>
+  </data>
+  <data name="Settings_Administrator" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Settings_Elevated" xml:space="preserve">
+    <value>WinClean is running as administrator.</value>
+  </data>
+  <data name="Settings_NotElevated" xml:space="preserve">
+    <value>WinClean is running with standard rights. Administrator rights are needed for Windows temporary files, the Windows Update cache, processes of other accounts and CPU sensors.</value>
+  </data>
+  <data name="Settings_RestartAsAdministrator" xml:space="preserve">
+    <value>Restart as administrator</value>
+  </data>
+  <data name="Settings_Logging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="Settings_VerboseLogging" xml:space="preserve">
+    <value>Verbose logging</value>
+  </data>
+  <data name="Settings_VerboseLoggingDescription" xml:space="preserve">
+    <value>Writes debug detail to the log files. Useful when reporting a problem.</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Settings_Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Settings_DataFolder" xml:space="preserve">
+    <value>Data folder</value>
+  </data>
+  <data name="Settings_DataFolderPortable" xml:space="preserve">
+    <value>Portable mode: settings and logs live next to the executable because a file named "portable" sits beside it.</value>
+  </data>
+  <data name="Settings_DataFolderPerUser" xml:space="preserve">
+    <value>Settings and logs for this account. Put a file named "portable" next to WinClean.exe to keep them beside the executable instead.</value>
+  </data>
+  <data name="Settings_OpenDataFolder" xml:space="preserve">
+    <value>Open data folder</value>
+  </data>
+  <data name="Settings_Diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="Settings_DiagnosticsDescription" xml:space="preserve">
+    <value>What each reader reported on this machine. The same list is written by WinClean.exe --self-check.</value>
+  </data>
+  <data name="Settings_DiagnosticOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Settings_VersionLine" xml:space="preserve">
+    <value>{0} {1}</value>
+    <comment>Name and version</comment>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>Open source under the MIT license.</value>
+  </data>
+  <data name="Settings_Privacy" xml:space="preserve">
+    <value>No account, no telemetry, no analytics, no crash upload and no update check. WinClean never opens a network connection on its own; links and the Windows Update check only run when you click them.</value>
+  </data>
+  <data name="Settings_WorkingSet" xml:space="preserve">
+    <value>WinClean is using {0} of memory.</value>
+  </data>
+  <data name="Settings_OpenReleases" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="Settings_OpenRepository" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="Storage_ScanFolder" xml:space="preserve">
+    <value>Scan folder</value>
+  </data>
+  <data name="Storage_Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="Storage_Scanning" xml:space="preserve">
+    <value>Scanning {0}</value>
+  </data>
+  <data name="Storage_ScanCounts" xml:space="preserve">
+    <value>{0} folders, {1} files, {2}</value>
+  </data>
+  <data name="Storage_ScanCancelled" xml:space="preserve">
+    <value>Scan cancelled. Results cover {0} files.</value>
+  </data>
+  <data name="Storage_ScanDenied" xml:space="preserve">
+    <value>{0} folders could not be read and are counted as empty.</value>
+  </data>
+  <data name="Storage_ScanFailed" xml:space="preserve">
+    <value>The scan failed: {0}</value>
+  </data>
+  <data name="Storage_PickTarget" xml:space="preserve">
+    <value>Pick a drive or folder to scan.</value>
+  </data>
+  <data name="Storage_PickTargetDescription" xml:space="preserve">
+    <value>The scan reads folder listings only. Nothing is opened, changed or sent anywhere.</value>
+  </data>
+  <data name="Storage_FreeOfTotal" xml:space="preserve">
+    <value>{0} free of {1}</value>
+  </data>
+  <data name="Storage_DriveKindFixed" xml:space="preserve">
+    <value>Fixed drive</value>
+  </data>
+  <data name="Storage_DriveKindRemovable" xml:space="preserve">
+    <value>Removable drive</value>
+  </data>
+  <data name="Storage_DriveKindNetwork" xml:space="preserve">
+    <value>Network drive</value>
+  </data>
+  <data name="Storage_DriveKindOptical" xml:space="preserve">
+    <value>Optical drive</value>
+  </data>
+  <data name="Storage_DriveKindRamDisk" xml:space="preserve">
+    <value>RAM disk</value>
+  </data>
+  <data name="Storage_Up" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="Storage_FilesHere" xml:space="preserve">
+    <value>{0} files directly in this folder, {1}</value>
+  </data>
+  <data name="Storage_FolderCounts" xml:space="preserve">
+    <value>{0} files</value>
+  </data>
+  <data name="Storage_FolderDenied" xml:space="preserve">
+    <value>not readable</value>
+  </data>
+  <data name="Storage_FolderLink" xml:space="preserve">
+    <value>link, not followed</value>
+  </data>
+  <data name="Storage_FolderCloud" xml:space="preserve">
+    <value>cloud folder</value>
+  </data>
+  <data name="Storage_FolderArtifact" xml:space="preserve">
+    <value>developer folder</value>
+  </data>
+  <data name="Storage_TabFolders" xml:space="preserve">
+    <value>Largest folders</value>
+  </data>
+  <data name="Storage_TabFiles" xml:space="preserve">
+    <value>Largest files</value>
+  </data>
+  <data name="Storage_TabTypes" xml:space="preserve">
+    <value>File types</value>
+  </data>
+  <data name="Storage_TabApplications" xml:space="preserve">
+    <value>Applications</value>
+  </data>
+  <data name="Storage_TabDeveloper" xml:space="preserve">
+    <value>Developer storage</value>
+  </data>
+  <data name="Storage_TabLocations" xml:space="preserve">
+    <value>Known locations</value>
+  </data>
+  <data name="Storage_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Storage_ColumnSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Storage_ColumnModified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="Storage_ColumnFolder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Storage_ColumnPublisher" xml:space="preserve">
+    <value>Publisher</value>
+  </data>
+  <data name="Storage_ColumnVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Storage_ColumnInstalled" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Storage_ColumnKind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Storage_ColumnLastChanged" xml:space="preserve">
+    <value>Project changed</value>
+  </data>
+  <data name="Storage_OpenInstalledApps" xml:space="preserve">
+    <value>Open Installed apps</value>
+  </data>
+  <data name="Storage_SizeEstimated" xml:space="preserve">
+    <value>{0} (reported by the installer)</value>
+  </data>
+  <data name="Storage_NoApplications" xml:space="preserve">
+    <value>No installed applications were found in the registry.</value>
+  </data>
+  <data name="Storage_NoArtifacts" xml:space="preserve">
+    <value>No developer folders were found in the scanned location.</value>
+  </data>
+  <data name="Storage_Stale" xml:space="preserve">
+    <value>stale</value>
+  </data>
+  <data name="Storage_Measure" xml:space="preserve">
+    <value>Measure</value>
+  </data>
+  <data name="Storage_Measuring" xml:space="preserve">
+    <value>Measuring {0}</value>
+  </data>
+  <data name="Storage_LocationsHint" xml:space="preserve">
+    <value>Caches, temporary files, package stores and virtual disks, measured without a full scan. Cleaning happens on the Cleanup page.</value>
+  </data>
+  <data name="Storage_LocationMissing" xml:space="preserve">
+    <value>Not present</value>
+  </data>
+  <data name="Storage_FileCount" xml:space="preserve">
+    <value>{0} files</value>
+  </data>
+  <data name="Category_Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Category_Image" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Category_Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="Category_Document" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Category_Archive" xml:space="preserve">
+    <value>Archives</value>
+  </data>
+  <data name="Category_Installer" xml:space="preserve">
+    <value>Installers</value>
+  </data>
+  <data name="Category_Program" xml:space="preserve">
+    <value>Programs</value>
+  </data>
+  <data name="Category_Code" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="Category_BuildOutput" xml:space="preserve">
+    <value>Build output</value>
+  </data>
+  <data name="Category_DiskImage" xml:space="preserve">
+    <value>Disk images</value>
+  </data>
+  <data name="Category_Database" xml:space="preserve">
+    <value>Databases</value>
+  </data>
+  <data name="Category_OtherFiles" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="LocationGroup_Temporary" xml:space="preserve">
+    <value>Temporary files</value>
+  </data>
+  <data name="LocationGroup_Diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="LocationGroup_Caches" xml:space="preserve">
+    <value>System caches</value>
+  </data>
+  <data name="LocationGroup_Browsers" xml:space="preserve">
+    <value>Browsers</value>
+  </data>
+  <data name="LocationGroup_PackageManagers" xml:space="preserve">
+    <value>Package manager caches</value>
+  </data>
+  <data name="LocationGroup_PackageStores" xml:space="preserve">
+    <value>Package stores</value>
+  </data>
+  <data name="LocationGroup_Ides" xml:space="preserve">
+    <value>Editors and IDEs</value>
+  </data>
+  <data name="LocationGroup_AiAgents" xml:space="preserve">
+    <value>Coding agents</value>
+  </data>
+  <data name="LocationGroup_Docker" xml:space="preserve">
+    <value>Docker Desktop</value>
+  </data>
+  <data name="LocationGroup_Wsl" xml:space="preserve">
+    <value>WSL</value>
+  </data>
+  <data name="LocationGroup_WindowsUpdate" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="LocationGroup_Downloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="Cleanup_RecycleBin" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
+  <data name="Cleanup_RecycleBinDescription" xml:space="preserve">
+    <value>Deleted files waiting in the Recycle Bin of every fixed drive. Emptying it is permanent.</value>
+  </data>
+  <data name="Cleanup_Docker" xml:space="preserve">
+    <value>Docker</value>
+  </data>
+  <data name="Cleanup_DockerDescription" xml:space="preserve">
+    <value>Unused images, stopped containers and build cache, pruned by Docker itself. Volumes are never touched.</value>
+  </data>
+  <data name="Cleanup_DockerNotInstalled" xml:space="preserve">
+    <value>Docker is not installed.</value>
+  </data>
+  <data name="Cleanup_DockerNotRunning" xml:space="preserve">
+    <value>Docker is not running.</value>
+  </data>
+  <data name="Cleanup_DeveloperFolders" xml:space="preserve">
+    <value>Stale developer folders</value>
+  </data>
+  <data name="Cleanup_DeveloperFoldersDescription" xml:space="preserve">
+    <value>node_modules, build output and virtual environments of projects that have not changed in a while. The tool recreates them; deleting is permanent.</value>
+  </data>
+  <data name="Cleanup_DeveloperFoldersNeedScan" xml:space="preserve">
+    <value>Scan a drive or folder on the Storage page first.</value>
+  </data>
+  <data name="Cleanup_Analyze" xml:space="preserve">
+    <value>Analyse</value>
+  </data>
+  <data name="Cleanup_Analyzing" xml:space="preserve">
+    <value>Looking at {0}</value>
+  </data>
+  <data name="Cleanup_NotAnalyzed" xml:space="preserve">
+    <value>Nothing has been analysed yet.</value>
+  </data>
+  <data name="Cleanup_NotAnalyzedDescription" xml:space="preserve">
+    <value>Analyse lists what each category would delete, with exact files and sizes. Nothing is deleted until you confirm.</value>
+  </data>
+  <data name="Cleanup_Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Cleanup_HidePreview" xml:space="preserve">
+    <value>Hide preview</value>
+  </data>
+  <data name="Cleanup_CleanSelected" xml:space="preserve">
+    <value>Clean selected</value>
+  </data>
+  <data name="Cleanup_Summary" xml:space="preserve">
+    <value>{0} categories, {1} files, {2} selected</value>
+  </data>
+  <data name="Cleanup_NothingSelected" xml:space="preserve">
+    <value>Nothing selected</value>
+  </data>
+  <data name="Cleanup_RiskSafe" xml:space="preserve">
+    <value>Safe</value>
+  </data>
+  <data name="Cleanup_RiskCaution" xml:space="preserve">
+    <value>Caution</value>
+  </data>
+  <data name="Cleanup_RiskAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="Cleanup_NeedsAdministrator" xml:space="preserve">
+    <value>Needs administrator</value>
+  </data>
+  <data name="Cleanup_NeedsAdministratorBanner" xml:space="preserve">
+    <value>Some categories can only be cleaned with administrator rights: Windows temporary files, the Windows Update cache, servicing logs and system crash dumps.</value>
+  </data>
+  <data name="Cleanup_Running" xml:space="preserve">
+    <value>{0} is running. Files in use will be skipped.</value>
+  </data>
+  <data name="Cleanup_ItemCount" xml:space="preserve">
+    <value>{0} items</value>
+  </data>
+  <data name="Cleanup_PreviewTitle" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Cleanup_PreviewFilter" xml:space="preserve">
+    <value>Filter by name or path</value>
+  </data>
+  <data name="Cleanup_PreviewTotal" xml:space="preserve">
+    <value>{0} items, {1}</value>
+  </data>
+  <data name="Cleanup_AllOrNothing" xml:space="preserve">
+    <value>The Recycle Bin is emptied as a whole; single entries cannot be left out.</value>
+  </data>
+  <data name="Cleanup_ConfirmTitle" xml:space="preserve">
+    <value>Delete {0} files?</value>
+  </data>
+  <data name="Cleanup_ConfirmTitleItems" xml:space="preserve">
+    <value>Remove {0} items?</value>
+  </data>
+  <data name="Cleanup_ConfirmMessage" xml:space="preserve">
+    <value>{0} will be freed. Deleted files cannot be recovered.</value>
+  </data>
+  <data name="Cleanup_ConfirmRecycleNote" xml:space="preserve">
+    <value>Installers in Downloads are moved to the Recycle Bin, not deleted.</value>
+  </data>
+  <data name="Cleanup_ConfirmDeveloperNote" xml:space="preserve">
+    <value>{0} developer folders will be deleted with everything inside them.</value>
+  </data>
+  <data name="Cleanup_ConfirmAndMore" xml:space="preserve">
+    <value>and {0} more</value>
+  </data>
+  <data name="Cleanup_ConfirmDelete" xml:space="preserve">
+    <value>Delete {0} files</value>
+  </data>
+  <data name="Cleanup_ConfirmRemove" xml:space="preserve">
+    <value>Remove {0} items</value>
+  </data>
+  <data name="Cleanup_FolderConfirmTitle" xml:space="preserve">
+    <value>Delete {0}?</value>
+  </data>
+  <data name="Cleanup_FolderConfirmMessage" xml:space="preserve">
+    <value>{0} and everything in it will be deleted permanently. Type the folder name to confirm.</value>
+  </data>
+  <data name="Cleanup_FolderConfirmDelete" xml:space="preserve">
+    <value>Delete folder</value>
+  </data>
+  <data name="Cleanup_Deleting" xml:space="preserve">
+    <value>Deleting {0} of {1}</value>
+  </data>
+  <data name="Cleanup_Finished" xml:space="preserve">
+    <value>Cleanup finished</value>
+  </data>
+  <data name="Cleanup_FinishedSummary" xml:space="preserve">
+    <value>{0} freed, {1} items removed, {2} skipped (in use), {3} access denied</value>
+  </data>
+  <data name="Cleanup_NotRemoved" xml:space="preserve">
+    <value>Not removed</value>
+  </data>
+  <data name="Cleanup_OpenLog" xml:space="preserve">
+    <value>Open log</value>
+  </data>
+  <data name="Cleanup_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Cleanup_ReasonInUse" xml:space="preserve">
+    <value>In use</value>
+  </data>
+  <data name="Cleanup_ReasonAccessDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="Cleanup_ReasonGone" xml:space="preserve">
+    <value>Already gone</value>
+  </data>
+  <data name="Cleanup_ReasonSkipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
+  <data name="Cleanup_ReasonFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Cleanup_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Cleanup_ColumnSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Cleanup_ColumnPath" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Cleanup_ColumnReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Cleanup_ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Health_Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Health_Edition" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="Health_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Health_Build" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="Health_Installed" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Health_Servicing" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Health_SupportedUntil" xml:space="preserve">
+    <value>Supported until {0} for {1} editions, according to data bundled with {2} (updated {3}).</value>
+  </data>
+  <data name="Health_SupportEnded" xml:space="preserve">
+    <value>Reached end of support on {0} for {1} editions, according to data bundled with {2} (updated {3}).</value>
+  </data>
+  <data name="Health_SupportUnknown" xml:space="preserve">
+    <value>This build is not in the support table bundled with {0} (updated {1}): a preview, a server edition or a newer release.</value>
+  </data>
+  <data name="Health_ConsumerEditions" xml:space="preserve">
+    <value>Home and Pro</value>
+  </data>
+  <data name="Health_EnterpriseEditions" xml:space="preserve">
+    <value>Enterprise and Education</value>
+  </data>
+  <data name="Health_LongTermEditions" xml:space="preserve">
+    <value>long-term servicing</value>
+  </data>
+  <data name="Health_Updates" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Health_LastCheck" xml:space="preserve">
+    <value>Last check</value>
+  </data>
+  <data name="Health_LastInstall" xml:space="preserve">
+    <value>Last install</value>
+  </data>
+  <data name="Health_AsReported" xml:space="preserve">
+    <value>as reported by the Windows Update Agent</value>
+  </data>
+  <data name="Health_RecentUpdates" xml:space="preserve">
+    <value>Recent updates</value>
+  </data>
+  <data name="Health_NoHistory" xml:space="preserve">
+    <value>No update history is available.</value>
+  </data>
+  <data name="Health_UpdateFailed" xml:space="preserve">
+    <value>failed</value>
+  </data>
+  <data name="Health_RestartPending" xml:space="preserve">
+    <value>A restart is pending.</value>
+  </data>
+  <data name="Health_RestartNotPending" xml:space="preserve">
+    <value>No restart is pending.</value>
+  </data>
+  <data name="Health_SignalWindowsUpdate" xml:space="preserve">
+    <value>Windows Update is waiting for a restart</value>
+  </data>
+  <data name="Health_SignalServicing" xml:space="preserve">
+    <value>Component servicing is waiting for a restart</value>
+  </data>
+  <data name="Health_SignalRenames" xml:space="preserve">
+    <value>File operations are queued for the next restart (weak signal)</value>
+  </data>
+  <data name="Health_SignalRename" xml:space="preserve">
+    <value>The computer name changes at the next restart</value>
+  </data>
+  <data name="Health_SignalUpdateInProgress" xml:space="preserve">
+    <value>An update is in progress</value>
+  </data>
+  <data name="Health_OpenWindowsUpdate" xml:space="preserve">
+    <value>Open Windows Update</value>
+  </data>
+  <data name="Health_CheckNow" xml:space="preserve">
+    <value>Check now</value>
+  </data>
+  <data name="Health_CheckNowCaption" xml:space="preserve">
+    <value>Contacts Microsoft Update.</value>
+  </data>
+  <data name="Health_Checking" xml:space="preserve">
+    <value>Asking Microsoft Update</value>
+  </data>
+  <data name="Health_CheckResultNone" xml:space="preserve">
+    <value>No updates are waiting.</value>
+  </data>
+  <data name="Health_CheckResult" xml:space="preserve">
+    <value>{0} updates are available:</value>
+  </data>
+  <data name="Health_CheckFailed" xml:space="preserve">
+    <value>The check failed: {0}</value>
+  </data>
+  <data name="Health_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Health_SystemDrive" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Health_LastRestart" xml:space="preserve">
+    <value>Last restart</value>
+  </data>
+  <data name="Health_Firmware" xml:space="preserve">
+    <value>Firmware</value>
+  </data>
+  <data name="Health_FirmwareUefi" xml:space="preserve">
+    <value>UEFI</value>
+  </data>
+  <data name="Health_FirmwareBios" xml:space="preserve">
+    <value>Legacy BIOS</value>
+  </data>
+  <data name="Health_SecureBoot" xml:space="preserve">
+    <value>Secure Boot</value>
+  </data>
+  <data name="Health_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Health_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Health_Drivers" xml:space="preserve">
+    <value>Drivers</value>
+  </data>
+  <data name="Health_DriversDescription" xml:space="preserve">
+    <value>Versions and dates as the vendor writes them. WinClean does not compare them online; the links open the official download pages.</value>
+  </data>
+  <data name="Health_ShowAllDevices" xml:space="preserve">
+    <value>Show all devices</value>
+  </data>
+  <data name="Health_ColumnDevice" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="Health_ColumnProvider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="Health_ColumnVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Health_ColumnDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Health_ColumnSource" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Health_DriverLink" xml:space="preserve">
+    <value>Drivers at {0}</value>
+  </data>
+  <data name="Health_DriverLinkTooltip" xml:space="preserve">
+    <value>Opens {0} in your browser</value>
+  </data>
+  <data name="Health_NoDrivers" xml:space="preserve">
+    <value>No devices could be listed.</value>
+  </data>
+  <data name="Health_Reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="DeviceGroup_Display" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="DeviceGroup_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="DeviceGroup_Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="DeviceGroup_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="DeviceGroup_Chipset" xml:space="preserve">
+    <value>Chipset</value>
+  </data>
+  <data name="DeviceGroup_Bluetooth" xml:space="preserve">
+    <value>Bluetooth</value>
+  </data>
+  <data name="DeviceGroup_Usb" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="DeviceGroup_Firmware" xml:space="preserve">
+    <value>Firmware</value>
+  </data>
+  <data name="DeviceGroup_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Hardware_CopySummary" xml:space="preserve">
+    <value>Copy summary</value>
+  </data>
+  <data name="Hardware_ShowIdentifiers" xml:space="preserve">
+    <value>Show identifiers</value>
+  </data>
+  <data name="Hardware_Hidden" xml:space="preserve">
+    <value>hidden</value>
+  </data>
+  <data name="Hardware_Processor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="Hardware_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Hardware_CoresThreads" xml:space="preserve">
+    <value>Cores and threads</value>
+  </data>
+  <data name="Hardware_CoresThreadsValue" xml:space="preserve">
+    <value>{0} cores, {1} threads</value>
+  </data>
+  <data name="Hardware_HybridCores" xml:space="preserve">
+    <value>{0} performance and {1} efficiency cores, {2} threads</value>
+  </data>
+  <data name="Hardware_Packages" xml:space="preserve">
+    <value>Sockets</value>
+  </data>
+  <data name="Hardware_BaseClock" xml:space="preserve">
+    <value>Base clock</value>
+  </data>
+  <data name="Hardware_Caches" xml:space="preserve">
+    <value>Caches</value>
+  </data>
+  <data name="Hardware_Architecture" xml:space="preserve">
+    <value>Architecture</value>
+  </data>
+  <data name="Hardware_Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="Hardware_Virtualization" xml:space="preserve">
+    <value>Virtualization in firmware</value>
+  </data>
+  <data name="Hardware_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Hardware_Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Hardware_Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="Hardware_TemperatureNeedsSensors" xml:space="preserve">
+    <value>Not available. Enable sensors in Settings.</value>
+  </data>
+  <data name="Hardware_TemperatureNeedsAdmin" xml:space="preserve">
+    <value>Not available. Reading CPU sensors needs the PawnIO driver and administrator rights.</value>
+  </data>
+  <data name="Hardware_TemperatureNotReported" xml:space="preserve">
+    <value>Not reported by this hardware</value>
+  </data>
+  <data name="Hardware_Graphics" xml:space="preserve">
+    <value>Graphics</value>
+  </data>
+  <data name="Hardware_DedicatedMemory" xml:space="preserve">
+    <value>Dedicated memory</value>
+  </data>
+  <data name="Hardware_SharedMemory" xml:space="preserve">
+    <value>Shared memory</value>
+  </data>
+  <data name="Hardware_Driver" xml:space="preserve">
+    <value>Driver</value>
+  </data>
+  <data name="Hardware_DriverValue" xml:space="preserve">
+    <value>{0}, {1}</value>
+    <comment>version and date</comment>
+  </data>
+  <data name="Hardware_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Hardware_Installed" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Hardware_SlotsUsed" xml:space="preserve">
+    <value>Slots</value>
+  </data>
+  <data name="Hardware_SlotsUsedValue" xml:space="preserve">
+    <value>{0} of {1} used</value>
+  </data>
+  <data name="Hardware_MaximumCapacity" xml:space="preserve">
+    <value>Maximum capacity</value>
+  </data>
+  <data name="Hardware_ModuleValue" xml:space="preserve">
+    <value>{0} {1}, {2} MT/s</value>
+    <comment>size, type, speed</comment>
+  </data>
+  <data name="Hardware_ModuleConfigured" xml:space="preserve">
+    <value>{0} {1}, {2} MT/s (configured {3} MT/s)</value>
+  </data>
+  <data name="Hardware_ModuleDetail" xml:space="preserve">
+    <value>{0} {1}</value>
+    <comment>manufacturer and part number</comment>
+  </data>
+  <data name="Hardware_EmptySlot" xml:space="preserve">
+    <value>empty</value>
+  </data>
+  <data name="Hardware_Motherboard" xml:space="preserve">
+    <value>Motherboard</value>
+  </data>
+  <data name="Hardware_Manufacturer" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="Hardware_Product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="Hardware_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Hardware_SerialNumber" xml:space="preserve">
+    <value>Serial number</value>
+  </data>
+  <data name="Hardware_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Hardware_Family" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="Hardware_Uuid" xml:space="preserve">
+    <value>UUID</value>
+  </data>
+  <data name="Hardware_Firmware" xml:space="preserve">
+    <value>BIOS / UEFI</value>
+  </data>
+  <data name="Hardware_Vendor" xml:space="preserve">
+    <value>Vendor</value>
+  </data>
+  <data name="Hardware_ReleaseDate" xml:space="preserve">
+    <value>Release date</value>
+  </data>
+  <data name="Hardware_Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Hardware_SecureBoot" xml:space="preserve">
+    <value>Secure Boot</value>
+  </data>
+  <data name="Hardware_Tpm" xml:space="preserve">
+    <value>TPM</value>
+  </data>
+  <data name="Hardware_NotPresent" xml:space="preserve">
+    <value>Not present</value>
+  </data>
+  <data name="Hardware_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Hardware_Disk" xml:space="preserve">
+    <value>Disk {0}</value>
+  </data>
+  <data name="Hardware_Bus" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="Hardware_MediaType" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Hardware_SolidState" xml:space="preserve">
+    <value>Solid state</value>
+  </data>
+  <data name="Hardware_Rotational" xml:space="preserve">
+    <value>Rotational</value>
+  </data>
+  <data name="Hardware_Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Hardware_Trim" xml:space="preserve">
+    <value>TRIM</value>
+  </data>
+  <data name="Hardware_Volumes" xml:space="preserve">
+    <value>Volumes</value>
+  </data>
+  <data name="Hardware_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Hardware_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Hardware_Speed" xml:space="preserve">
+    <value>Link speed</value>
+  </data>
+  <data name="Hardware_SpeedValue" xml:space="preserve">
+    <value>{0} Mbit/s</value>
+  </data>
+  <data name="Hardware_SpeedGbit" xml:space="preserve">
+    <value>{0} Gbit/s</value>
+  </data>
+  <data name="Hardware_PhysicalAddress" xml:space="preserve">
+    <value>MAC address</value>
+  </data>
+  <data name="Hardware_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Hardware_Up" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="Hardware_Down" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="Hardware_Displays" xml:space="preserve">
+    <value>Displays</value>
+  </data>
+  <data name="Hardware_Resolution" xml:space="preserve">
+    <value>Resolution</value>
+  </data>
+  <data name="Hardware_ResolutionValue" xml:space="preserve">
+    <value>{0} × {1} at {2} Hz</value>
+  </data>
+  <data name="Hardware_Adapter" xml:space="preserve">
+    <value>Adapter</value>
+  </data>
+  <data name="Hardware_Primary" xml:space="preserve">
+    <value>primary</value>
+  </data>
+  <data name="Hardware_Scale" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Hardware_Sensors" xml:space="preserve">
+    <value>Sensors</value>
+  </data>
+  <data name="Hardware_SensorsOff" xml:space="preserve">
+    <value>Sensors are off. Enable them in Settings to read temperatures, fans and power.</value>
+  </data>
+  <data name="Hardware_SensorsNone" xml:space="preserve">
+    <value>No sensor reported a value yet.</value>
+  </data>
+  <data name="Hardware_SensorsUnsupported" xml:space="preserve">
+    <value>Sensors are not available on ARM64.</value>
+  </data>
+  <data name="Hardware_Reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="Overview_TopApplications" xml:space="preserve">
+    <value>Top applications by memory</value>
+  </data>
+  <data name="Overview_NoProcesses" xml:space="preserve">
+    <value>Waiting for the first process snapshot.</value>
+  </data>
+  <data name="Overview_Temperatures" xml:space="preserve">
+    <value>Temperatures</value>
+  </data>
+  <data name="Overview_SensorsOff" xml:space="preserve">
+    <value>Sensors are off. Enable them in Settings.</value>
+  </data>
+  <data name="Settings_Widget" xml:space="preserve">
+    <value>Desktop widget</value>
+  </data>
+  <data name="Settings_WidgetEnabled" xml:space="preserve">
+    <value>Show the widget</value>
+  </data>
+  <data name="Settings_WidgetEnabledDescription" xml:space="preserve">
+    <value>A small window with live CPU, memory, disk and network figures and the developer tools running right now. While it is shown, closing the main window keeps WinClean running.</value>
+  </data>
+  <data name="Settings_WidgetPlacement" xml:space="preserve">
+    <value>Placement</value>
+  </data>
+  <data name="Settings_WidgetPlacementDescription" xml:space="preserve">
+    <value>Behind other windows keeps the widget above the wallpaper and under everything else; Show desktop hides it until the desktop is toggled back.</value>
+  </data>
+  <data name="Settings_WidgetAlwaysOnTop" xml:space="preserve">
+    <value>Always on top</value>
+  </data>
+  <data name="Settings_WidgetBehindWindows" xml:space="preserve">
+    <value>Behind other windows</value>
+  </data>
+  <data name="Settings_WidgetNormal" xml:space="preserve">
+    <value>Normal window</value>
+  </data>
+  <data name="Settings_WidgetLayout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="Settings_WidgetLayoutFull" xml:space="preserve">
+    <value>Full, with history</value>
+  </data>
+  <data name="Settings_WidgetLayoutCompact" xml:space="preserve">
+    <value>Compact, one line</value>
+  </data>
+  <data name="Settings_WidgetOpacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="Settings_Percent60" xml:space="preserve">
+    <value>60 %</value>
+  </data>
+  <data name="Settings_Percent75" xml:space="preserve">
+    <value>75 %</value>
+  </data>
+  <data name="Settings_Percent90" xml:space="preserve">
+    <value>90 %</value>
+  </data>
+  <data name="Settings_Percent100" xml:space="preserve">
+    <value>100 %</value>
+  </data>
+  <data name="Settings_WidgetLocked" xml:space="preserve">
+    <value>Lock position</value>
+  </data>
+  <data name="Settings_WidgetLockedDescription" xml:space="preserve">
+    <value>The widget cannot be dragged.</value>
+  </data>
+  <data name="Settings_WidgetClickThrough" xml:space="preserve">
+    <value>Let clicks pass through</value>
+  </data>
+  <data name="Settings_WidgetClickThroughDescription" xml:space="preserve">
+    <value>Clicks reach whatever is under the widget, so it never gets in the way of a terminal or a game. The widget itself can then only be reached from here or from the notification area menu.</value>
+  </data>
+  <data name="Settings_WidgetShowsTools" xml:space="preserve">
+    <value>Show running developer tools and agents</value>
+  </data>
+  <data name="Settings_WidgetShowsToolsDescription" xml:space="preserve">
+    <value>Up to four applications of the categories AI agent, IDE, editor, container, virtual machine and runtime, by CPU.</value>
+  </data>
+  <data name="Settings_WidgetShowsStorage" xml:space="preserve">
+    <value>Show the free space on the system drive</value>
+  </data>
+  <data name="Settings_WidgetResetPosition" xml:space="preserve">
+    <value>Reset position</value>
+  </data>
+  <data name="Settings_WidgetResetPositionDescription" xml:space="preserve">
+    <value>Puts the widget back in the top-right corner of the primary screen.</value>
+  </data>
+  <data name="Tray_ShowWidget" xml:space="preserve">
+    <value>Show widget</value>
+  </data>
+  <data name="Widget_Cpu" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Widget_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Widget_Disk" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="Widget_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Widget_Gpu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="Widget_Temperature" xml:space="preserve">
+    <value>CPU temp.</value>
+  </data>
+  <data name="Widget_RunningNow" xml:space="preserve">
+    <value>Running now</value>
+  </data>
+  <data name="Widget_FreeSpace" xml:space="preserve">
+    <value>{0} {1} free</value>
+    <comment>0 = drive letter, 1 = size</comment>
+  </data>
+  <data name="Widget_Compact" xml:space="preserve">
+    <value>CPU {0}   Mem {1}   Disk {2}   Net {3}</value>
+    <comment>The compact layout's single line</comment>
+  </data>
+  <data name="Widget_Open" xml:space="preserve">
+    <value>Open WinClean</value>
+  </data>
+  <data name="Widget_LockPosition" xml:space="preserve">
+    <value>Lock position</value>
+  </data>
+  <data name="Widget_Hide" xml:space="preserve">
+    <value>Hide widget</value>
+  </data>
+  <data name="Widget_Exit" xml:space="preserve">
+    <value>Exit WinClean</value>
+  </data>
+</root>

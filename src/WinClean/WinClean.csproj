@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>WinClean</RootNamespace>
+    <AssemblyName>WinClean</AssemblyName>
+    <AssemblyTitle>WinClean</AssemblyTitle>
+    <Description>Windows system monitor and cleanup utility.</Description>
+    <ApplicationIcon>Resources\WinClean.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>WinClean.Program</StartupObject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <!-- Application.ThemeMode is still marked experimental in WPF; the Settings page needs it. -->
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Runtime">
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+  </PropertyGroup>
+
+  <!--
+    Published as a single self-contained executable per architecture; plain builds stay framework-dependent.
+    The publish properties are tied to an explicit runtime identifier, and the SDK is told not to infer one
+    from the host, so the restore graph (and the lock file) is the same on Windows, Linux and macOS.
+  -->
+  <PropertyGroup Label="Publish">
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <UseDefaultPublishRuntimeIdentifier>false</UseDefaultPublishRuntimeIdentifier>
+    <SelfContained Condition="'$(RuntimeIdentifier)' != ''">true</SelfContained>
+    <PublishSingleFile Condition="'$(RuntimeIdentifier)' != ''">true</PublishSingleFile>
+    <PublishReadyToRun Condition="'$(RuntimeIdentifier)' != ''">true</PublishReadyToRun>
+    <!-- Always on, not only when publishing, so the analyzer package is part of every restore and the lock file. -->
+    <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishTrimmed>false</PublishTrimmed>
+    <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+    <!-- The XML documentation files only exist for the analyzers; users get one executable. -->
+    <PublishDocumentationFiles>false</PublishDocumentationFiles>
+  </PropertyGroup>
+
+  <!-- App.xaml is compiled as a page so that Program.Main owns startup and can handle command-line modes first. -->
+  <ItemGroup>
+    <ApplicationDefinition Remove="App.xaml" />
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WinClean.Core\WinClean.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WinClean.App.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" />
+    <PackageReference Include="LibreHardwareMonitorLib" />
+  </ItemGroup>
+
+  <!--
+    Strings.Designer.cs is generated from Strings.resx and committed. After editing the resx run:
+    dotnet run eng/UpdateStrings.cs
+  -->
+  <ItemGroup>
+    <Compile Update="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

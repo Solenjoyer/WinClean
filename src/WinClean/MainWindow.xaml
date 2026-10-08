@@ -1,0 +1,53 @@
+<Window x:Class="WinClean.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:WinClean.Controls"
+        xmlns:vm="clr-namespace:WinClean.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:ShellViewModel}"
+        Title="WinClean"
+        Width="1180" Height="760"
+        MinWidth="960" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display">
+
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="D1" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Overview}" />
+        <KeyBinding Modifiers="Control" Key="D2" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Processes}" />
+        <KeyBinding Modifiers="Control" Key="D3" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Storage}" />
+        <KeyBinding Modifiers="Control" Key="D4" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Cleanup}" />
+        <KeyBinding Modifiers="Control" Key="D5" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Health}" />
+        <KeyBinding Modifiers="Control" Key="D6" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Hardware}" />
+        <KeyBinding Modifiers="Control" Key="D7" Command="{Binding NavigateCommand}" CommandParameter="{x:Static vm:PageKeys.Settings}" />
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <controls:NavRail Grid.Column="0" Margin="0,8,0,0" />
+
+        <Border Grid.Column="1" Style="{StaticResource ContentLayer}" Margin="0,8,0,0">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top"
+                           Style="{StaticResource SubtitleText}"
+                           Text="{Binding SelectedItem.Title}"
+                           Margin="24,20,24,12" />
+                <ContentControl Content="{Binding SelectedItem.Content}"
+                                Focusable="False" />
+            </DockPanel>
+        </Border>
+
+        <!-- Dims the window while one of its dialogs is open. -->
+        <Border x:Name="Smoke"
+                Grid.ColumnSpan="2"
+                Background="{DynamicResource SmokeFillColorDefaultBrush}"
+                Visibility="Collapsed" />
+    </Grid>
+</Window>

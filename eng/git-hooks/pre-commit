@@ -1,0 +1,7 @@
+#!/bin/sh
+# Formats the staged C# files before each commit. Enable with: git config core.hooksPath eng/git-hooks
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.cs')
+if [ -n "$files" ]; then
+    dotnet format WinClean.slnx --no-restore --include $files >/dev/null || exit 1
+    git add $files
+fi

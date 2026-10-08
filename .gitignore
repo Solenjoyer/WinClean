@@ -1,0 +1,38 @@
+# Build output
+bin/
+obj/
+artifacts/
+publish/
+TestResults/
+*.trx
+*.binlog
+
+# Installer output
+installer/Output/
+
+# IDE
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+*.user
+*.suo
+*.swp
+*.DotSettings.user
+launchSettings.json
+
+# Secrets and signing material
+*.pfx
+*.snk
+*.p12
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Local tooling
+.dotnet/
+*.log

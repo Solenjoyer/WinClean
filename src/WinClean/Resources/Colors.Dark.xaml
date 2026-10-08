@@ -1,0 +1,20 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="CpuSeriesBrush" Color="#6EB4F0" />
+    <SolidColorBrush x:Key="MemorySeriesBrush" Color="#B19CF2" />
+    <SolidColorBrush x:Key="DiskSeriesBrush" Color="#67C98D" />
+    <SolidColorBrush x:Key="GpuSeriesBrush" Color="#F0A060" />
+    <SolidColorBrush x:Key="NetworkSeriesBrush" Color="#5CC9DB" />
+
+    <SolidColorBrush x:Key="CpuSeriesFillBrush" Color="#266EB4F0" />
+    <SolidColorBrush x:Key="MemorySeriesFillBrush" Color="#26B19CF2" />
+    <SolidColorBrush x:Key="DiskSeriesFillBrush" Color="#2667C98D" />
+    <SolidColorBrush x:Key="GpuSeriesFillBrush" Color="#26F0A060" />
+    <SolidColorBrush x:Key="NetworkSeriesFillBrush" Color="#265CC9DB" />
+
+    <!-- The widget is a layered window, so its surface is nearly opaque to keep the text crisp. -->
+    <SolidColorBrush x:Key="WidgetBackgroundBrush" Color="#F21C2230" />
+    <SolidColorBrush x:Key="WidgetStrokeBrush" Color="#33FFFFFF" />
+
+</ResourceDictionary>
